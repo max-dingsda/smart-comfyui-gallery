@@ -1,0 +1,497 @@
+{
+  "communities": {
+    "0": [
+      "concept_external_folder_mounting",
+      "smartgallery_ai_indexing_add_files",
+      "smartgallery_ai_indexing_add_folder",
+      "smartgallery_ai_indexing_control",
+      "smartgallery_ai_indexing_reset",
+      "smartgallery_ai_indexing_status",
+      "smartgallery_ai_watched_folders",
+      "smartgallery_background_rescan_worker",
+      "smartgallery_background_watcher_task",
+      "smartgallery_background_zip_task",
+      "smartgallery_browse_filesystem",
+      "smartgallery_copy_batch",
+      "smartgallery_create_collection",
+      "smartgallery_create_folder",
+      "smartgallery_delete_collection",
+      "smartgallery_delete_folder",
+      "smartgallery_exhibition_delete_comment",
+      "smartgallery_exhibition_edit_comment",
+      "smartgallery_exhibition_rate_batch",
+      "smartgallery_favorite_batch",
+      "smartgallery_get_db_connection",
+      "smartgallery_get_dynamic_folder_config",
+      "smartgallery_get_file_collections",
+      "smartgallery_get_sidebar_state",
+      "smartgallery_get_standardized_path",
+      "smartgallery_get_unique_filepath",
+      "smartgallery_get_users_simple_list",
+      "smartgallery_mount_folder",
+      "smartgallery_move_batch",
+      "smartgallery_path_to_key",
+      "smartgallery_rationale_1950",
+      "smartgallery_rationale_3054",
+      "smartgallery_rationale_3903",
+      "smartgallery_rationale_4548",
+      "smartgallery_rationale_479",
+      "smartgallery_rationale_5785",
+      "smartgallery_rationale_5887",
+      "smartgallery_rationale_6502",
+      "smartgallery_rename_collection_api",
+      "smartgallery_rename_file",
+      "smartgallery_rename_folder",
+      "smartgallery_rescan_folder",
+      "smartgallery_sync_folder_on_demand",
+      "smartgallery_sync_status",
+      "smartgallery_toggle_collection_public",
+      "smartgallery_toggle_favorite",
+      "smartgallery_unmount_folder",
+      "smartgallery_upload_files"
+    ],
+    "1": [
+      "asset_collections",
+      "asset_comments_panel",
+      "asset_compare",
+      "asset_exhibition",
+      "asset_focus_on",
+      "asset_sidebar_tabs",
+      "asset_statuses",
+      "asset_storyboard",
+      "asset_top_toolbar",
+      "concept_compare_mode",
+      "concept_dam_mode",
+      "concept_exhibition_portal",
+      "concept_focus_mode",
+      "concept_main_workspace",
+      "concept_ratings_comments",
+      "concept_status_tags",
+      "concept_storyboard",
+      "concept_virtual_collections",
+      "doc_readme",
+      "smartgallery_compare_files_api",
+      "smartgallery_exhibition_get_comments",
+      "smartgallery_exhibition_logout",
+      "smartgallery_exhibition_post_comment",
+      "smartgallery_exhibition_rate_file",
+      "smartgallery_get_collections",
+      "smartgallery_get_storyboard",
+      "smartgallery_rationale_5918",
+      "smartgallery_serve_storyboard_frame",
+      "smartgallery_tag_batch",
+      "tpl_exhibition",
+      "tpl_exhibition_login",
+      "tpl_index"
+    ],
+    "2": [
+      "smartgallery_clean_prompt_text",
+      "smartgallery_comfymetadataparser",
+      "smartgallery_comfymetadataparser_extract_model_from_sampler",
+      "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "smartgallery_comfymetadataparser_extract_sampler_params",
+      "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "smartgallery_comfymetadataparser_fallback_scan",
+      "smartgallery_comfymetadataparser_find_sampler_node",
+      "smartgallery_comfymetadataparser_get_real_value",
+      "smartgallery_comfymetadataparser_init",
+      "smartgallery_comfymetadataparser_parse",
+      "smartgallery_comfymetadataparser_trace_text",
+      "smartgallery_rationale_750",
+      "smartgallery_rationale_789",
+      "smartgallery_rationale_797",
+      "smartgallery_rationale_832",
+      "smartgallery_rationale_842",
+      "smartgallery_rationale_873",
+      "smartgallery_rationale_902",
+      "smartgallery_rationale_915",
+      "smartgallery_rationale_923",
+      "smartgallery_rationale_955",
+      "smartgallery_rationale_971"
+    ],
+    "3": [
+      "concept_workflow_recall",
+      "smartgallery_download_file",
+      "smartgallery_download_workflow",
+      "smartgallery_extract_workflow",
+      "smartgallery_get_file_info_from_db",
+      "smartgallery_get_node_summary",
+      "smartgallery_rationale_1062",
+      "smartgallery_rationale_1104",
+      "smartgallery_rationale_2704",
+      "smartgallery_rationale_2722",
+      "smartgallery_rationale_5001",
+      "smartgallery_rationale_5707",
+      "smartgallery_scan_bytes_for_workflow",
+      "smartgallery_serve_cleaned_file",
+      "smartgallery_serve_file",
+      "smartgallery_should_strip_metadata",
+      "smartgallery_stream_video",
+      "smartgallery_strip_media_metadata"
+    ],
+    "4": [
+      "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "smartgallery_check_rescan_status",
+      "smartgallery_check_zip_status",
+      "smartgallery_colors",
+      "smartgallery_gallery_redirect_base",
+      "smartgallery_key_to_path",
+      "smartgallery_load_more",
+      "smartgallery_prepare_batch_zip",
+      "smartgallery_print_startup_banner",
+      "smartgallery_rationale_172",
+      "smartgallery_rationale_296",
+      "smartgallery_rationale_4107",
+      "smartgallery_rationale_76",
+      "smartgallery_serve_zip_file",
+      "smartgallery_validate_and_get_workflow"
+    ],
+    "5": [
+      "smartgallery_check_exhibition_requirements",
+      "smartgallery_cleanup_invalid_watched_folders",
+      "smartgallery_find_ffprobe_path",
+      "smartgallery_full_sync_database",
+      "smartgallery_init_db",
+      "smartgallery_initialize_gallery",
+      "smartgallery_initialize_gallery_fast_no_db_check",
+      "smartgallery_pregenerate_exhibition_cache",
+      "smartgallery_rationale_2374",
+      "smartgallery_rationale_2413",
+      "smartgallery_rationale_2491"
+    ],
+    "6": [
+      "asset_user_management",
+      "concept_user_management",
+      "doc_architecture_plan",
+      "smartgallery_admin_manage_users",
+      "smartgallery_decrypt_password",
+      "smartgallery_encrypt_password",
+      "smartgallery_ensure_admin_user",
+      "smartgallery_exhibition_login",
+      "smartgallery_rationale_2684",
+      "tpl_user_manager_modal"
+    ],
+    "7": [
+      "smartgallery_create_thumbnail",
+      "smartgallery_extract_workflow_files_string",
+      "smartgallery_extract_workflow_prompt_string",
+      "smartgallery_is_garbage_text",
+      "smartgallery_process_single_file",
+      "smartgallery_rationale_1328",
+      "smartgallery_rationale_1474",
+      "smartgallery_rationale_1543",
+      "smartgallery_serve_thumbnail"
+    ],
+    "8": [
+      "smartgallery_api_search_options",
+      "smartgallery_collection_view",
+      "smartgallery_gallery_view",
+      "smartgallery_get_filter_options_from_db",
+      "smartgallery_normalize_smart_path",
+      "smartgallery_rationale_2336",
+      "smartgallery_rationale_2579",
+      "smartgallery_rationale_497",
+      "smartgallery_scan_folder_and_extract_options"
+    ],
+    "9": [
+      "smartgallery_filter_enabled_nodes",
+      "smartgallery_generate_node_summary",
+      "smartgallery_get_node_color",
+      "smartgallery_rationale_587",
+      "smartgallery_rationale_596",
+      "smartgallery_rationale_609"
+    ],
+    "10": [
+      "smartgallery_delete_batch",
+      "smartgallery_delete_file",
+      "smartgallery_rationale_991",
+      "smartgallery_safe_delete_file"
+    ],
+    "11": [
+      "smartgallery_analyze_file_metadata",
+      "smartgallery_format_duration",
+      "smartgallery_is_webp_animated"
+    ],
+    "12": [
+      "smartgallery_rationale_5648",
+      "smartgallery_serve_input_file"
+    ],
+    "13": [
+      "smartgallery_load_or_create_encryption_key",
+      "smartgallery_rationale_2643"
+    ],
+    "14": [
+      "smartgallery_rationale_6877",
+      "smartgallery_show_ffmpeg_warning"
+    ],
+    "15": [
+      "smartgallery_print_configuration",
+      "smartgallery_rationale_506"
+    ],
+    "16": [
+      "smartgallery_check_metadata",
+      "smartgallery_rationale_5667"
+    ],
+    "17": [
+      "smartgallery_check_for_updates",
+      "smartgallery_rationale_6799"
+    ],
+    "18": [
+      "smartgallery_rationale_401",
+      "smartgallery_run_integrity_check"
+    ],
+    "19": [
+      "smartgallery_management_api_only",
+      "smartgallery_rationale_532"
+    ],
+    "20": [
+      "smartgallery_rationale_6852",
+      "smartgallery_show_config_error_and_exit"
+    ],
+    "21": [
+      "smartgallery_ai_check_status",
+      "smartgallery_rationale_2950"
+    ],
+    "22": [
+      "smartgallery_ai_queue_search",
+      "smartgallery_rationale_2914"
+    ],
+    "23": [
+      "smartgallery_check_port_available",
+      "smartgallery_rationale_6901"
+    ]
+  },
+  "cohesion": {
+    "0": 0.06,
+    "1": 0.09,
+    "2": 0.13,
+    "3": 0.15,
+    "4": 0.13,
+    "5": 0.22,
+    "6": 0.22,
+    "7": 0.22,
+    "8": 0.22,
+    "9": 0.33,
+    "10": 0.5,
+    "11": 0.67,
+    "12": 1.0,
+    "13": 1.0,
+    "14": 1.0,
+    "15": 1.0,
+    "16": 1.0,
+    "17": 1.0,
+    "18": 1.0,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0
+  },
+  "gods": [
+    {
+      "id": "smartgallery_get_db_connection",
+      "label": "get_db_connection()",
+      "edges": 52
+    },
+    {
+      "id": "smartgallery_get_dynamic_folder_config",
+      "label": "get_dynamic_folder_config()",
+      "edges": 21
+    },
+    {
+      "id": "smartgallery_comfymetadataparser",
+      "label": "ComfyMetadataParser",
+      "edges": 13
+    },
+    {
+      "id": "smartgallery_get_file_info_from_db",
+      "label": "get_file_info_from_db()",
+      "edges": 10
+    },
+    {
+      "id": "concept_exhibition_portal",
+      "label": "Exhibition Portal",
+      "edges": 10
+    },
+    {
+      "id": "concept_virtual_collections",
+      "label": "Virtual Collections",
+      "edges": 10
+    },
+    {
+      "id": "smartgallery_extract_workflow",
+      "label": "extract_workflow()",
+      "edges": 9
+    },
+    {
+      "id": "smartgallery_initialize_gallery",
+      "label": "initialize_gallery()",
+      "edges": 9
+    },
+    {
+      "id": "concept_ratings_comments",
+      "label": "Ratings and Comments",
+      "edges": 8
+    },
+    {
+      "id": "smartgallery_get_standardized_path",
+      "label": "get_standardized_path()",
+      "edges": 7
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Exhibition Portal",
+      "target": "exhibition_login()",
+      "source_files": [
+        "README.md",
+        "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Exhibition Portal",
+      "target": "exhibition_logout()",
+      "source_files": [
+        "README.md",
+        "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; peripheral node `exhibition_logout()` unexpectedly reaches hub `Exhibition Portal`"
+    },
+    {
+      "source": "Compare Mode",
+      "target": "compare_files_api()",
+      "source_files": [
+        "README.md",
+        "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; peripheral node `compare_files_api()` unexpectedly reaches hub `Compare Mode`"
+    },
+    {
+      "source": "Focus Mode",
+      "target": "gallery_view()",
+      "source_files": [
+        "README.md",
+        "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; bridges separate communities"
+    },
+    {
+      "source": "Video Storyboard",
+      "target": "serve_storyboard_frame()",
+      "source_files": [
+        "README.md",
+        "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py"
+      ],
+      "confidence": "INFERRED",
+      "relation": "conceptually_related_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (code \u2194 doc); connects across different repos/directories; peripheral node `serve_storyboard_frame()` unexpectedly reaches hub `Video Storyboard`"
+    }
+  ],
+  "questions": [
+    {
+      "type": "ambiguous_edge",
+      "question": "What is the exact relationship between `Exhibition Portal` and `Video Storyboard`?",
+      "why": "Edge tagged AMBIGUOUS (relation: semantically_similar_to) - confidence is low."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `ComfyMetadataParser` connect `clean_prompt_text, ComfyMetadataParser` to `Workflow Recall, download_file`, `check_rescan_status, check_zip_status`?",
+      "why": "High betweenness centrality (0.161) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `get_db_connection()` connect `External Folder Mounting, ai_indexing_add_files` to `Collections Screenshot, Comments Panel Screenshot`, `Workflow Recall, download_file`, `check_rescan_status, check_zip_status`, `check_exhibition_requirements, cleanup_invalid_watched_folde`, `User Management Screenshot, User Management and ACL`, `api_search_options, collection_view`, `delete_batch, delete_file`, `check_metadata, Lightweight endpoint to check real-time stat`, `ai_check_status, Checks the status of a specific search sess`, `ai_queue_search, Receives a search query from the frontend a`?",
+      "why": "High betweenness centrality (0.065) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `tag_batch()` connect `Collections Screenshot, Comments Panel Screenshot` to `External Folder Mounting, ai_indexing_add_files`, `check_rescan_status, check_zip_status`?",
+      "why": "High betweenness centrality (0.040) - this node is a cross-community bridge."
+    },
+    {
+      "type": "verify_inferred",
+      "question": "Are the 5 inferred relationships involving `Exhibition Portal` (e.g. with `exhibition_login()` and `exhibition_logout()`) actually correct?",
+      "why": "`Exhibition Portal` has 5 INFERRED edges - model-reasoned connections that need verification."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `Colors`, `System Health Check with user advice and cross-platform wait.     Verifies libr`, `Converts path to absolute, forces forward slashes, and handles case sensitivity` to the rest of the system?",
+      "why": "68 weakly-connected nodes found - possible documentation gaps or missing edges."
+    },
+    {
+      "type": "low_cohesion",
+      "question": "Should `External Folder Mounting, ai_indexing_add_files` be split into smaller, more focused modules?",
+      "why": "Cohesion score 0.06 - nodes in this community are weakly interconnected."
+    }
+  ],
+  "community_labels": {
+    "0": "External Folder Mounting, ai_indexing_add_files",
+    "1": "Collections Screenshot, Comments Panel Screenshot",
+    "2": "clean_prompt_text, ComfyMetadataParser",
+    "3": "Workflow Recall, download_file",
+    "4": "check_rescan_status, check_zip_status",
+    "5": "check_exhibition_requirements, cleanup_invalid_watched_folde",
+    "6": "User Management Screenshot, User Management and ACL",
+    "7": "create_thumbnail, extract_workflow_files_string",
+    "8": "api_search_options, collection_view",
+    "9": "filter_enabled_nodes, generate_node_summary",
+    "10": "delete_batch, delete_file",
+    "11": "analyze_file_metadata, format_duration",
+    "12": "Serves input files directly from the ComfyUI Input folder., ",
+    "13": "load_or_create_encryption_key, Loads the system encryption k",
+    "14": "Shows a non-blocking warning message for missing FFmpeg., sh",
+    "15": "print_configuration, Prints the current configuration in a n",
+    "16": "check_metadata, Lightweight endpoint to check real-time stat",
+    "17": "check_for_updates, Checks the GitHub repo for a newer versio",
+    "18": "System Health Check with user advice and cross-platform wait",
+    "19": "management_api_only, Security Decorator: Blocks access to de",
+    "20": "Shows a critical error message and exits the program., show_",
+    "21": "ai_check_status, Checks the status of a specific search sess",
+    "22": "ai_queue_search, Receives a search query from the frontend a",
+    "23": "check_port_available, Checks if the specified port is availa"
+  },
+  "benchmark": {
+    "corpus_tokens": 1041432,
+    "corpus_words": 781074,
+    "nodes": 212,
+    "edges": 392,
+    "avg_query_tokens": 6601,
+    "reduction_ratio": 157.8,
+    "per_question": [
+      {
+        "question": "how does authentication work",
+        "query_tokens": 8379,
+        "reduction": 124.3
+      },
+      {
+        "question": "what is the main entry point",
+        "query_tokens": 5403,
+        "reduction": 192.8
+      },
+      {
+        "question": "how are errors handled",
+        "query_tokens": 8354,
+        "reduction": 124.7
+      },
+      {
+        "question": "what connects the data layer to the api",
+        "query_tokens": 5436,
+        "reduction": 191.6
+      },
+      {
+        "question": "what are the core abstractions",
+        "query_tokens": 5434,
+        "reduction": 191.7
+      }
+    ]
+  }
+}

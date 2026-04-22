@@ -1,0 +1,4563 @@
+{
+  "nodes": [
+    {
+      "id": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "label": "smartgallery.py",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "smartgallery_path_to_key",
+      "label": "path_to_key()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L364"
+    },
+    {
+      "id": "smartgallery_key_to_path",
+      "label": "key_to_path()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L368"
+    },
+    {
+      "id": "smartgallery_colors",
+      "label": "Colors",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L389"
+    },
+    {
+      "id": "smartgallery_run_integrity_check",
+      "label": "run_integrity_check()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L400"
+    },
+    {
+      "id": "smartgallery_get_standardized_path",
+      "label": "get_standardized_path()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L478"
+    },
+    {
+      "id": "smartgallery_normalize_smart_path",
+      "label": "normalize_smart_path()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L496"
+    },
+    {
+      "id": "smartgallery_print_configuration",
+      "label": "print_configuration()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L505"
+    },
+    {
+      "id": "smartgallery_management_api_only",
+      "label": "management_api_only()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L531"
+    },
+    {
+      "id": "smartgallery_get_node_color",
+      "label": "get_node_color()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L586"
+    },
+    {
+      "id": "smartgallery_filter_enabled_nodes",
+      "label": "filter_enabled_nodes()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L595"
+    },
+    {
+      "id": "smartgallery_generate_node_summary",
+      "label": "generate_node_summary()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L608"
+    },
+    {
+      "id": "smartgallery_clean_prompt_text",
+      "label": "clean_prompt_text()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L749"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser",
+      "label": "ComfyMetadataParser",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L788"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L793"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_parse",
+      "label": ".parse()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L796"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_find_sampler_node",
+      "label": "._find_sampler_node()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L831"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_get_real_value",
+      "label": "._get_real_value()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L841"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "label": "._extract_size_from_sampler()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L872"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_extract_sampler_params",
+      "label": "._extract_sampler_params()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L901"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "label": "._extract_prompts_from_sampler()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L914"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_trace_text",
+      "label": "._trace_text()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L922"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_extract_model_from_sampler",
+      "label": "._extract_model_from_sampler()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L954"
+    },
+    {
+      "id": "smartgallery_comfymetadataparser_fallback_scan",
+      "label": "._fallback_scan()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L970"
+    },
+    {
+      "id": "smartgallery_safe_delete_file",
+      "label": "safe_delete_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L990"
+    },
+    {
+      "id": "smartgallery_find_ffprobe_path",
+      "label": "find_ffprobe_path()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1022"
+    },
+    {
+      "id": "smartgallery_validate_and_get_workflow",
+      "label": "_validate_and_get_workflow()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1036"
+    },
+    {
+      "id": "smartgallery_scan_bytes_for_workflow",
+      "label": "_scan_bytes_for_workflow()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1061"
+    },
+    {
+      "id": "smartgallery_extract_workflow",
+      "label": "extract_workflow()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1103"
+    },
+    {
+      "id": "smartgallery_is_webp_animated",
+      "label": "is_webp_animated()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1187"
+    },
+    {
+      "id": "smartgallery_format_duration",
+      "label": "format_duration()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1192"
+    },
+    {
+      "id": "smartgallery_analyze_file_metadata",
+      "label": "analyze_file_metadata()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1197"
+    },
+    {
+      "id": "smartgallery_create_thumbnail",
+      "label": "create_thumbnail()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1242"
+    },
+    {
+      "id": "smartgallery_extract_workflow_files_string",
+      "label": "extract_workflow_files_string()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1327"
+    },
+    {
+      "id": "smartgallery_is_garbage_text",
+      "label": "_is_garbage_text()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1420"
+    },
+    {
+      "id": "smartgallery_extract_workflow_prompt_string",
+      "label": "extract_workflow_prompt_string()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1473"
+    },
+    {
+      "id": "smartgallery_process_single_file",
+      "label": "process_single_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1542"
+    },
+    {
+      "id": "smartgallery_get_db_connection",
+      "label": "get_db_connection()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1582"
+    },
+    {
+      "id": "smartgallery_init_db",
+      "label": "init_db()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1595"
+    },
+    {
+      "id": "smartgallery_get_dynamic_folder_config",
+      "label": "get_dynamic_folder_config()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1832"
+    },
+    {
+      "id": "smartgallery_background_watcher_task",
+      "label": "background_watcher_task()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1949"
+    },
+    {
+      "id": "smartgallery_full_sync_database",
+      "label": "full_sync_database()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2057"
+    },
+    {
+      "id": "smartgallery_sync_folder_on_demand",
+      "label": "sync_folder_on_demand()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2226"
+    },
+    {
+      "id": "smartgallery_scan_folder_and_extract_options",
+      "label": "scan_folder_and_extract_options()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2335"
+    },
+    {
+      "id": "smartgallery_cleanup_invalid_watched_folders",
+      "label": "cleanup_invalid_watched_folders()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2373"
+    },
+    {
+      "id": "smartgallery_initialize_gallery_fast_no_db_check",
+      "label": "initialize_gallery_fast_no_db_check()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2392"
+    },
+    {
+      "id": "smartgallery_pregenerate_exhibition_cache",
+      "label": "pregenerate_exhibition_cache()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2412"
+    },
+    {
+      "id": "smartgallery_check_exhibition_requirements",
+      "label": "check_exhibition_requirements()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2490"
+    },
+    {
+      "id": "smartgallery_initialize_gallery",
+      "label": "initialize_gallery()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2548"
+    },
+    {
+      "id": "smartgallery_get_filter_options_from_db",
+      "label": "get_filter_options_from_db()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2578"
+    },
+    {
+      "id": "smartgallery_load_or_create_encryption_key",
+      "label": "load_or_create_encryption_key()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2642"
+    },
+    {
+      "id": "smartgallery_encrypt_password",
+      "label": "encrypt_password()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2674"
+    },
+    {
+      "id": "smartgallery_decrypt_password",
+      "label": "decrypt_password()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2678"
+    },
+    {
+      "id": "smartgallery_ensure_admin_user",
+      "label": "ensure_admin_user()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2683"
+    },
+    {
+      "id": "smartgallery_should_strip_metadata",
+      "label": "should_strip_metadata()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2703"
+    },
+    {
+      "id": "smartgallery_strip_media_metadata",
+      "label": "strip_media_metadata()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2721"
+    },
+    {
+      "id": "smartgallery_gallery_redirect_base",
+      "label": "gallery_redirect_base()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2792"
+    },
+    {
+      "id": "smartgallery_exhibition_login",
+      "label": "exhibition_login()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2796"
+    },
+    {
+      "id": "smartgallery_exhibition_logout",
+      "label": "exhibition_logout()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2835"
+    },
+    {
+      "id": "smartgallery_admin_manage_users",
+      "label": "admin_manage_users()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2840"
+    },
+    {
+      "id": "smartgallery_ai_queue_search",
+      "label": "ai_queue_search()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2913"
+    },
+    {
+      "id": "smartgallery_ai_check_status",
+      "label": "ai_check_status()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2949"
+    },
+    {
+      "id": "smartgallery_sync_status",
+      "label": "sync_status()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2960"
+    },
+    {
+      "id": "smartgallery_api_search_options",
+      "label": "api_search_options()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2975"
+    },
+    {
+      "id": "smartgallery_compare_files_api",
+      "label": "compare_files_api()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2990"
+    },
+    {
+      "id": "smartgallery_ai_indexing_reset",
+      "label": "ai_indexing_reset()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3053"
+    },
+    {
+      "id": "smartgallery_ai_indexing_add_files",
+      "label": "ai_indexing_add_files()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3137"
+    },
+    {
+      "id": "smartgallery_ai_indexing_add_folder",
+      "label": "ai_indexing_add_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3199"
+    },
+    {
+      "id": "smartgallery_ai_watched_folders",
+      "label": "ai_watched_folders()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3332"
+    },
+    {
+      "id": "smartgallery_ai_indexing_status",
+      "label": "ai_indexing_status()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3395"
+    },
+    {
+      "id": "smartgallery_ai_indexing_control",
+      "label": "ai_indexing_control()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3439"
+    },
+    {
+      "id": "smartgallery_gallery_view",
+      "label": "gallery_view()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3452"
+    },
+    {
+      "id": "smartgallery_upload_files",
+      "label": "upload_files()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3879"
+    },
+    {
+      "id": "smartgallery_background_rescan_worker",
+      "label": "background_rescan_worker()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3902"
+    },
+    {
+      "id": "smartgallery_rescan_folder",
+      "label": "rescan_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3968"
+    },
+    {
+      "id": "smartgallery_check_rescan_status",
+      "label": "check_rescan_status()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4027"
+    },
+    {
+      "id": "smartgallery_create_folder",
+      "label": "create_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4037"
+    },
+    {
+      "id": "smartgallery_mount_folder",
+      "label": "mount_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4060"
+    },
+    {
+      "id": "smartgallery_unmount_folder",
+      "label": "unmount_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4152"
+    },
+    {
+      "id": "smartgallery_browse_filesystem",
+      "label": "browse_filesystem()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4211"
+    },
+    {
+      "id": "smartgallery_background_zip_task",
+      "label": "background_zip_task()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4302"
+    },
+    {
+      "id": "smartgallery_prepare_batch_zip",
+      "label": "prepare_batch_zip()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4354"
+    },
+    {
+      "id": "smartgallery_check_zip_status",
+      "label": "check_zip_status()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4370"
+    },
+    {
+      "id": "smartgallery_serve_zip_file",
+      "label": "serve_zip_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4381"
+    },
+    {
+      "id": "smartgallery_rename_folder",
+      "label": "rename_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4386"
+    },
+    {
+      "id": "smartgallery_delete_folder",
+      "label": "delete_folder()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4494"
+    },
+    {
+      "id": "smartgallery_load_more",
+      "label": "load_more()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4536"
+    },
+    {
+      "id": "smartgallery_get_file_info_from_db",
+      "label": "get_file_info_from_db()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4541"
+    },
+    {
+      "id": "smartgallery_get_unique_filepath",
+      "label": "_get_unique_filepath()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4547"
+    },
+    {
+      "id": "smartgallery_move_batch",
+      "label": "move_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4570"
+    },
+    {
+      "id": "smartgallery_copy_batch",
+      "label": "copy_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4700"
+    },
+    {
+      "id": "smartgallery_delete_batch",
+      "label": "delete_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4780"
+    },
+    {
+      "id": "smartgallery_favorite_batch",
+      "label": "favorite_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4847"
+    },
+    {
+      "id": "smartgallery_toggle_favorite",
+      "label": "toggle_favorite()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4858"
+    },
+    {
+      "id": "smartgallery_delete_file",
+      "label": "delete_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4870"
+    },
+    {
+      "id": "smartgallery_rename_file",
+      "label": "rename_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4896"
+    },
+    {
+      "id": "smartgallery_serve_cleaned_file",
+      "label": "serve_cleaned_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5000"
+    },
+    {
+      "id": "smartgallery_serve_file",
+      "label": "serve_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5044"
+    },
+    {
+      "id": "smartgallery_download_file",
+      "label": "download_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5056"
+    },
+    {
+      "id": "smartgallery_download_workflow",
+      "label": "download_workflow()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5077"
+    },
+    {
+      "id": "smartgallery_get_node_summary",
+      "label": "get_node_summary()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5094"
+    },
+    {
+      "id": "smartgallery_serve_thumbnail",
+      "label": "serve_thumbnail()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5163"
+    },
+    {
+      "id": "smartgallery_get_storyboard",
+      "label": "get_storyboard()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5176"
+    },
+    {
+      "id": "smartgallery_serve_storyboard_frame",
+      "label": "serve_storyboard_frame()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5640"
+    },
+    {
+      "id": "smartgallery_serve_input_file",
+      "label": "serve_input_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5647"
+    },
+    {
+      "id": "smartgallery_check_metadata",
+      "label": "check_metadata()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5666"
+    },
+    {
+      "id": "smartgallery_stream_video",
+      "label": "stream_video()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5706"
+    },
+    {
+      "id": "smartgallery_get_collections",
+      "label": "get_collections()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5774"
+    },
+    {
+      "id": "smartgallery_get_sidebar_state",
+      "label": "get_sidebar_state()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5784"
+    },
+    {
+      "id": "smartgallery_rename_collection_api",
+      "label": "rename_collection_api()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5801"
+    },
+    {
+      "id": "smartgallery_create_collection",
+      "label": "create_collection()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5825"
+    },
+    {
+      "id": "smartgallery_delete_collection",
+      "label": "delete_collection()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5848"
+    },
+    {
+      "id": "smartgallery_toggle_collection_public",
+      "label": "toggle_collection_public()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5860"
+    },
+    {
+      "id": "smartgallery_get_file_collections",
+      "label": "get_file_collections()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5886"
+    },
+    {
+      "id": "smartgallery_tag_batch",
+      "label": "tag_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5917"
+    },
+    {
+      "id": "smartgallery_collection_view",
+      "label": "collection_view()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6050"
+    },
+    {
+      "id": "smartgallery_exhibition_rate_file",
+      "label": "exhibition_rate_file()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6445"
+    },
+    {
+      "id": "smartgallery_exhibition_rate_batch",
+      "label": "exhibition_rate_batch()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6501"
+    },
+    {
+      "id": "smartgallery_exhibition_get_comments",
+      "label": "exhibition_get_comments()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6552"
+    },
+    {
+      "id": "smartgallery_get_users_simple_list",
+      "label": "get_users_simple_list()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6618"
+    },
+    {
+      "id": "smartgallery_exhibition_post_comment",
+      "label": "exhibition_post_comment()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6632"
+    },
+    {
+      "id": "smartgallery_exhibition_delete_comment",
+      "label": "exhibition_delete_comment()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6694"
+    },
+    {
+      "id": "smartgallery_exhibition_edit_comment",
+      "label": "exhibition_edit_comment()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6721"
+    },
+    {
+      "id": "smartgallery_print_startup_banner",
+      "label": "print_startup_banner()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6760"
+    },
+    {
+      "id": "smartgallery_check_for_updates",
+      "label": "check_for_updates()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6798"
+    },
+    {
+      "id": "smartgallery_show_config_error_and_exit",
+      "label": "show_config_error_and_exit()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6851"
+    },
+    {
+      "id": "smartgallery_show_ffmpeg_warning",
+      "label": "show_ffmpeg_warning()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6876"
+    },
+    {
+      "id": "smartgallery_check_port_available",
+      "label": "check_port_available()",
+      "file_type": "code",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6900"
+    },
+    {
+      "id": "smartgallery_rationale_401",
+      "label": "System Health Check with user advice and cross-platform wait.     Verifies libr",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L401"
+    },
+    {
+      "id": "smartgallery_rationale_479",
+      "label": "Converts path to absolute, forces forward slashes, and handles case sensitivity",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L479"
+    },
+    {
+      "id": "smartgallery_rationale_497",
+      "label": "Normalizes a path string for search comparison:     1. Converts to lowercase.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L497"
+    },
+    {
+      "id": "smartgallery_rationale_506",
+      "label": "Prints the current configuration in a neat, aligned table.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L506"
+    },
+    {
+      "id": "smartgallery_rationale_532",
+      "label": "Security Decorator: Blocks access to destructive or management APIs      when t",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L532"
+    },
+    {
+      "id": "smartgallery_rationale_587",
+      "label": "Generates a unique and consistent color for a node type.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L587"
+    },
+    {
+      "id": "smartgallery_rationale_596",
+      "label": "Filters and returns only active nodes and links (mode=0) from a workflow.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L596"
+    },
+    {
+      "id": "smartgallery_rationale_609",
+      "label": "Analyzes a workflow JSON, extracts active nodes, and identifies input media.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L609"
+    },
+    {
+      "id": "smartgallery_rationale_750",
+      "label": "Cleans a raw prompt string: removes LoRA tags, normalizes whitespace,     and e",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L750"
+    },
+    {
+      "id": "smartgallery_rationale_789",
+      "label": "Advanced parser that traces the workflow graph to find real generation parameter",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L789"
+    },
+    {
+      "id": "smartgallery_rationale_797",
+      "label": "Main parsing method. Returns a standardized dictionary.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L797"
+    },
+    {
+      "id": "smartgallery_rationale_832",
+      "label": "Finds the main KSampler node ID.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L832"
+    },
+    {
+      "id": "smartgallery_rationale_842",
+      "label": "Follows links recursively to find the actual value.         Improved to handle",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L842"
+    },
+    {
+      "id": "smartgallery_rationale_873",
+      "label": "Traces the latent image link.          If direct tracing fails, it attempts to",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L873"
+    },
+    {
+      "id": "smartgallery_rationale_902",
+      "label": "Extracts simple scalar values from the Sampler, resolving links.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L902"
+    },
+    {
+      "id": "smartgallery_rationale_915",
+      "label": "Traces 'positive' and 'negative' links to find text.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L915"
+    },
+    {
+      "id": "smartgallery_rationale_923",
+      "label": "Recursive helper to find text content from a link.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L923"
+    },
+    {
+      "id": "smartgallery_rationale_955",
+      "label": "Follows the model wire to find the Checkpoint name.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L955"
+    },
+    {
+      "id": "smartgallery_rationale_971",
+      "label": "Scans all nodes for specific types if direct tracing missed data.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L971"
+    },
+    {
+      "id": "smartgallery_rationale_991",
+      "label": "Safely delete a file by either moving it to trash (if DELETE_TO is configured)",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L991"
+    },
+    {
+      "id": "smartgallery_rationale_1062",
+      "label": "Generator that yields all valid JSON objects found in the byte stream.     Sear",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1062"
+    },
+    {
+      "id": "smartgallery_rationale_1104",
+      "label": "Extracts workflow JSON from image/video files.          Args:         filepat",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1104"
+    },
+    {
+      "id": "smartgallery_rationale_1328",
+      "label": "Parses workflow and returns a normalized string containing ONLY filenames",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1328"
+    },
+    {
+      "id": "smartgallery_rationale_1474",
+      "label": "Broad extraction for Database Indexing (Searchable Keywords).     This function",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1474"
+    },
+    {
+      "id": "smartgallery_rationale_1543",
+      "label": "Worker function to perform all heavy processing for a single file.     Designed",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1543"
+    },
+    {
+      "id": "smartgallery_rationale_1950",
+      "label": "Periodically scans watched folders.     Ensures TRUE incremental indexing:",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1950"
+    },
+    {
+      "id": "smartgallery_rationale_2336",
+      "label": "Scans the physical folder to count files and extract metadata.     Supports rec",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2336"
+    },
+    {
+      "id": "smartgallery_rationale_2374",
+      "label": "Checks if watched folders still exist on disk.     [SAFE MODE]: If a folder is",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2374"
+    },
+    {
+      "id": "smartgallery_rationale_2413",
+      "label": "Pre-generates metadata-stripped files for all items in public collections.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2413"
+    },
+    {
+      "id": "smartgallery_rationale_2491",
+      "label": "Strict Pre-Flight Check for Exhibition Mode.     Ensures that the Main gallery",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2491"
+    },
+    {
+      "id": "smartgallery_rationale_2579",
+      "label": "Extracts extensions and prefixes for dropdowns using a robust      Python-side",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2579"
+    },
+    {
+      "id": "smartgallery_rationale_2643",
+      "label": "Loads the system encryption key if it exists.      Generates a new one only if",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2643"
+    },
+    {
+      "id": "smartgallery_rationale_2684",
+      "label": "Checks for admin user and applies password from startup config.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2684"
+    },
+    {
+      "id": "smartgallery_rationale_2704",
+      "label": "Helper to determine if metadata stripping is required based on session and flags",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2704"
+    },
+    {
+      "id": "smartgallery_rationale_2722",
+      "label": "Strips metadata.      - Images & Animated Images (WebP/GIF): Rebuilt frame-by-f",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2722"
+    },
+    {
+      "id": "smartgallery_rationale_2914",
+      "label": "Receives a search query from the frontend and adds it to the DB queue.     Also",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2914"
+    },
+    {
+      "id": "smartgallery_rationale_2950",
+      "label": "Checks the status of a specific search session.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2950"
+    },
+    {
+      "id": "smartgallery_rationale_3054",
+      "label": "Resets AI metadata (caption, embedding, timestamp) for specific files or a whole",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3054"
+    },
+    {
+      "id": "smartgallery_rationale_3903",
+      "label": "Background worker that updates a global job status so the UI can poll for progre",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3903"
+    },
+    {
+      "id": "smartgallery_rationale_4548",
+      "label": "Generates a unique filepath using the NATIVE OS separator.     This ensures tha",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4548"
+    },
+    {
+      "id": "smartgallery_rationale_5001",
+      "label": "Serves the cleaned file from cache.      If the cached file is corrupted (0 byt",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5001"
+    },
+    {
+      "id": "smartgallery_rationale_5648",
+      "label": "Serves input files directly from the ComfyUI Input folder.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5648"
+    },
+    {
+      "id": "smartgallery_rationale_5667",
+      "label": "Lightweight endpoint to check real-time status of metadata.     Now includes Re",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5667"
+    },
+    {
+      "id": "smartgallery_rationale_5707",
+      "label": "Streams video files by transcoding them on-the-fly using FFmpeg.     This allow",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5707"
+    },
+    {
+      "id": "smartgallery_rationale_5785",
+      "label": "Returns the current state of folders and collections for real-time sync.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5785"
+    },
+    {
+      "id": "smartgallery_rationale_5887",
+      "label": "Returns a list of all collections and status flags associated with a file.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5887"
+    },
+    {
+      "id": "smartgallery_rationale_5918",
+      "label": "Handles batch assignment/removal of files to/from collections and status tags.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5918"
+    },
+    {
+      "id": "smartgallery_rationale_6502",
+      "label": "Handles batch rating for multiple files in a single database transaction.     G",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6502"
+    },
+    {
+      "id": "smartgallery_rationale_6799",
+      "label": "Checks the GitHub repo for a newer version without external libs.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6799"
+    },
+    {
+      "id": "smartgallery_rationale_6852",
+      "label": "Shows a critical error message and exits the program.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6852"
+    },
+    {
+      "id": "smartgallery_rationale_6877",
+      "label": "Shows a non-blocking warning message for missing FFmpeg.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6877"
+    },
+    {
+      "id": "smartgallery_rationale_6901",
+      "label": "Checks if the specified port is available on the host machine.     Returns True",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6901"
+    },
+    {
+      "id": "smartgallery_rationale_76",
+      "label": "# IMPORTANT: If your paths contain SPACES, you MUST use quotes around them!",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L76"
+    },
+    {
+      "id": "smartgallery_rationale_172",
+      "label": "# NOTE: A full ffmpeg installation is highly recommended.",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L172"
+    },
+    {
+      "id": "smartgallery_rationale_296",
+      "label": "# IMPORTANT:",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L296"
+    },
+    {
+      "id": "smartgallery_rationale_4107",
+      "label": "# NOTE: This usually requires Developer Mode enabled OR running ComfyUI as Admin",
+      "file_type": "rationale",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4107"
+    }
+  ],
+  "edges": [
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "os",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "hashlib",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "cv2",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "json",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "shutil",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "re",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "sqlite3",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "time",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "glob",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "sys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "base64",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "zipfile",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "io",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "flask",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "pil",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "colorsys",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "werkzeug_utils",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "concurrent_futures",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "tqdm",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "threading",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "uuid",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "socket",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "tkinter",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "tkinter",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "secrets",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "functools",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "cryptography_fernet",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "urllib_request",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "secrets",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "typing",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "waitress",
+      "relation": "imports_from",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "argparse",
+      "relation": "imports",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L340",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_path_to_key",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L364",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_key_to_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L368",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_colors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L389",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_run_integrity_check",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L400",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_normalize_smart_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L496",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_print_configuration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L505",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_management_api_only",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L531",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_node_color",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L586",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_filter_enabled_nodes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L595",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_generate_node_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L608",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_clean_prompt_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L749",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_comfymetadataparser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L788",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L793",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_parse",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L796",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_find_sampler_node",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L831",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_get_real_value",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L841",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L872",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_extract_sampler_params",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L901",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L914",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_trace_text",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L922",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_extract_model_from_sampler",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L954",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser",
+      "target": "smartgallery_comfymetadataparser_fallback_scan",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L970",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_safe_delete_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L990",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_find_ffprobe_path",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1022",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_validate_and_get_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1036",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_scan_bytes_for_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1061",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_extract_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1103",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_is_webp_animated",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1187",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_format_duration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1192",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_analyze_file_metadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1197",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_create_thumbnail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1242",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_extract_workflow_files_string",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1327",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_is_garbage_text",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1420",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_extract_workflow_prompt_string",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1473",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_process_single_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1542",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_db_connection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1582",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_init_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1595",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1832",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_background_watcher_task",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1949",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_full_sync_database",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2057",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_sync_folder_on_demand",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2226",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_scan_folder_and_extract_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2335",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_cleanup_invalid_watched_folders",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2373",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_initialize_gallery_fast_no_db_check",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2392",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_pregenerate_exhibition_cache",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2412",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_exhibition_requirements",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2490",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_initialize_gallery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2548",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_filter_options_from_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2578",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_load_or_create_encryption_key",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2642",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_encrypt_password",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2674",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_decrypt_password",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2678",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ensure_admin_user",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2683",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_should_strip_metadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2703",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_strip_media_metadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2721",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_gallery_redirect_base",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2792",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_login",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2796",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_logout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2835",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_admin_manage_users",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2840",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_queue_search",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2913",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_check_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2949",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_sync_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2960",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_api_search_options",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2975",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_compare_files_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2990",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_indexing_reset",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3053",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_indexing_add_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3137",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_indexing_add_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3199",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_watched_folders",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3332",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_indexing_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3395",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_ai_indexing_control",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3439",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_gallery_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3452",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_upload_files",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3879",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_background_rescan_worker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3902",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_rescan_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3968",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_rescan_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4027",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_create_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4037",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_mount_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4060",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_unmount_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4152",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_browse_filesystem",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4211",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_background_zip_task",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4302",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_prepare_batch_zip",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4354",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_zip_status",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4370",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_zip_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4381",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_rename_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4386",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_delete_folder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4494",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_load_more",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4536",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4541",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_unique_filepath",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4547",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_move_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4570",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_copy_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4700",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_delete_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4780",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_favorite_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4847",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_toggle_favorite",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4858",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_delete_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4870",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_rename_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4896",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_cleaned_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5000",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5044",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_download_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5056",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_download_workflow",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5077",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_node_summary",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5094",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_thumbnail",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5163",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_storyboard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5176",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_storyboard_frame",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5640",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_serve_input_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5647",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_metadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5666",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_stream_video",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5706",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_collections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5774",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_sidebar_state",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5784",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_rename_collection_api",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5801",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_create_collection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5825",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_delete_collection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5848",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_toggle_collection_public",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5860",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_file_collections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5886",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_tag_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5917",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_collection_view",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6050",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_rate_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6445",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_rate_batch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6501",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_get_comments",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6552",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_get_users_simple_list",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6618",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_post_comment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6632",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_delete_comment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6694",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_exhibition_edit_comment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6721",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_print_startup_banner",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6760",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_for_updates",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6798",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_show_config_error_and_exit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6851",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_show_ffmpeg_warning",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6876",
+      "weight": 1.0
+    },
+    {
+      "source": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "target": "smartgallery_check_port_available",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6900",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_generate_node_summary",
+      "target": "smartgallery_filter_enabled_nodes",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L622",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_generate_node_summary",
+      "target": "smartgallery_get_node_color",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L730",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_find_sampler_node",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L808",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_extract_sampler_params",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L811",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L812",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_extract_model_from_sampler",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L813",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L814",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_comfymetadataparser_fallback_scan",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L817",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_parse",
+      "target": "smartgallery_clean_prompt_text",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L821",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "target": "smartgallery_comfymetadataparser_get_real_value",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L888",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_extract_sampler_params",
+      "target": "smartgallery_comfymetadataparser_get_real_value",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L906",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "target": "smartgallery_comfymetadataparser_trace_text",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L918",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_comfymetadataparser_fallback_scan",
+      "target": "smartgallery_comfymetadataparser_get_real_value",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L979",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_extract_workflow",
+      "target": "smartgallery_find_ffprobe_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1128",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_extract_workflow",
+      "target": "smartgallery_scan_bytes_for_workflow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1156",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_analyze_file_metadata",
+      "target": "smartgallery_is_webp_animated",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1216",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_analyze_file_metadata",
+      "target": "smartgallery_extract_workflow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1221",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_analyze_file_metadata",
+      "target": "smartgallery_format_duration",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1239",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_extract_workflow_files_string",
+      "target": "smartgallery_normalize_smart_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1397",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_extract_workflow_prompt_string",
+      "target": "smartgallery_is_garbage_text",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1528",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_process_single_file",
+      "target": "smartgallery_analyze_file_metadata",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1549",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_process_single_file",
+      "target": "smartgallery_create_thumbnail",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1553",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_process_single_file",
+      "target": "smartgallery_extract_workflow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1565",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_process_single_file",
+      "target": "smartgallery_extract_workflow_files_string",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1568",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_process_single_file",
+      "target": "smartgallery_extract_workflow_prompt_string",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1569",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_init_db",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1598",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_dynamic_folder_config",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1865",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_dynamic_folder_config",
+      "target": "smartgallery_path_to_key",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1903",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_background_watcher_task",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1961",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_background_watcher_task",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1993",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_full_sync_database",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2061",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_full_sync_database",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2219",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_sync_folder_on_demand",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2230",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery_fast_no_db_check",
+      "target": "smartgallery_find_ffprobe_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2395",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery_fast_no_db_check",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2399",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery_fast_no_db_check",
+      "target": "smartgallery_init_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2401",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery_fast_no_db_check",
+      "target": "smartgallery_full_sync_database",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2406",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_pregenerate_exhibition_cache",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2425",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_check_exhibition_requirements",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2553",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_find_ffprobe_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2556",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2561",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_init_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2563",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_cleanup_invalid_watched_folders",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2566",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_full_sync_database",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2569",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_ensure_admin_user",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2570",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_initialize_gallery",
+      "target": "smartgallery_pregenerate_exhibition_cache",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2573",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ensure_admin_user",
+      "target": "smartgallery_encrypt_password",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2689",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_login",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2811",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_login",
+      "target": "smartgallery_decrypt_password",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2821",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_admin_manage_users",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2850",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_admin_manage_users",
+      "target": "smartgallery_decrypt_password",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2856",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_admin_manage_users",
+      "target": "smartgallery_encrypt_password",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2870",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_queue_search",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2929",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_check_status",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2951",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_sync_status",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2968",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_sync_status",
+      "target": "smartgallery_sync_folder_on_demand",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2972",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_api_search_options",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2980",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_api_search_options",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2983",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_api_search_options",
+      "target": "smartgallery_get_filter_options_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2985",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_reset",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3071",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_reset",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3080",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_add_files",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3147",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_add_files",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3169",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_add_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3208",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_add_folder",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3213",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_add_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3219",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_watched_folders",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3334",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_watched_folders",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3339",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_watched_folders",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3350",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_status",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3398",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_ai_indexing_control",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3442",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_gallery_view",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3511",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_gallery_view",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3541",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_gallery_view",
+      "target": "smartgallery_normalize_smart_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3593",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_gallery_view",
+      "target": "smartgallery_scan_folder_and_extract_options",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3814",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_gallery_view",
+      "target": "smartgallery_get_filter_options_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3823",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_upload_files",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3882",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_upload_files",
+      "target": "smartgallery_sync_folder_on_demand",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3894",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_background_rescan_worker",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3916",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rescan_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3974",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rescan_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3982",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_create_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4047",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_create_folder",
+      "target": "smartgallery_sync_folder_on_demand",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4053",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_mount_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4128",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_mount_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4135",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_unmount_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4156",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_unmount_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4165",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_background_zip_task",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4315",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rename_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4395",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rename_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4418",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_folder",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4496",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_folder",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4500",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_file_info_from_db",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4542",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_move_batch",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4575",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_move_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4586",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_move_batch",
+      "target": "smartgallery_get_unique_filepath",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4638",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_copy_batch",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4706",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_copy_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4715",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_copy_batch",
+      "target": "smartgallery_get_unique_filepath",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4731",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4793",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_batch",
+      "target": "smartgallery_safe_delete_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4809",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_favorite_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4851",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_toggle_favorite",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4859",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_file",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4871",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_file",
+      "target": "smartgallery_safe_delete_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4880",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rename_file",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4906",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_cleaned_file",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5009",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_cleaned_file",
+      "target": "smartgallery_strip_media_metadata",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5033",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_file",
+      "target": "smartgallery_should_strip_metadata",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5045",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_file",
+      "target": "smartgallery_serve_cleaned_file",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5046",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_file",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5049",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_download_file",
+      "target": "smartgallery_should_strip_metadata",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5057",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_download_file",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5059",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_download_file",
+      "target": "smartgallery_strip_media_metadata",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5068",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_download_workflow",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5078",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_download_workflow",
+      "target": "smartgallery_extract_workflow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5084",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_node_summary",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5097",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_node_summary",
+      "target": "smartgallery_extract_workflow",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5102",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_node_summary",
+      "target": "smartgallery_generate_node_summary",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5106",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_node_summary",
+      "target": "smartgallery_comfymetadataparser",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5119",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_node_summary",
+      "target": "smartgallery_comfymetadataparser_parse",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5120",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_thumbnail",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5164",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_serve_thumbnail",
+      "target": "smartgallery_create_thumbnail",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5170",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_storyboard",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5181",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_check_metadata",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5672",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_stream_video",
+      "target": "smartgallery_get_file_info_from_db",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5712",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_collections",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5775",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_sidebar_state",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5786",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_sidebar_state",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5787",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rename_collection_api",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5810",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_create_collection",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5833",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_delete_collection",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5850",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_toggle_collection_public",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5868",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_file_collections",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5905",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_tag_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5933",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_collection_view",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6070",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_collection_view",
+      "target": "smartgallery_normalize_smart_path",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6143",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_collection_view",
+      "target": "smartgallery_get_dynamic_folder_config",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6396",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_rate_file",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6459",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_rate_batch",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6519",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_get_comments",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6561",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_get_users_simple_list",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6625",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_post_comment",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6674",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_delete_comment",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6704",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_exhibition_edit_comment",
+      "target": "smartgallery_get_db_connection",
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6736",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_401",
+      "target": "smartgallery_run_integrity_check",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L401",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_479",
+      "target": "smartgallery_get_standardized_path",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L479",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_497",
+      "target": "smartgallery_normalize_smart_path",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L497",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_506",
+      "target": "smartgallery_print_configuration",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L506",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_532",
+      "target": "smartgallery_management_api_only",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L532",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_587",
+      "target": "smartgallery_get_node_color",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L587",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_596",
+      "target": "smartgallery_filter_enabled_nodes",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L596",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_609",
+      "target": "smartgallery_generate_node_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L609",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_750",
+      "target": "smartgallery_clean_prompt_text",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L750",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_789",
+      "target": "smartgallery_comfymetadataparser",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L789",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_797",
+      "target": "smartgallery_comfymetadataparser_parse",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L797",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_832",
+      "target": "smartgallery_comfymetadataparser_find_sampler_node",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L832",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_842",
+      "target": "smartgallery_comfymetadataparser_get_real_value",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L842",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_873",
+      "target": "smartgallery_comfymetadataparser_extract_size_from_sampler",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L873",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_902",
+      "target": "smartgallery_comfymetadataparser_extract_sampler_params",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L902",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_915",
+      "target": "smartgallery_comfymetadataparser_extract_prompts_from_sampler",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L915",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_923",
+      "target": "smartgallery_comfymetadataparser_trace_text",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L923",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_955",
+      "target": "smartgallery_comfymetadataparser_extract_model_from_sampler",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L955",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_971",
+      "target": "smartgallery_comfymetadataparser_fallback_scan",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L971",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_991",
+      "target": "smartgallery_safe_delete_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L991",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1062",
+      "target": "smartgallery_scan_bytes_for_workflow",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1062",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1104",
+      "target": "smartgallery_extract_workflow",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1104",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1328",
+      "target": "smartgallery_extract_workflow_files_string",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1328",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1474",
+      "target": "smartgallery_extract_workflow_prompt_string",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1474",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1543",
+      "target": "smartgallery_process_single_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1543",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_1950",
+      "target": "smartgallery_background_watcher_task",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L1950",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2336",
+      "target": "smartgallery_scan_folder_and_extract_options",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2336",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2374",
+      "target": "smartgallery_cleanup_invalid_watched_folders",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2374",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2413",
+      "target": "smartgallery_pregenerate_exhibition_cache",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2413",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2491",
+      "target": "smartgallery_check_exhibition_requirements",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2491",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2579",
+      "target": "smartgallery_get_filter_options_from_db",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2579",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2643",
+      "target": "smartgallery_load_or_create_encryption_key",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2643",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2684",
+      "target": "smartgallery_ensure_admin_user",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2684",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2704",
+      "target": "smartgallery_should_strip_metadata",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2704",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2722",
+      "target": "smartgallery_strip_media_metadata",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2722",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2914",
+      "target": "smartgallery_ai_queue_search",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2914",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_2950",
+      "target": "smartgallery_ai_check_status",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L2950",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_3054",
+      "target": "smartgallery_ai_indexing_reset",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3054",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_3903",
+      "target": "smartgallery_background_rescan_worker",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L3903",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_4548",
+      "target": "smartgallery_get_unique_filepath",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4548",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5001",
+      "target": "smartgallery_serve_cleaned_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5001",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5648",
+      "target": "smartgallery_serve_input_file",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5648",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5667",
+      "target": "smartgallery_check_metadata",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5667",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5707",
+      "target": "smartgallery_stream_video",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5707",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5785",
+      "target": "smartgallery_get_sidebar_state",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5785",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5887",
+      "target": "smartgallery_get_file_collections",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5887",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_5918",
+      "target": "smartgallery_tag_batch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L5918",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_6502",
+      "target": "smartgallery_exhibition_rate_batch",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6502",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_6799",
+      "target": "smartgallery_check_for_updates",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6799",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_6852",
+      "target": "smartgallery_show_config_error_and_exit",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6852",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_6877",
+      "target": "smartgallery_show_ffmpeg_warning",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6877",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_6901",
+      "target": "smartgallery_check_port_available",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L6901",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_76",
+      "target": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_172",
+      "target": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_296",
+      "target": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L296",
+      "weight": 1.0
+    },
+    {
+      "source": "smartgallery_rationale_4107",
+      "target": "f_workspace_smart_comfyui_gallery_smartgallery_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "F:\\workspace\\smart-comfyui-gallery\\smartgallery.py",
+      "source_location": "L4107",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

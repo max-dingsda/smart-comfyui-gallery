@@ -46,6 +46,26 @@ from functools import wraps
 from cryptography.fernet import Fernet
 import urllib.request 
 import secrets
+from smartgallery_core.files import get_unique_filepath as build_unique_filepath
+from smartgallery_core.files import safe_delete_file as safe_delete_path
+from smartgallery_core.renaming import build_workflow_name
+from smartgallery_core.renaming import generate_workflow_suggestions
+from smartgallery_core.renaming import preview_batch_renames
+from smartgallery_core.renaming import rename_with_sidecars
+from smartgallery_core.renaming import sanitize_filename as sanitize_renamed_filename
+from smartgallery_core.models import derive_models_root
+from smartgallery_core.models import fetch_civitai_metadata_for_model
+from smartgallery_core.models import fetch_model_records
+from smartgallery_core.models import persist_model_records
+from smartgallery_core.models import scan_model_library
+from smartgallery_core.models import update_model_civitai_data
+from smartgallery_core.storage import get_db_connection as create_db_connection
+from smartgallery_core.storage import init_db as initialize_database
+from smartgallery_core.storage import exhibition_collections_ready
+from smartgallery_core.storage import ensure_sg_models_schema
+from smartgallery_core.storage import fetch_collections_snapshot
+from smartgallery_core.storage import fetch_file_info
+from smartgallery_core.storage import get_collections_table_exists
 from typing import Dict, List, Any, Optional, Union # Added for type hinting in new tools
 try:
     from waitress import serve
@@ -988,36 +1008,122 @@ class ComfyMetadataParser:
 # ============================================================================
 
 def safe_delete_file(filepath):
+    safe_delete_path(filepath, DELETE_TO, TRASH_FOLDER)
+
+
+def rename_gallery_file(conn, file_id, requested_name):
+    requested_name = (requested_name or "").strip()
+    if not requested_name or len(requested_name) > 250:
+        raise ValueError("Invalid filename.")
+    if re.search(r'[\\/:"*?<>|]', requested_name):
+        raise ValueError("Invalid characters.")
+
+    query_fetch = """
+        SELECT
+            path, name, size, has_workflow, is_favorite, type, duration, dimensions,
+            ai_last_scanned, ai_caption, ai_embedding, ai_error, workflow_files, workflow_prompt
+        FROM files WHERE id = ?
     """
-    Safely delete a file by either moving it to trash (if DELETE_TO is configured)
-    or permanently deleting it.
-    
-    Args:
-        filepath: Path to the file to delete
-        
-    Raises:
-        OSError: If deletion/move fails
-    """
-    if DELETE_TO and TRASH_FOLDER:
-        # Move to trash (folder already validated at startup)
-        timestamp = time.strftime('%Y%m%d_%H%M%S')
-        filename = os.path.basename(filepath)
-        trash_filename = f"{timestamp}_{filename}"
-        trash_path = os.path.join(TRASH_FOLDER, trash_filename)
-        
-        # Handle duplicate filenames in trash
-        counter = 1
-        while os.path.exists(trash_path):
-            name_without_ext, ext = os.path.splitext(filename)
-            trash_filename = f"{timestamp}_{name_without_ext}_{counter}{ext}"
-            trash_path = os.path.join(TRASH_FOLDER, trash_filename)
-            counter += 1
-        
-        shutil.move(filepath, trash_path)
-        print(f"INFO: Moved file to trash: {trash_path}")
+    file_info = conn.execute(query_fetch, (file_id,)).fetchone()
+    if not file_info:
+        raise FileNotFoundError("File not found.")
+
+    old_path = file_info["path"]
+    old_name = file_info["name"]
+
+    _, old_ext = os.path.splitext(old_name)
+    _, requested_ext = os.path.splitext(requested_name)
+    final_new_name = requested_name if requested_ext else requested_name + old_ext
+
+    if final_new_name == old_name:
+        raise ValueError("Name unchanged.")
+
+    dir_name = os.path.dirname(old_path)
+    new_path = os.path.join(dir_name, final_new_name)
+
+    if os.path.exists(new_path) and os.path.abspath(new_path) != os.path.abspath(old_path):
+        raise FileExistsError(f'File "{final_new_name}" already exists.')
+
+    new_id = hashlib.md5(new_path.encode()).hexdigest()
+    existing_db = conn.execute("SELECT id FROM files WHERE id = ?", (new_id,)).fetchone()
+
+    rename_with_sidecars(old_path, final_new_name)
+
+    if existing_db and existing_db["id"] != file_id:
+        query_merge = """
+            UPDATE files
+            SET path = ?, name = ?, mtime = ?,
+                size = ?, has_workflow = ?, is_favorite = ?,
+                type = ?, duration = ?, dimensions = ?,
+                ai_last_scanned = ?, ai_caption = ?, ai_embedding = ?, ai_error = ?,
+                workflow_files = ?, workflow_prompt = ?
+            WHERE id = ?
+        """
+        conn.execute(
+            query_merge,
+            (
+                new_path,
+                final_new_name,
+                time.time(),
+                file_info["size"],
+                file_info["has_workflow"],
+                file_info["is_favorite"],
+                file_info["type"],
+                file_info["duration"],
+                file_info["dimensions"],
+                file_info["ai_last_scanned"],
+                file_info["ai_caption"],
+                file_info["ai_embedding"],
+                file_info["ai_error"],
+                file_info["workflow_files"],
+                file_info["workflow_prompt"],
+                new_id,
+            ),
+        )
+        conn.execute("DELETE FROM files WHERE id = ?", (file_id,))
     else:
-        # Permanently delete
-        os.remove(filepath)
+        conn.execute(
+            "UPDATE files SET id = ?, path = ?, name = ? WHERE id = ?",
+            (new_id, new_path, final_new_name, file_id),
+        )
+
+    return {
+        "status": "success",
+        "message": "File renamed.",
+        "old_id": file_id,
+        "new_id": new_id,
+        "new_name": final_new_name,
+        "new_path": new_path,
+    }
+
+
+def extract_workflow_rename_meta(file_path):
+    api_json = extract_workflow(file_path, target_type="api")
+    ui_json = extract_workflow(file_path, target_type="ui")
+    json_source = api_json if api_json else ui_json
+    if not json_source:
+        return {}
+
+    wf_data = json.loads(json_source)
+    if isinstance(wf_data, list):
+        wf_data = {str(i): node for i, node in enumerate(wf_data)}
+
+    parser = ComfyMetadataParser(wf_data)
+    return parser.parse() or {}
+
+
+def get_models_root_path():
+    return str(derive_models_root(BASE_OUTPUT_PATH))
+
+
+@app.route('/galleryout/models')
+@management_api_only
+def model_manager_view():
+    return render_template(
+        'models.html',
+        app_version=APP_VERSION,
+        models_root=get_models_root_path(),
+    )
 
 def find_ffprobe_path():
     if FFPROBE_MANUAL_PATH and os.path.isfile(FFPROBE_MANUAL_PATH):
@@ -1580,254 +1686,10 @@ def process_single_file(filepath):
         return None
         
 def get_db_connection():
-    # Timeout increased to 60s to be patient with the Indexer
-    conn = sqlite3.connect(DATABASE_FILE, timeout=60)
-    conn.row_factory = sqlite3.Row
-    # CONCURRENCY OPTIMIZATION:
-    conn.execute('PRAGMA journal_mode=WAL;') 
-    conn.execute('PRAGMA synchronous=NORMAL;') 
-    # --- CRITICAL FOR DATA CONSISTENCY ---
-    # Enables cascading updates/deletes for Categories/Collections
-    conn.execute('PRAGMA foreign_keys = ON;') 
-    
-    return conn
+    return create_db_connection(DATABASE_FILE)
     
 def init_db(conn=None):
-    close_conn = False
-    if conn is None:
-        conn = get_db_connection()
-        close_conn = True
-        
-    try:
-        # 1. CORE TABLE CREATION
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS files (
-                id TEXT PRIMARY KEY, 
-                path TEXT NOT NULL UNIQUE, 
-                mtime REAL NOT NULL,
-                name TEXT NOT NULL, 
-                type TEXT, 
-                duration TEXT, 
-                dimensions TEXT,
-                has_workflow INTEGER, 
-                is_favorite INTEGER DEFAULT 0, 
-                size INTEGER DEFAULT 0,
-                last_scanned REAL DEFAULT 0,
-                workflow_files TEXT DEFAULT '',
-                workflow_prompt TEXT DEFAULT '',
-                ai_last_scanned REAL DEFAULT 0,
-                ai_caption TEXT,
-                ai_embedding BLOB,
-                ai_error TEXT
-            )
-        ''')
-
-        # 2. AI TABLES
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS ai_search_queue (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                session_id TEXT NOT NULL UNIQUE,
-                query TEXT NOT NULL,
-                limit_results INTEGER DEFAULT 100,
-                status TEXT DEFAULT 'pending', 
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                completed_at TIMESTAMP NULL
-            );
-        ''')
-        
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS ai_search_results (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                session_id TEXT NOT NULL,
-                file_id TEXT NOT NULL,
-                score REAL NOT NULL,
-                FOREIGN KEY (session_id) REFERENCES ai_search_queue(session_id)
-            );
-        ''')
-        
-        conn.execute('CREATE INDEX IF NOT EXISTS idx_queue_status ON ai_search_queue(status);')
-        conn.execute('CREATE INDEX IF NOT EXISTS idx_results_session ON ai_search_results(session_id);')
-        
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS ai_indexing_queue (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                file_path TEXT NOT NULL,
-                file_id TEXT,
-                status TEXT DEFAULT 'pending', 
-                force_index INTEGER DEFAULT 0,
-                params TEXT DEFAULT '{}',
-                created_at REAL,
-                updated_at REAL,
-                error_msg TEXT,
-                UNIQUE(file_path) ON CONFLICT REPLACE
-            );
-        ''')
-        conn.execute('CREATE INDEX IF NOT EXISTS idx_ai_idx_status ON ai_indexing_queue(status);')
-
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS ai_watched_folders (
-                path TEXT PRIMARY KEY,
-                recursive INTEGER DEFAULT 0,
-                added_at REAL
-            );
-        ''')
-        
-        conn.execute("CREATE TABLE IF NOT EXISTS ai_metadata (key TEXT PRIMARY KEY, value TEXT, updated_at REAL)")
-        
-        # MOUNT POINTS TABLE
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS mounted_folders (
-                path TEXT PRIMARY KEY,
-                target_source TEXT,
-                created_at REAL
-            );
-        ''')
-        
-        # 3. COLLECTIONS SYSTEM
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS collections (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                type TEXT NOT NULL, 
-                color TEXT,         
-                is_public INTEGER DEFAULT 0,
-                created_at REAL
-            );
-        ''')
-
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS collection_files (
-                collection_id INTEGER,
-                file_id TEXT,
-                added_at REAL,
-                PRIMARY KEY (collection_id, file_id),
-                FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY (collection_id) REFERENCES collections(id) ON DELETE CASCADE
-            );
-        ''')
-        
-        # 4. EXHIBITION MODE TABLES (Ratings & Comments)
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS file_ratings (
-                file_id TEXT,
-                client_uuid TEXT,
-                rating INTEGER CHECK(rating >= 1 AND rating <= 5),
-                created_at REAL,
-                PRIMARY KEY (file_id, client_uuid),
-                FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
-            );
-        ''')
-
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS file_comments (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                file_id TEXT,
-                client_uuid TEXT,
-                author_name TEXT,
-                comment_text TEXT,
-                target_audience TEXT DEFAULT 'public',
-                created_at REAL,
-                FOREIGN KEY (file_id) REFERENCES files(id) ON DELETE CASCADE
-            );
-        ''')
-        
-        # Pre-populate Standard Workflow Flags
-        system_flags = [
-            ('Approved', 'system_flag', '#28a745'),
-            ('Review',   'system_flag', '#ffc107'),
-            ('To Edit',  'system_flag', '#17a2b8'),
-            ('Rejected', 'system_flag', '#dc3545'),
-            ('Select',   'system_flag', '#6f42c1')
-        ]
-        
-        existing_cols = conn.execute("SELECT COUNT(*) FROM collections WHERE type='system_flag'").fetchone()[0]
-        if existing_cols == 0:
-            print(f"{Colors.BLUE}INFO: Initializing standard workflow tags...{Colors.RESET}")
-            conn.executemany(
-                "INSERT INTO collections (name, type, color, is_public, created_at) VALUES (?, ?, ?, 0, ?)",
-                [(n, t, c, time.time()) for n, t, c in system_flags]
-            )
-        
-
-        # 5. USER MANAGEMENT (Always required now for messaging target resolution)
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                user_id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT NOT NULL UNIQUE,
-                password TEXT NOT NULL,         -- Reversibly encrypted password
-                full_name TEXT NOT NULL,
-                email TEXT,                     -- Communication email
-                phone_number TEXT,              -- Optional contact
-                role TEXT CHECK(role IN ('USER', 'STAFF', 'MANAGER', 'CUSTOMER', 'FRIEND', 'GUEST', 'ADMIN')) DEFAULT 'GUEST',
-                start_date DATE DEFAULT CURRENT_DATE,
-                expiry_date DATE,               -- Optional expiration date
-                is_active BOOLEAN DEFAULT 1     -- 1 = Active, 0 = Disabled
-            );
-        ''')
-        # Index for faster login lookups
-        conn.execute('CREATE INDEX IF NOT EXISTS idx_users_username ON users(username);')    
-        
-        # 6. COLUMN MIGRATION
-        required_columns = {
-            'size': 'INTEGER DEFAULT 0', 
-            'last_scanned': 'REAL DEFAULT 0',
-            'workflow_files': "TEXT DEFAULT ''",
-            'workflow_prompt': "TEXT DEFAULT ''",
-            'ai_last_scanned': 'REAL DEFAULT 0',
-            'ai_caption': 'TEXT',
-            'ai_embedding': 'BLOB',
-            'ai_error': 'TEXT'
-        }
-
-        # Handle comments target migration
-        try:
-            cursor_fc = conn.execute("PRAGMA table_info(file_comments)")
-            fc_columns = {row['name'] for row in cursor_fc.fetchall()}
-            if 'target_audience' not in fc_columns:
-                print("INFO: Updating Database Schema... Adding 'target_audience' to file_comments")
-                conn.execute("ALTER TABLE file_comments ADD COLUMN target_audience TEXT DEFAULT 'public'")
-        except Exception as e:
-            print(f"WARNING: Could not migrate file_comments table: {e}")
-
-        # Handle collections public flag migration
-        try:
-            cursor_col = conn.execute("PRAGMA table_info(collections)")
-            col_columns = {row['name'] for row in cursor_col.fetchall()}
-            if 'is_public' not in col_columns:
-                print("INFO: Updating Database Schema... Adding 'is_public' to collections")
-                conn.execute("ALTER TABLE collections ADD COLUMN is_public INTEGER DEFAULT 0")
-        except Exception as e:
-            print(f"WARNING: Could not migrate collections table: {e}")
-
-        cursor = conn.execute("PRAGMA table_info(files)")
-        existing_columns = {row['name'] for row in cursor.fetchall()}
-
-        for col_name, col_type in required_columns.items():
-            if col_name not in existing_columns:
-                print(f"INFO: Updating Database Schema... Adding missing column '{col_name}'")
-                try:
-                    conn.execute(f"ALTER TABLE files ADD COLUMN {col_name} {col_type}")
-                except Exception as e:
-                    print(f"WARNING: Could not add column {col_name}: {e}")
-
-        # 6. SCHEMA VERSION
-        try:
-            cur = conn.execute("PRAGMA user_version")
-            current_ver = cur.fetchone()[0]
-            
-            if current_ver != DB_SCHEMA_VERSION:
-                print(f"INFO: Updating Database Schema Version: {current_ver} -> {DB_SCHEMA_VERSION}")
-                conn.execute(f"PRAGMA user_version = {DB_SCHEMA_VERSION}")
-        except Exception as e:
-            print(f"WARNING: Could not update DB schema version: {e}")
-
-        conn.commit()
-        
-    except Exception as e:
-        print(f"CRITICAL DATABASE ERROR: {e}")
-        
-    finally:
-        if close_conn: conn.close()
+    initialize_database(DATABASE_FILE, DB_SCHEMA_VERSION, Colors, conn=conn)
         
 def get_dynamic_folder_config(force_refresh=False):
     global folder_config_cache
@@ -2513,12 +2375,7 @@ def check_exhibition_requirements():
         sys.exit(1)
 
     try:
-        with sqlite3.connect(DATABASE_FILE) as conn:
-            conn.row_factory = sqlite3.Row
-            
-            # Check if collections table exists
-            table_check = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='collections'").fetchone()
-            if not table_check:
+        if not get_collections_table_exists(DATABASE_FILE):
                 print(f"\n{Colors.RED}{Colors.BOLD}❌ CRITICAL ERROR: Collections Table Missing{Colors.RESET}")
                 print(f"{Colors.RED}The database exists, but it's empty or outdated.{Colors.RESET}")
                 print(f"\n{Colors.CYAN}{Colors.BOLD}💡 HOW TO FIX IT:{Colors.RESET}")
@@ -2526,10 +2383,7 @@ def check_exhibition_requirements():
                 print(f"   {Colors.YELLOW}python smartgallery.py{Colors.RESET}\n")
                 sys.exit(1)
 
-            # Check if there is at least one PUBLIC user album
-            public_colls = conn.execute("SELECT COUNT(*) FROM collections WHERE type='user_album' AND is_public=1").fetchone()[0]
-            
-            if public_colls == 0:
+        if not exhibition_collections_ready(DATABASE_FILE):
                 print(f"\n{Colors.RED}{Colors.BOLD}❌ CRITICAL ERROR: No Exhibition Ready Collections Found{Colors.RESET}")
                 print(f"{Colors.RED}Exhibition Mode is a showcase. It only displays collections marked as 'Exhibition Ready'.{Colors.RESET}")
                 print(f"{Colors.RED}Currently, your database has 0 Exhibition Ready collections, so the Exhibition would be completely empty.{Colors.RESET}")
@@ -2540,7 +2394,7 @@ def check_exhibition_requirements():
                 print(f"   (Or edit an existing one from the sidebar menu: ⋮ -> 👁️ Set as Exhibition Ready).")
                 print(f"4. Once you have at least one public collection, restart with --exhibition.\n")
                 sys.exit(1)
-                
+
     except sqlite3.DatabaseError as e:
         print(f"\n{Colors.RED}{Colors.BOLD}❌ CRITICAL ERROR: Database corrupted or inaccessible: {e}{Colors.RESET}")
         sys.exit(1)
@@ -4539,10 +4393,10 @@ def load_more():
     return jsonify(files=gallery_view_cache[offset:offset + PAGE_SIZE])
 
 def get_file_info_from_db(file_id, column='*'):
-    with get_db_connection() as conn:
-        row = conn.execute(f"SELECT {column} FROM files WHERE id = ?", (file_id,)).fetchone()
-    if not row: abort(404)
-    return dict(row) if column == '*' else row[0]
+    row = fetch_file_info(DATABASE_FILE, file_id, column)
+    if row is None:
+        abort(404)
+    return row
 
 def _get_unique_filepath(destination_folder, filename):
     """
@@ -4550,20 +4404,7 @@ def _get_unique_filepath(destination_folder, filename):
     This ensures that the path matches exactly what the Scanner generates,
     preventing duplicate records in the database.
     """
-    base, ext = os.path.splitext(filename)
-    counter = 1
-    
-    # Use standard os.path.join. 
-    # On Windows with base path "C:/A", it produces "C:/A\file.txt" (Matches your DB).
-    # On Linux, it produces "C:/A/file.txt" (Matches Linux DB).
-    full_path = os.path.join(destination_folder, filename)
-
-    while os.path.exists(full_path):
-        new_filename = f"{base}({counter}){ext}"
-        full_path = os.path.join(destination_folder, new_filename)
-        counter += 1
-        
-    return full_path
+    return build_unique_filepath(destination_folder, filename)
     
 @app.route('/galleryout/move_batch', methods=['POST'])
 @management_api_only
@@ -4897,104 +4738,359 @@ def rename_file(file_id):
     data = request.json
     new_name = data.get('new_name', '').strip()
 
-    if not new_name or len(new_name) > 250:
-        return jsonify({'status': 'error', 'message': 'Invalid filename.'}), 400
-    if re.search(r'[\\/:"*?<>|]', new_name):
-        return jsonify({'status': 'error', 'message': 'Invalid characters.'}), 400
-
     try:
         with get_db_connection() as conn:
-            # 1. Fetch All Metadata
-            query_fetch = """
-                SELECT 
-                    path, name, size, has_workflow, is_favorite, type, duration, dimensions,
-                    ai_last_scanned, ai_caption, ai_embedding, ai_error, workflow_files, workflow_prompt  
-                FROM files WHERE id = ?
-            """
-            file_info = conn.execute(query_fetch, (file_id,)).fetchone()
-            
-            if not file_info:
-                return jsonify({'status': 'error', 'message': 'File not found.'}), 404
-
-            old_path = file_info['path']
-            old_name = file_info['name']
-            
-            # Metadata Pack
-            meta = {
-                'size': file_info['size'],
-                'has_workflow': file_info['has_workflow'],
-                'is_favorite': file_info['is_favorite'],
-                'type': file_info['type'],
-                'duration': file_info['duration'],
-                'dimensions': file_info['dimensions'],
-                'ai_last_scanned': file_info['ai_last_scanned'],
-                'ai_caption': file_info['ai_caption'],
-                'ai_embedding': file_info['ai_embedding'],
-                'ai_error': file_info['ai_error'],
-                'workflow_files': file_info['workflow_files'],
-                'workflow_prompt': file_info['workflow_prompt']
-            }
-            
-            # Extension logic
-            _, old_ext = os.path.splitext(old_name)
-            new_name_base, new_ext = os.path.splitext(new_name)
-            final_new_name = new_name if new_ext else new_name + old_ext
-
-            if final_new_name == old_name:
-                return jsonify({'status': 'error', 'message': 'Name unchanged.'}), 400
-
-            # 2. Construct Path NATIVELY using os.path.join
-            # This respects the OS separator (Mixed on Win, Forward on Linux)
-            # ensuring the Hash ID matches future Scans.
-            dir_name = os.path.dirname(old_path)
-            new_path = os.path.join(dir_name, final_new_name)
-
-            if os.path.exists(new_path):
-                 return jsonify({'status': 'error', 'message': f'File "{final_new_name}" already exists.'}), 409
-
-            new_id = hashlib.md5(new_path.encode()).hexdigest()
-            existing_db = conn.execute("SELECT id FROM files WHERE id = ?", (new_id,)).fetchone()
-
-            os.rename(old_path, new_path)
-
-            if existing_db:
-                # MERGE SCENARIO
-                query_merge = """
-                    UPDATE files 
-                    SET path = ?, name = ?, mtime = ?,
-                        size = ?, has_workflow = ?, is_favorite = ?, 
-                        type = ?, duration = ?, dimensions = ?,
-                        ai_last_scanned = ?, ai_caption = ?, ai_embedding = ?, ai_error = ?,
-                        workflow_files = ?, workflow_prompt = ?
-                    WHERE id = ?
-                """
-                conn.execute(query_merge, (
-                    final_dest_path, final_filename, time.time(),
-                    meta['size'], meta['has_workflow'], meta['is_favorite'],
-                    meta['type'], meta['duration'], meta['dimensions'],
-                    meta['ai_last_scanned'], meta['ai_caption'], meta['ai_embedding'], meta['ai_error'],
-                    meta['workflow_files'], 
-                    meta['workflow_prompt'],
-                    new_id
-                ))
-                conn.execute("DELETE FROM files WHERE id = ?", (file_id,))
-            else:
-                # STANDARD SCENARIO
-                conn.execute("UPDATE files SET id = ?, path = ?, name = ? WHERE id = ?", 
-                            (new_id, new_path, final_new_name, file_id))
-
+            result = rename_gallery_file(conn, file_id, new_name)
             conn.commit()
-
-            return jsonify({
-                'status': 'success',
-                'message': 'File renamed.',
-                'new_name': final_new_name,
-                'new_id': new_id
-            })
-
+            return jsonify(result)
+    except ValueError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 400
+    except FileNotFoundError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 404
+    except FileExistsError as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 409
     except Exception as e:
         print(f"ERROR: Rename failed: {e}")
         return jsonify({'status': 'error', 'message': f'Error: {e}'}), 500
+
+
+@app.route('/galleryout/api/renaming/suggest_batch', methods=['POST'])
+@management_api_only
+def suggest_batch_rename():
+    data = request.json or {}
+    file_ids = data.get('file_ids', [])
+    priority = data.get('priority', 'model')
+    include_model = bool(data.get('include_model', True))
+    include_prompt = bool(data.get('include_prompt', True))
+    include_loras = bool(data.get('include_loras', False))
+    include_sampler = bool(data.get('include_sampler', False))
+    include_steps = bool(data.get('include_steps', False))
+    if not file_ids:
+        return jsonify({'status': 'error', 'message': 'No files selected.'}), 400
+
+    with get_db_connection() as conn:
+        placeholders = ','.join(['?'] * len(file_ids))
+        rows = conn.execute(
+            f"SELECT id, path, name, has_workflow FROM files WHERE id IN ({placeholders})",
+            file_ids,
+        ).fetchall()
+
+    if not rows:
+        return jsonify({'status': 'error', 'message': 'Selected files were not found.'}), 404
+
+    ordered_rows = []
+    row_by_id = {row['id']: row for row in rows}
+    for file_id in file_ids:
+        row = row_by_id.get(file_id)
+        if row:
+            ordered_rows.append(row)
+
+    suggestion = ""
+    suggestions = []
+    source = "fallback"
+    for row in ordered_rows:
+        if row['has_workflow']:
+            try:
+                meta = extract_workflow_rename_meta(row['path'])
+                suggestion = build_workflow_name(
+                    meta,
+                    priority=priority,
+                    include_model=include_model,
+                    include_prompt=include_prompt,
+                    include_loras=include_loras,
+                    include_sampler=include_sampler,
+                    include_steps=include_steps,
+                )
+                suggestions = generate_workflow_suggestions(meta)
+                if suggestion:
+                    source = 'workflow'
+                    break
+            except Exception as exc:
+                print(f"WARN: Batch rename suggestion failed for {row['path']}: {exc}")
+
+    if not suggestion:
+        first_name = os.path.splitext(ordered_rows[0]['name'])[0]
+        suggestion = sanitize_renamed_filename(first_name)
+
+    if not suggestion:
+        suggestion = "batch_rename"
+
+    if suggestion and suggestion not in suggestions:
+        suggestions.insert(0, suggestion)
+
+    return jsonify({'status': 'success', 'suggestion': suggestion, 'suggestions': suggestions[:6], 'source': source})
+
+
+@app.route('/galleryout/api/renaming/preview_batch', methods=['POST'])
+@management_api_only
+def preview_batch_rename():
+    data = request.json or {}
+    file_ids = data.get('file_ids', [])
+    base_name = sanitize_renamed_filename((data.get('base_name') or '').strip())
+    priority = data.get('priority', 'model')
+    include_model = bool(data.get('include_model', True))
+    include_prompt = bool(data.get('include_prompt', True))
+    include_loras = bool(data.get('include_loras', False))
+    include_sampler = bool(data.get('include_sampler', False))
+    include_steps = bool(data.get('include_steps', False))
+
+    if not file_ids:
+        return jsonify({'status': 'error', 'message': 'No files selected.'}), 400
+
+    with get_db_connection() as conn:
+        placeholders = ','.join(['?'] * len(file_ids))
+        rows = conn.execute(
+            f"SELECT id, path, name, has_workflow FROM files WHERE id IN ({placeholders})",
+            file_ids,
+        ).fetchall()
+
+    row_by_id = {row['id']: dict(row) for row in rows}
+    ordered_rows = [row_by_id[file_id] for file_id in file_ids if file_id in row_by_id]
+    if not ordered_rows:
+        return jsonify({'status': 'error', 'message': 'Selected files were not found.'}), 404
+
+    if not base_name:
+        for row in ordered_rows:
+            if row['has_workflow']:
+                try:
+                    meta = extract_workflow_rename_meta(row['path'])
+                    base_name = build_workflow_name(
+                        meta,
+                        priority=priority,
+                        include_model=include_model,
+                        include_prompt=include_prompt,
+                        include_loras=include_loras,
+                        include_sampler=include_sampler,
+                        include_steps=include_steps,
+                    )
+                    if base_name:
+                        break
+                except Exception as exc:
+                    print(f"WARN: Preview base generation failed for {row['path']}: {exc}")
+
+    if not base_name:
+        base_name = sanitize_renamed_filename(os.path.splitext(ordered_rows[0]['name'])[0])
+    if not base_name:
+        return jsonify({'status': 'error', 'message': 'A valid base name is required.'}), 400
+
+    previews = preview_batch_renames(ordered_rows, base_name)
+    preview_payload = [
+        {
+            'file_id': info['id'],
+            'old_name': preview.old_name,
+            'new_name': preview.new_name,
+            'conflict': preview.conflict,
+            'reason': preview.reason,
+        }
+        for info, preview in zip(ordered_rows, previews)
+    ]
+    conflict_count = sum(1 for preview in previews if preview.conflict)
+    return jsonify({
+        'status': 'success',
+        'base_name': base_name,
+        'preview': preview_payload,
+        'conflict_count': conflict_count,
+    })
+
+
+@app.route('/galleryout/api/renaming/apply_batch', methods=['POST'])
+@management_api_only
+def apply_batch_rename():
+    data = request.json or {}
+    file_ids = data.get('file_ids', [])
+    base_name = sanitize_renamed_filename((data.get('base_name') or '').strip())
+    priority = data.get('priority', 'model')
+    include_model = bool(data.get('include_model', True))
+    include_prompt = bool(data.get('include_prompt', True))
+    include_loras = bool(data.get('include_loras', False))
+    include_sampler = bool(data.get('include_sampler', False))
+    include_steps = bool(data.get('include_steps', False))
+
+    if not file_ids:
+        return jsonify({'status': 'error', 'message': 'No files selected.'}), 400
+
+    with get_db_connection() as conn:
+        placeholders = ','.join(['?'] * len(file_ids))
+        rows = conn.execute(
+            f"SELECT id, path, name, has_workflow FROM files WHERE id IN ({placeholders})",
+            file_ids,
+        ).fetchall()
+
+        row_by_id = {row['id']: dict(row) for row in rows}
+        ordered_rows = [row_by_id[file_id] for file_id in file_ids if file_id in row_by_id]
+        if not ordered_rows:
+            return jsonify({'status': 'error', 'message': 'Selected files were not found.'}), 404
+
+        if not base_name:
+            for row in ordered_rows:
+                if row['has_workflow']:
+                    try:
+                        meta = extract_workflow_rename_meta(row['path'])
+                        base_name = build_workflow_name(
+                            meta,
+                            priority=priority,
+                            include_model=include_model,
+                            include_prompt=include_prompt,
+                            include_loras=include_loras,
+                            include_sampler=include_sampler,
+                            include_steps=include_steps,
+                        )
+                        if base_name:
+                            break
+                    except Exception as exc:
+                        print(f"WARN: Apply base generation failed for {row['path']}: {exc}")
+
+        if not base_name:
+            base_name = sanitize_renamed_filename(os.path.splitext(ordered_rows[0]['name'])[0])
+        if not base_name:
+            return jsonify({'status': 'error', 'message': 'A valid base name is required.'}), 400
+
+        previews = preview_batch_renames(ordered_rows, base_name)
+        conflicts = [preview.new_name for preview in previews if preview.conflict]
+        if conflicts:
+            return jsonify({
+                'status': 'error',
+                'message': f'Batch rename blocked by {len(conflicts)} conflict(s). Review the preview first.',
+                'conflicts': conflicts,
+            }), 409
+
+        results = []
+        for row, preview in zip(ordered_rows, previews):
+            result = rename_gallery_file(conn, row['id'], preview.new_name)
+            results.append(result)
+
+        conn.commit()
+
+    return jsonify({
+        'status': 'success',
+        'message': f'Renamed {len(results)} file(s).',
+        'results': results,
+    })
+
+
+@app.route('/galleryout/api/models/scan', methods=['POST'])
+@management_api_only
+def scan_models_api():
+    data = request.json or {}
+    include_sha256 = bool(data.get('include_sha256', False))
+    models_root = get_models_root_path()
+
+    if not os.path.exists(models_root):
+        return jsonify({
+            'status': 'error',
+            'message': f'Models root not found: {models_root}',
+        }), 404
+
+    records = scan_model_library(models_root, include_sha256=include_sha256)
+    with get_db_connection() as conn:
+        ensure_sg_models_schema(conn)
+        persist_model_records(conn, records)
+        conn.commit()
+        models = fetch_model_records(conn)
+
+    grouped = {
+        'checkpoints': [model for model in models if model['section'] == 'checkpoints'],
+        'loras': [model for model in models if model['section'] == 'loras'],
+        'embeddings': [model for model in models if model['section'] == 'embeddings'],
+    }
+    return jsonify({
+        'status': 'success',
+        'models_root': models_root,
+        'counts': {key: len(value) for key, value in grouped.items()},
+        'models': grouped,
+    })
+
+
+@app.route('/galleryout/api/models/list', methods=['GET'])
+@management_api_only
+def list_models_api():
+    with get_db_connection() as conn:
+        ensure_sg_models_schema(conn)
+        models = fetch_model_records(conn)
+
+    grouped = {
+        'checkpoints': [model for model in models if model['section'] == 'checkpoints'],
+        'loras': [model for model in models if model['section'] == 'loras'],
+        'embeddings': [model for model in models if model['section'] == 'embeddings'],
+    }
+    return jsonify({
+        'status': 'success',
+        'models_root': get_models_root_path(),
+        'counts': {key: len(value) for key, value in grouped.items()},
+        'models': grouped,
+    })
+
+
+@app.route('/galleryout/api/models/civitai/enrich', methods=['POST'])
+@management_api_only
+def enrich_models_from_civitai_api():
+    data = request.json or {}
+    model_ids = data.get('model_ids', [])
+    if not model_ids:
+        return jsonify({'status': 'error', 'message': 'No models selected.'}), 400
+
+    api_key = os.environ.get('CIVITAI_API_KEY') or None
+    results = []
+
+    with get_db_connection() as conn:
+        ensure_sg_models_schema(conn)
+        placeholders = ','.join(['?'] * len(model_ids))
+        rows = conn.execute(
+            f"SELECT id, path, name FROM sg_models WHERE id IN ({placeholders})",
+            model_ids,
+        ).fetchall()
+        row_by_id = {row['id']: row for row in rows}
+
+        for model_id in model_ids:
+            row = row_by_id.get(model_id)
+            if not row:
+                results.append({'model_id': model_id, 'status': 'error', 'message': 'Model not found in local catalog.'})
+                continue
+
+            try:
+                civitai_data = fetch_civitai_metadata_for_model(row['path'], api_key=api_key)
+                update_model_civitai_data(conn, model_id, civitai_data)
+                results.append({
+                    'model_id': model_id,
+                    'name': row['name'],
+                    'status': 'success',
+                    'found': civitai_data.get('found', False),
+                    'civitai_name': civitai_data.get('civitai_name'),
+                    'civitai_model_url': civitai_data.get('civitai_model_url'),
+                })
+            except Exception as exc:
+                update_model_civitai_data(conn, model_id, {
+                    'sha256': None,
+                    'checked_at': int(time.time()),
+                    'civitai_model_url': None,
+                    'civitai_name': None,
+                    'civitai_version_name': None,
+                    'civitai_type': None,
+                    'civitai_base_model': None,
+                    'civitai_creator': None,
+                    'civitai_license': None,
+                    'civitai_trigger': None,
+                    'civitai_tags': None,
+                    'civitai_status': 'error',
+                    'civitai_error': str(exc),
+                })
+                results.append({
+                    'model_id': model_id,
+                    'name': row['name'],
+                    'status': 'error',
+                    'message': str(exc),
+                })
+
+        conn.commit()
+
+    success_count = sum(1 for item in results if item['status'] == 'success' and item.get('found'))
+    checked_count = sum(1 for item in results if item['status'] == 'success')
+    error_count = sum(1 for item in results if item['status'] == 'error')
+    return jsonify({
+        'status': 'success',
+        'message': f'CivitAI checked {checked_count} model(s), matched {success_count}, errors {error_count}.',
+        'results': results,
+    })
 
 @app.route('/galleryout/file_clean/<string:file_id>')
 def serve_cleaned_file(file_id):
@@ -5772,28 +5868,16 @@ def stream_video(file_id):
 
 @app.route('/galleryout/api/collections', methods=['GET'])
 def get_collections():
-    with get_db_connection() as conn:
-        flags = conn.execute("SELECT * FROM collections WHERE type='system_flag' ORDER BY id").fetchall()
-        albums = conn.execute("SELECT * FROM collections WHERE type='user_album' ORDER BY name").fetchall()
-        return jsonify({
-            'flags': [dict(r) for r in flags],
-            'albums': [dict(r) for r in albums]
-        })
+    return jsonify(fetch_collections_snapshot(DATABASE_FILE))
 
 @app.route('/galleryout/api/sidebar_state')
 def get_sidebar_state():
     """Returns the current state of folders and collections for real-time sync."""
     folders = get_dynamic_folder_config(force_refresh=True)
-    with get_db_connection() as conn:
-        flags = conn.execute("SELECT * FROM collections WHERE type='system_flag' ORDER BY id").fetchall()
-        albums = conn.execute("SELECT * FROM collections WHERE type='user_album' ORDER BY name").fetchall()
-    
+    collections = fetch_collections_snapshot(DATABASE_FILE)
     return jsonify({
         'folders': folders,
-        'collections': {
-            'flags': [dict(r) for r in flags],
-            'albums': [dict(r) for r in albums]
-        }
+        'collections': collections
     })
 
 @app.route('/galleryout/api/collections/rename', methods=['POST'])

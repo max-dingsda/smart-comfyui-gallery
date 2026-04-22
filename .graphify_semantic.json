@@ -1,0 +1,893 @@
+{
+  "nodes": [
+    {
+      "id": "concept_main_workspace",
+      "label": "Main Workspace",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.1 The Main Workspace"
+    },
+    {
+      "id": "concept_exhibition_portal",
+      "label": "Exhibition Portal",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.5 Exhibition Portal"
+    },
+    {
+      "id": "concept_virtual_collections",
+      "label": "Virtual Collections",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.3.1 Virtual Collections"
+    },
+    {
+      "id": "concept_status_tags",
+      "label": "Pipeline Status Tags",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.3.2 Pipeline Status Tags"
+    },
+    {
+      "id": "concept_ratings_comments",
+      "label": "Ratings and Comments",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.3.3 Ratings & Comments"
+    },
+    {
+      "id": "concept_user_management",
+      "label": "User Management and ACL",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.4 User Management & Access Control"
+    },
+    {
+      "id": "concept_focus_mode",
+      "label": "Focus Mode",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.1.4 Gallery Grid & Focus Mode"
+    },
+    {
+      "id": "concept_compare_mode",
+      "label": "Compare Mode",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.2.3 Compare Mode"
+    },
+    {
+      "id": "concept_storyboard",
+      "label": "Video Storyboard",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "3.2.4 Video Storyboard"
+    },
+    {
+      "id": "concept_workflow_recall",
+      "label": "Workflow Recall",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "ComfyUI-Aware. ComfyUI-Independent."
+    },
+    {
+      "id": "concept_dam_mode",
+      "label": "DAM Collaboration Layer",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "1.2 What is New in v2.11"
+    },
+    {
+      "id": "concept_external_folder_mounting",
+      "label": "External Folder Mounting",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "Interface Walkthrough / Sidebar Navigation"
+    },
+    {
+      "id": "doc_readme",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_architecture_plan",
+      "label": "architecture-plan.md",
+      "file_type": "document",
+      "source_file": "docs/architecture-plan.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "tpl_index",
+      "label": "templates/index.html",
+      "file_type": "document",
+      "source_file": "templates/index.html",
+      "source_location": "L1"
+    },
+    {
+      "id": "tpl_exhibition",
+      "label": "templates/exhibition.html",
+      "file_type": "document",
+      "source_file": "templates/exhibition.html",
+      "source_location": "L1"
+    },
+    {
+      "id": "tpl_exhibition_login",
+      "label": "templates/exhibition_login.html",
+      "file_type": "document",
+      "source_file": "templates/exhibition_login.html",
+      "source_location": "L1"
+    },
+    {
+      "id": "tpl_user_manager_modal",
+      "label": "user_manager_module.html",
+      "file_type": "document",
+      "source_file": "templates/modals/user_manager_module.html",
+      "source_location": "L1"
+    },
+    {
+      "id": "asset_sidebar_tabs",
+      "label": "Sidebar Tabs Screenshot",
+      "file_type": "image",
+      "source_file": "assets/sidebar_tabs.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_top_toolbar",
+      "label": "Top Toolbar Screenshot",
+      "file_type": "image",
+      "source_file": "assets/top_main_toolbar.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_collections",
+      "label": "Collections Screenshot",
+      "file_type": "image",
+      "source_file": "assets/collections.jpg",
+      "source_location": null
+    },
+    {
+      "id": "asset_statuses",
+      "label": "Statuses Screenshot",
+      "file_type": "image",
+      "source_file": "assets/statuses.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_comments_panel",
+      "label": "Comments Panel Screenshot",
+      "file_type": "image",
+      "source_file": "assets/main_rating_comments_panel.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_focus_on",
+      "label": "Focus Mode Screenshot",
+      "file_type": "image",
+      "source_file": "assets/focus_mode_active.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_compare",
+      "label": "Compare Mode Screenshot",
+      "file_type": "image",
+      "source_file": "assets/compare.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_storyboard",
+      "label": "Storyboard Screenshot",
+      "file_type": "image",
+      "source_file": "assets/storyboard.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_exhibition",
+      "label": "Exhibition Portal Screenshot",
+      "file_type": "image",
+      "source_file": "assets/hero_exhibition_portal.png",
+      "source_location": null
+    },
+    {
+      "id": "asset_user_management",
+      "label": "User Management Screenshot",
+      "file_type": "image",
+      "source_file": "assets/user_management_modal.png",
+      "source_location": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_readme",
+      "target": "concept_main_workspace",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.1",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_exhibition_portal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.5",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_virtual_collections",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.3.1",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_status_tags",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.3.2",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_ratings_comments",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.3.3",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_user_management",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.4",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_focus_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.1.4",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.2.3",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_storyboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "3.2.4",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_workflow_recall",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "Overview",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_readme",
+      "target": "concept_dam_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": "1.2",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_architecture_plan",
+      "target": "concept_virtual_collections",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.67,
+      "source_file": "docs/architecture-plan.md",
+      "source_location": "Target Shape",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_architecture_plan",
+      "target": "concept_user_management",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.62,
+      "source_file": "docs/architecture-plan.md",
+      "source_location": "Current Constraints",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_main_workspace",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "UI shell",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_virtual_collections",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "sidebar tabs",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_status_tags",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "status tab",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_ratings_comments",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "file info panel",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_focus_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "focus toggle",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "compare mode",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_index",
+      "target": "concept_storyboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html",
+      "source_location": "storyboard overlay",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_exhibition",
+      "target": "concept_exhibition_portal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/exhibition.html",
+      "source_location": "exhibition shell",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_exhibition_login",
+      "target": "concept_exhibition_portal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/exhibition_login.html",
+      "source_location": "login screen",
+      "weight": 1.0
+    },
+    {
+      "source": "tpl_user_manager_modal",
+      "target": "concept_user_management",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/modals/user_manager_module.html",
+      "source_location": "modal",
+      "weight": 1.0
+    },
+    {
+      "source": "asset_sidebar_tabs",
+      "target": "concept_virtual_collections",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.88,
+      "source_file": "assets/sidebar_tabs.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_sidebar_tabs",
+      "target": "concept_status_tags",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.88,
+      "source_file": "assets/sidebar_tabs.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_top_toolbar",
+      "target": "concept_focus_mode",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.76,
+      "source_file": "assets/top_main_toolbar.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_collections",
+      "target": "concept_virtual_collections",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/collections.jpg",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_statuses",
+      "target": "concept_status_tags",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/statuses.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_comments_panel",
+      "target": "concept_ratings_comments",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/main_rating_comments_panel.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_focus_on",
+      "target": "concept_focus_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/focus_mode_active.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_compare",
+      "target": "concept_compare_mode",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/compare.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_storyboard",
+      "target": "concept_storyboard",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/storyboard.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_exhibition",
+      "target": "concept_exhibition_portal",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/hero_exhibition_portal.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "asset_user_management",
+      "target": "concept_user_management",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "assets/user_management_modal.png",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "concept_virtual_collections",
+      "target": "smartgallery_get_collections",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.92,
+      "source_file": "README.md",
+      "source_location": "3.3.1",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_virtual_collections",
+      "target": "smartgallery_collection_view",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.91,
+      "source_file": "README.md",
+      "source_location": "3.3.1",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_virtual_collections",
+      "target": "smartgallery_tag_batch",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.84,
+      "source_file": "README.md",
+      "source_location": "3.3.1",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_status_tags",
+      "target": "smartgallery_tag_batch",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.89,
+      "source_file": "README.md",
+      "source_location": "3.3.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_ratings_comments",
+      "target": "smartgallery_exhibition_rate_file",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.89,
+      "source_file": "README.md",
+      "source_location": "3.3.3",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_ratings_comments",
+      "target": "smartgallery_exhibition_post_comment",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.89,
+      "source_file": "README.md",
+      "source_location": "3.3.3",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_ratings_comments",
+      "target": "smartgallery_exhibition_get_comments",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.86,
+      "source_file": "README.md",
+      "source_location": "3.3.3",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_focus_mode",
+      "target": "smartgallery_gallery_view",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.63,
+      "source_file": "README.md",
+      "source_location": "3.1.4",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_compare_mode",
+      "target": "smartgallery_compare_files_api",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.93,
+      "source_file": "README.md",
+      "source_location": "3.2.3",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_storyboard",
+      "target": "smartgallery_get_storyboard",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.93,
+      "source_file": "README.md",
+      "source_location": "3.2.4",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_storyboard",
+      "target": "smartgallery_serve_storyboard_frame",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.84,
+      "source_file": "README.md",
+      "source_location": "3.2.4",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_user_management",
+      "target": "smartgallery_admin_manage_users",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.93,
+      "source_file": "README.md",
+      "source_location": "3.4",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_user_management",
+      "target": "smartgallery_ensure_admin_user",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.78,
+      "source_file": "README.md",
+      "source_location": "3.4",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_exhibition_portal",
+      "target": "smartgallery_exhibition_login",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.94,
+      "source_file": "README.md",
+      "source_location": "3.5",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_exhibition_portal",
+      "target": "smartgallery_exhibition_logout",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.86,
+      "source_file": "README.md",
+      "source_location": "3.5",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_exhibition_portal",
+      "target": "smartgallery_collection_view",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.69,
+      "source_file": "README.md",
+      "source_location": "3.5",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_workflow_recall",
+      "target": "smartgallery_extract_workflow",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.93,
+      "source_file": "README.md",
+      "source_location": "Overview",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_workflow_recall",
+      "target": "smartgallery_get_node_summary",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "README.md",
+      "source_location": "3.2.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_workflow_recall",
+      "target": "smartgallery_download_workflow",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.86,
+      "source_file": "README.md",
+      "source_location": "Overview",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_external_folder_mounting",
+      "target": "smartgallery_mount_folder",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.93,
+      "source_file": "README.md",
+      "source_location": "Sidebar Navigation",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_external_folder_mounting",
+      "target": "smartgallery_unmount_folder",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.91,
+      "source_file": "README.md",
+      "source_location": "Sidebar Navigation",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_external_folder_mounting",
+      "target": "smartgallery_browse_filesystem",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.88,
+      "source_file": "README.md",
+      "source_location": "Sidebar Navigation",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_dam_mode",
+      "target": "concept_virtual_collections",
+      "relation": "participates_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "README.md",
+      "source_location": "1.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_dam_mode",
+      "target": "concept_status_tags",
+      "relation": "participates_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "README.md",
+      "source_location": "1.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_dam_mode",
+      "target": "concept_ratings_comments",
+      "relation": "participates_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.72,
+      "source_file": "README.md",
+      "source_location": "1.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_dam_mode",
+      "target": "concept_user_management",
+      "relation": "participates_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.66,
+      "source_file": "README.md",
+      "source_location": "1.2",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_exhibition_portal",
+      "target": "concept_virtual_collections",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.83,
+      "source_file": "README.md",
+      "source_location": "sharing flow",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_ratings_comments",
+      "target": "concept_exhibition_portal",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.81,
+      "source_file": "README.md",
+      "source_location": "collaboration",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_compare_mode",
+      "target": "concept_workflow_recall",
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "README.md",
+      "source_location": "advanced inspection",
+      "weight": 1.0
+    },
+    {
+      "source": "concept_storyboard",
+      "target": "concept_exhibition_portal",
+      "relation": "semantically_similar_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.24,
+      "source_file": "README.md",
+      "source_location": "video review vs sharing",
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "dam_collaboration_surface",
+      "label": "DAM Collaboration Surface",
+      "nodes": [
+        "concept_dam_mode",
+        "concept_virtual_collections",
+        "concept_status_tags",
+        "concept_ratings_comments",
+        "concept_user_management",
+        "concept_exhibition_portal"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.84,
+      "source_file": "README.md"
+    },
+    {
+      "id": "advanced_media_inspection",
+      "label": "Advanced Media Inspection",
+      "nodes": [
+        "concept_workflow_recall",
+        "concept_compare_mode",
+        "concept_storyboard",
+        "smartgallery_extract_workflow",
+        "smartgallery_compare_files_api",
+        "smartgallery_get_storyboard"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.86,
+      "source_file": "README.md"
+    },
+    {
+      "id": "main_workspace_shell",
+      "label": "Main Workspace Shell",
+      "nodes": [
+        "concept_main_workspace",
+        "tpl_index",
+        "asset_sidebar_tabs",
+        "asset_top_toolbar",
+        "asset_focus_on"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "templates/index.html"
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

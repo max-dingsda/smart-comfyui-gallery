@@ -54,3 +54,10 @@ buildkitd.toml
 compose-test.yaml
 SmartGallery
 temp
+pytest*
+.tmp*
+
+
+# Own stuff
+docs/architecture-plan.md
+docs/lessons-learned.md

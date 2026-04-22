@@ -2396,6 +2396,232 @@
             cursor: pointer;
         }
 
+        #batch-rename-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.84);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 2350;
+        }
+
+        #batch-rename-overlay.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .batch-rename-panel {
+            width: 760px;
+            max-width: 94vw;
+            max-height: 88vh;
+            background: var(--surface-color);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.65);
+            display: flex;
+            flex-direction: column;
+            transform: translateY(16px) scale(0.98);
+            transition: transform 0.25s ease;
+            overflow: hidden;
+        }
+
+        #batch-rename-overlay.visible .batch-rename-panel {
+            transform: translateY(0) scale(1);
+        }
+
+        .batch-rename-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .batch-rename-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+        }
+
+        .batch-rename-body {
+            padding: 20px 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            overflow-y: auto;
+        }
+
+        .batch-rename-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 18px;
+        }
+
+        .br-section {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 16px;
+        }
+
+        .br-section h4 {
+            margin: 0 0 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .br-field-label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .br-input,
+        .br-select {
+            width: 100%;
+            background: rgba(0,0,0,0.28);
+            border: 1px solid var(--glass-border);
+            color: white;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+        }
+
+        .br-checkbox-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .br-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .br-checkbox input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-color);
+        }
+
+        .br-suggestion-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .br-suggestion-chip {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: var(--text-color);
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .br-suggestion-chip:hover {
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .br-preview-box {
+            background: rgba(0,0,0,0.22);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 12px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .br-preview-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            max-height: 320px;
+        }
+
+        .br-preview-item {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 10px;
+            align-items: center;
+            font-size: 0.86rem;
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .br-preview-item.conflict {
+            border: 1px solid rgba(220,53,69,0.55);
+            background: rgba(220,53,69,0.12);
+        }
+
+        .br-preview-old,
+        .br-preview-new {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .br-preview-arrow {
+            color: var(--text-muted);
+        }
+
+        .br-preview-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .batch-rename-footer {
+            padding: 16px 22px;
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .batch-rename-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .batch-rename-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .br-checkbox-list {
+                grid-template-columns: 1fr;
+            }
+
+            .batch-rename-panel {
+                width: 96vw;
+                max-height: 92vh;
+            }
+        }
+
         .node-summary-panel {
             max-width: 900px;
             max-height: 85vh;
@@ -2801,7 +3027,7 @@
             bottom: 100%; /* Sits on top of the bar */
             right: 0;
             margin-bottom: 10px;
-            width: 200px;
+            width: 240px;
             background: #252525;
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 12px;
@@ -2836,6 +3062,7 @@
             gap: 10px;
             border-radius: 8px;
             transition: background 0.2s;
+            white-space: nowrap;
         }
 
         .sel-more-menu button:hover {
@@ -2857,6 +3084,7 @@
             }
             .sel-more-menu {
                 right: 10px; /* Slight offset on mobile */
+                width: 250px;
             }
         }
 
@@ -7712,6 +7940,10 @@ body.dam-mode-active .status-color-strip { display: block; }
                     <span style="margin-right:5px;">📖</span> Docs
                 </a>
 
+                <a href="/galleryout/models" class="glass-btn" title="Open Model Manager" style="height: 42px; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;">
+                    <span style="margin-right:5px;">🧩</span> Models
+                </a>
+
                 <!-- 2. Shortcuts Help -->
                 <button type="button" onclick="showShortcutsHelp()" class="glass-btn" title="View Keyboard Shortcuts" style="height: 42px; display: inline-flex; align-items: center; justify-content: center;">
                     <span style="font-weight:900; margin-right:5px;">?</span> Shortcuts
@@ -8097,6 +8329,8 @@ body.dam-mode-active .status-color-strip { display: block; }
             <button id="tag-selected-btn" class="sel-btn" onclick="openTaggingModal('status')" title="Set Status">🏷️</button>
             <!-- COLLECTION BUTTON -->
             <button id="col-selected-btn" class="sel-btn" onclick="openTaggingModal('collection')" title="Add/Remove from Collection (A)">📚</button>
+            <!-- BATCH RENAME -->
+            <button id="rename-selected-btn" class="sel-btn" title="Batch Rename Selected">✏️</button>
             
             <!-- Delete (Always visible for speed) -->
             <button id="delete-selected-btn" class="sel-btn danger" title="Delete Selected">🗑️</button>
@@ -8125,6 +8359,7 @@ body.dam-mode-active .status-color-strip { display: block; }
             <!-- 4. File Operations -->
             <button id="copy-selected-btn">Cc Copy to Folder...</button>
             <button id="move-selected-btn">📁 Move to Folder...</button>
+            <button id="batch-rename-menu-btn">✏️ Batch Rename Selected</button>
             <button id="download-zip-btn">📦 Download as Zip</button>
             <button onclick="favoriteSelected(true)">⭐ Add Favorite</button>
             <button id="unfavorite-selected-btn">☆ Remove Favorite</button>
@@ -8791,6 +9026,60 @@ body.dam-mode-active .status-color-strip { display: block; }
             </div>
         </div>
     </div>
+    <div id="batch-rename-overlay">
+        <div class="batch-rename-panel">
+            <div class="batch-rename-header">
+                <div>
+                    <h3>✏️ Batch Rename</h3>
+                    <div id="batch-rename-subtitle" style="color:var(--text-muted); font-size:0.85rem; margin-top:4px;">Configure naming and preview the result.</div>
+                </div>
+                <button class="close-btn" id="batch-rename-close-btn" style="font-size:1.6rem; background:none; border:none; color:var(--text-muted); cursor:pointer;">×</button>
+            </div>
+            <div class="batch-rename-body">
+                <div class="batch-rename-grid">
+                    <div class="br-section">
+                        <h4>Name Setup</h4>
+                        <label class="br-field-label" for="batch-rename-base-name">Base Name</label>
+                        <input id="batch-rename-base-name" class="br-input" type="text" placeholder="model_subject_variant">
+                        <div style="height:14px;"></div>
+                        <label class="br-field-label" for="batch-rename-priority">Priority</label>
+                        <select id="batch-rename-priority" class="br-select">
+                            <option value="model">Model First</option>
+                            <option value="prompt">Prompt First</option>
+                        </select>
+                        <div style="height:16px;"></div>
+                        <div class="br-checkbox-list">
+                            <label class="br-checkbox"><input id="batch-rename-include-model" type="checkbox" checked> <span>Include model</span></label>
+                            <label class="br-checkbox"><input id="batch-rename-include-prompt" type="checkbox" checked> <span>Include prompt</span></label>
+                            <label class="br-checkbox"><input id="batch-rename-include-loras" type="checkbox"> <span>Include LoRAs</span></label>
+                            <label class="br-checkbox"><input id="batch-rename-include-sampler" type="checkbox"> <span>Include sampler</span></label>
+                            <label class="br-checkbox"><input id="batch-rename-include-steps" type="checkbox"> <span>Include steps</span></label>
+                        </div>
+                    </div>
+                    <div class="br-section">
+                        <h4>Quick Suggestions</h4>
+                        <div id="batch-rename-suggestions" class="br-suggestion-list"></div>
+                    </div>
+                </div>
+                <div class="br-section">
+                    <div class="br-preview-meta">
+                        <span id="batch-rename-preview-summary">No preview loaded yet.</span>
+                        <button id="batch-rename-refresh-btn" class="glass-btn" style="height:auto; min-height:0; padding:8px 12px;">🔄 Refresh Preview</button>
+                    </div>
+                    <div class="br-preview-box">
+                        <div id="batch-rename-preview-list" class="br-preview-list"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="batch-rename-footer">
+                <div id="batch-rename-status" style="color:var(--text-muted); font-size:0.85rem;">Waiting for input.</div>
+                <div class="batch-rename-actions">
+                    <button id="batch-rename-cancel-btn" class="glass-btn">Cancel</button>
+                    <button id="batch-rename-apply-btn" class="glass-btn active-blue">Apply Batch Rename</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- MOUNT FOLDER MODAL (Advanced) -->
     <div id="mount-folder-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);backdrop-filter:blur(5px);z-index:4000;display:none;justify-content:center;align-items:center;">
         <div class="smart-dialog-panel" style="width:600px; max-width:95vw; height: auto; max-height: 90vh;">
@@ -9395,6 +9684,8 @@ body.dam-mode-active .status-color-strip { display: block; }
         let currentDropAction = 'move'; // 'move' or 'copy'
         let copyKeepFavorites = false; // Store user choice
         let isFilmstripDragging = false;
+        let currentBatchRenameFileIds = [];
+        let currentBatchRenamePreview = [];
 
         // --- UI STATE PERSISTENCE MANAGEMENT ---
         const savedSort = localStorage.getItem('gallerySortPreference');
@@ -10993,6 +11284,194 @@ body.dam-mode-active .status-color-strip { display: block; }
         }
         
         function moveSelected() { if (selectedFiles.size > 0) populateAndShowDropPanel(); }
+
+        function getBatchRenameOptions() {
+            return {
+                file_ids: [...currentBatchRenameFileIds],
+                base_name: document.getElementById('batch-rename-base-name').value.trim(),
+                priority: document.getElementById('batch-rename-priority').value,
+                include_model: document.getElementById('batch-rename-include-model').checked,
+                include_prompt: document.getElementById('batch-rename-include-prompt').checked,
+                include_loras: document.getElementById('batch-rename-include-loras').checked,
+                include_sampler: document.getElementById('batch-rename-include-sampler').checked,
+                include_steps: document.getElementById('batch-rename-include-steps').checked,
+            };
+        }
+
+        function updateBatchRenameSuggestions(suggestions = []) {
+            const container = document.getElementById('batch-rename-suggestions');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (!suggestions.length) {
+                container.innerHTML = '<span style="color:var(--text-muted); font-size:0.85rem;">No workflow suggestions available.</span>';
+                return;
+            }
+
+            suggestions.forEach(suggestion => {
+                const chip = document.createElement('button');
+                chip.type = 'button';
+                chip.className = 'br-suggestion-chip';
+                chip.textContent = suggestion;
+                chip.onclick = () => {
+                    document.getElementById('batch-rename-base-name').value = suggestion;
+                    refreshBatchRenamePreview();
+                };
+                container.appendChild(chip);
+            });
+        }
+
+        function renderBatchRenamePreview(previewData) {
+            currentBatchRenamePreview = previewData.preview || [];
+            const list = document.getElementById('batch-rename-preview-list');
+            const summary = document.getElementById('batch-rename-preview-summary');
+            const status = document.getElementById('batch-rename-status');
+            const applyBtn = document.getElementById('batch-rename-apply-btn');
+            if (!list || !summary || !status || !applyBtn) return;
+
+            list.innerHTML = '';
+            currentBatchRenamePreview.forEach(item => {
+                const row = document.createElement('div');
+                row.className = `br-preview-item${item.conflict ? ' conflict' : ''}`;
+                row.innerHTML = `
+                    <div class="br-preview-old" title="${escapeHTML(item.old_name)}">${escapeHTML(item.old_name)}</div>
+                    <div class="br-preview-arrow">→</div>
+                    <div class="br-preview-new" title="${escapeHTML(item.new_name)}">${escapeHTML(item.new_name)}</div>
+                `;
+                list.appendChild(row);
+            });
+
+            summary.textContent = `${previewData.preview.length} file(s) prepared with base "${previewData.base_name}".`;
+            if (previewData.conflict_count > 0) {
+                status.textContent = `${previewData.conflict_count} conflict(s) detected. Adjust the options or base name.`;
+                status.style.color = 'var(--danger-color)';
+                applyBtn.disabled = true;
+                applyBtn.style.opacity = '0.6';
+                applyBtn.style.cursor = 'not-allowed';
+            } else {
+                status.textContent = 'Preview looks clean. Ready to apply.';
+                status.style.color = 'var(--success-color)';
+                applyBtn.disabled = false;
+                applyBtn.style.opacity = '';
+                applyBtn.style.cursor = '';
+            }
+        }
+
+        async function refreshBatchRenameSuggestionAndPreview() {
+            const options = getBatchRenameOptions();
+            if (!options.file_ids.length) return;
+
+            try {
+                const suggestRes = await fetch('/galleryout/api/renaming/suggest_batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(options)
+                });
+                const suggestData = await suggestRes.json();
+                if (suggestRes.ok && suggestData.status === 'success') {
+                    if (!options.base_name && suggestData.suggestion) {
+                        document.getElementById('batch-rename-base-name').value = suggestData.suggestion;
+                    }
+                    updateBatchRenameSuggestions(suggestData.suggestions || []);
+                }
+            } catch (error) {
+                console.warn('Batch rename suggestion refresh failed', error);
+            }
+
+            await refreshBatchRenamePreview();
+        }
+
+        async function refreshBatchRenamePreview() {
+            const options = getBatchRenameOptions();
+            if (!options.file_ids.length) return;
+
+            const summary = document.getElementById('batch-rename-preview-summary');
+            if (summary) summary.textContent = 'Loading preview...';
+
+            const previewRes = await fetch('/galleryout/api/renaming/preview_batch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(options)
+            });
+            const previewData = await previewRes.json();
+            if (!previewRes.ok || previewData.status !== 'success') {
+                throw new Error(previewData.message || 'Could not build batch rename preview.');
+            }
+            document.getElementById('batch-rename-base-name').value = previewData.base_name || options.base_name;
+            renderBatchRenamePreview(previewData);
+        }
+
+        function closeBatchRenameModal() {
+            const overlay = document.getElementById('batch-rename-overlay');
+            if (!overlay) return;
+            overlay.classList.remove('visible');
+            currentBatchRenameFileIds = [];
+            currentBatchRenamePreview = [];
+            if (!document.getElementById('smart-dialog-overlay').classList.contains('visible')) {
+                document.body.classList.remove('modal-open');
+            }
+        }
+
+        async function applyBatchRenameFromModal() {
+            const options = getBatchRenameOptions();
+            if (!options.file_ids.length) {
+                showNotification('No files selected.', 'warning');
+                return;
+            }
+
+            try {
+                const response = await fetch('/galleryout/api/renaming/apply_batch', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(options)
+                });
+                const data = await response.json();
+                if (!response.ok || data.status !== 'success') {
+                    throw new Error(data.message || 'Batch rename failed.');
+                }
+
+                closeBatchRenameModal();
+                sessionStorage.setItem('gallery_notification', JSON.stringify({
+                    message: data.message || 'Batch rename completed.',
+                    type: 'success'
+                }));
+                window.location.reload();
+            } catch (error) {
+                handleError(error);
+            }
+        }
+
+        async function batchRenameSelected() {
+            if (selectedFiles.size === 0) {
+                showNotification('Select files first.', 'warning');
+                return;
+            }
+
+            currentBatchRenameFileIds = [...selectedFiles];
+            document.getElementById('batch-rename-subtitle').textContent = `${currentBatchRenameFileIds.length} selected file(s). Configure naming and inspect the preview.`;
+            document.getElementById('batch-rename-base-name').value = '';
+            document.getElementById('batch-rename-priority').value = 'model';
+            document.getElementById('batch-rename-include-model').checked = true;
+            document.getElementById('batch-rename-include-prompt').checked = true;
+            document.getElementById('batch-rename-include-loras').checked = false;
+            document.getElementById('batch-rename-include-sampler').checked = false;
+            document.getElementById('batch-rename-include-steps').checked = false;
+            document.getElementById('batch-rename-preview-list').innerHTML = '';
+            document.getElementById('batch-rename-status').textContent = 'Loading suggestions...';
+            document.getElementById('batch-rename-status').style.color = 'var(--text-muted)';
+            updateBatchRenameSuggestions([]);
+
+            const overlay = document.getElementById('batch-rename-overlay');
+            overlay.classList.add('visible');
+            document.body.classList.add('modal-open');
+
+            try {
+                await refreshBatchRenameSuggestionAndPreview();
+                setTimeout(() => document.getElementById('batch-rename-base-name').focus(), 50);
+            } catch (error) {
+                handleError(error);
+            }
+        }
         
         // --- COPY FILES LOGIC ---
         // Wrapper to start Move
@@ -13422,6 +13901,35 @@ body.dam-mode-active .status-color-strip { display: block; }
 
             const copyBtn = document.getElementById('copy-selected-btn');
             if (copyBtn) copyBtn.addEventListener('click', copySelected);
+            const renameSelectedBtn = document.getElementById('rename-selected-btn');
+            if (renameSelectedBtn) renameSelectedBtn.addEventListener('click', batchRenameSelected);
+            const batchRenameMenuBtn = document.getElementById('batch-rename-menu-btn');
+            if (batchRenameMenuBtn) batchRenameMenuBtn.addEventListener('click', batchRenameSelected);
+            document.getElementById('batch-rename-close-btn').addEventListener('click', closeBatchRenameModal);
+            document.getElementById('batch-rename-cancel-btn').addEventListener('click', closeBatchRenameModal);
+            document.getElementById('batch-rename-refresh-btn').addEventListener('click', () => {
+                refreshBatchRenameSuggestionAndPreview().catch(handleError);
+            });
+            document.getElementById('batch-rename-apply-btn').addEventListener('click', applyBatchRenameFromModal);
+            document.getElementById('batch-rename-base-name').addEventListener('input', () => {
+                refreshBatchRenamePreview().catch(handleError);
+            });
+            document.getElementById('batch-rename-priority').addEventListener('change', () => {
+                document.getElementById('batch-rename-base-name').value = '';
+                refreshBatchRenameSuggestionAndPreview().catch(handleError);
+            });
+            [
+                'batch-rename-include-model',
+                'batch-rename-include-prompt',
+                'batch-rename-include-loras',
+                'batch-rename-include-sampler',
+                'batch-rename-include-steps'
+            ].forEach(id => {
+                document.getElementById(id).addEventListener('change', () => {
+                    document.getElementById('batch-rename-base-name').value = '';
+                    refreshBatchRenameSuggestionAndPreview().catch(handleError);
+                });
+            });
             document.getElementById('download-zip-btn').addEventListener('click', downloadSelectedZip);
             document.getElementById('delete-selected-btn').addEventListener('click', deleteSelected);
             document.getElementById('favorite-selected-btn').addEventListener('click', () => favoriteSelected(true));
@@ -13433,6 +13941,9 @@ body.dam-mode-active .status-color-strip { display: block; }
             document.getElementById('lightbox-zoom-out').addEventListener('click', () => zoomLightbox(-0.2));
             document.getElementById('lightbox-delete-btn').addEventListener('click', () => deleteFromLightbox(false));
             document.getElementById('lightbox-rename-btn').addEventListener('click', renameFileFromLightbox);
+            document.getElementById('batch-rename-overlay').addEventListener('click', (event) => {
+                if (event.target === document.getElementById('batch-rename-overlay')) closeBatchRenameModal();
+            });
             // --- COPY WORKFLOW TO CLIPBOARD (Button Click) ---
             const copyJsonBtn = document.getElementById('lightbox-copy-json');
             if (copyJsonBtn) {
@@ -13698,6 +14209,7 @@ body.dam-mode-active .status-color-strip { display: block; }
                     if (document.getElementById('upload-overlay').classList.contains('visible')) { closeUploadModal(); return; }
                     if (document.getElementById('node-summary-overlay').classList.contains('visible')) { closeNodeSummary(); return; }
                     if (document.getElementById('ai-search-overlay').classList.contains('visible')) { closeAiSearchModal(); return; }
+                    if (document.getElementById('batch-rename-overlay').classList.contains('visible')) { closeBatchRenameModal(); return; }
                     
                     // NEW: Intercept Tagging, Move and AI Indexing panels to close them with Esc BEFORE the Lightbox
                     if (document.getElementById('tagging-overlay').classList.contains('visible')) { closeTaggingModal(); return; }

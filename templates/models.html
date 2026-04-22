@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartGallery Model Manager</title>
+    <style>
+        :root {
+            --bg: #0c0d10;
+            --panel: #17191f;
+            --panel-2: #1e2129;
+            --line: rgba(255,255,255,0.10);
+            --text: #f2f4f8;
+            --muted: #a9b0bc;
+            --blue: #4ea3ff;
+            --green: #33d17a;
+            --gold: #ffcc4d;
+            --pink: #ff6ec7;
+            --danger: #ff5d73;
+            --shadow: 0 20px 60px rgba(0,0,0,0.45);
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(78,163,255,0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(255,110,199,0.12), transparent 22%),
+                linear-gradient(180deg, #0b0c0f 0%, #10131a 100%);
+            min-height: 100vh;
+        }
+
+        .shell {
+            width: min(1500px, calc(100vw - 32px));
+            margin: 24px auto 40px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 18px;
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(20,22,28,0.82);
+            backdrop-filter: blur(14px);
+            box-shadow: var(--shadow);
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand p {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn, .chip {
+            border: 1px solid var(--line);
+            color: var(--text);
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            padding: 10px 14px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 0.92rem;
+            transition: 0.2s ease;
+        }
+
+        .btn:hover, .chip:hover {
+            border-color: var(--blue);
+            transform: translateY(-1px);
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, rgba(78,163,255,0.22), rgba(78,163,255,0.10));
+            border-color: rgba(78,163,255,0.45);
+        }
+
+        .btn.fuchsia {
+            background: linear-gradient(135deg, rgba(255,110,199,0.22), rgba(255,110,199,0.10));
+            border-color: rgba(255,110,199,0.45);
+        }
+
+        .btn.ghost {
+            color: var(--muted);
+        }
+
+        .overview {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            background: rgba(23,25,31,0.86);
+            box-shadow: var(--shadow);
+        }
+
+        .stat {
+            padding: 18px;
+        }
+
+        .stat .label {
+            color: var(--muted);
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .stat .value {
+            margin-top: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat .note {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .root-card {
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .root-card strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .root-path {
+            color: var(--gold);
+            word-break: break-all;
+            font-family: Consolas, monospace;
+            font-size: 0.92rem;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .filter-bar {
+            display: grid;
+            grid-template-columns: 1.3fr 220px 220px;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .status-text {
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .section {
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 16px 18px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .section-header .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .table-wrap {
+            overflow: auto;
+        }
+
+        .field {
+            width: 100%;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.05);
+            color: var(--text);
+            border-radius: 12px;
+            padding: 11px 13px;
+            font-size: 0.92rem;
+        }
+
+        select.field option {
+            background: #f4f7fb;
+            color: #111827;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 980px;
+        }
+
+        th, td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            text-align: left;
+            vertical-align: top;
+            font-size: 0.92rem;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: rgba(30,33,41,0.96);
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.78rem;
+            z-index: 1;
+        }
+
+        tbody tr:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        tbody tr.clickable-row {
+            cursor: pointer;
+        }
+
+        .name-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .name-cell strong {
+            font-size: 0.95rem;
+        }
+
+        .subtle {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border-radius: 999px;
+            padding: 5px 9px;
+            font-size: 0.76rem;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,0.04);
+            white-space: nowrap;
+        }
+
+        .pill.blue { border-color: rgba(78,163,255,0.35); color: #b9d9ff; }
+        .pill.green { border-color: rgba(51,209,122,0.35); color: #bff5d6; }
+        .pill.pink { border-color: rgba(255,110,199,0.35); color: #ffd1ef; }
+        .pill.gold { border-color: rgba(255,204,77,0.35); color: #ffe7a3; }
+        .pill.red { border-color: rgba(255,93,115,0.35); color: #ffced7; }
+
+        .mono {
+            font-family: Consolas, monospace;
+            word-break: break-all;
+            color: #d7def0;
+            font-size: 0.85rem;
+        }
+
+        .truncate-cell {
+            max-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .model-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.82);
+            backdrop-filter: blur(12px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            padding: 18px;
+        }
+
+        .model-overlay.show {
+            display: flex;
+        }
+
+        .model-panel {
+            width: min(900px, 96vw);
+            max-height: 88vh;
+            overflow: auto;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: rgba(20,22,28,0.96);
+            box-shadow: var(--shadow);
+        }
+
+        .model-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            background: rgba(20,22,28,0.96);
+        }
+
+        .model-panel-header h3 {
+            margin: 0;
+            font-size: 1.15rem;
+        }
+
+        .model-panel-body {
+            padding: 20px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 10px 14px;
+            align-items: start;
+        }
+
+        .detail-key {
+            color: var(--muted);
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .detail-value {
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .detail-section {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 16px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .detail-section h4 {
+            margin: 0 0 14px 0;
+            font-size: 0.95rem;
+        }
+
+        .empty {
+            padding: 22px 18px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 980px) {
+            .overview {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .filter-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .overview {
+                grid-template-columns: 1fr;
+            }
+
+            .shell {
+                width: min(100vw - 18px, 1500px);
+                margin-top: 10px;
+            }
+
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shell">
+        <div class="topbar">
+            <div class="brand">
+                <h1>🧩 SmartGallery Model Manager</h1>
+                <p>First integrated preview for checkpoints, LoRAs, and embeddings. Version {{ app_version }}</p>
+            </div>
+            <div class="actions">
+                <button class="btn primary" id="scan-models-btn">🔄 Scan Models</button>
+                <button class="btn fuchsia" id="enrich-visible-btn">✨ Enrich Visible via CivitAI</button>
+                <button class="btn" id="refresh-models-btn">↻ Refresh View</button>
+                <a class="btn ghost" href="/galleryout/">← Back to Gallery</a>
+            </div>
+        </div>
+
+        <div class="overview">
+            <div class="card stat">
+                <div class="label">Checkpoints</div>
+                <div class="value" id="count-checkpoints">0</div>
+                <div class="note">Includes `checkpoints` and `diffusion_models`.</div>
+            </div>
+            <div class="card stat">
+                <div class="label">LoRAs</div>
+                <div class="value" id="count-loras">0</div>
+                <div class="note">Trigger and tag metadata where available.</div>
+            </div>
+            <div class="card stat">
+                <div class="label">Embeddings</div>
+                <div class="value" id="count-embeddings">0</div>
+                <div class="note">Prompt helpers and negative embeddings.</div>
+            </div>
+            <div class="card stat">
+                <div class="label">Total</div>
+                <div class="value" id="count-total">0</div>
+                <div class="note" id="scan-note">No scan loaded yet.</div>
+            </div>
+        </div>
+
+        <div class="card root-card">
+            <strong>Detected Models Root</strong>
+            <div class="root-path">{{ models_root }}</div>
+        </div>
+
+        <div class="status-row">
+            <div class="status-text" id="models-status">Loading model catalog...</div>
+            <div class="pill-row">
+                <span class="pill blue">🎨 checkpoints</span>
+                <span class="pill pink">🎭 loras</span>
+                <span class="pill gold">📝 embeddings</span>
+            </div>
+        </div>
+
+        <div class="filter-bar">
+            <input class="field" id="model-search-input" type="text" placeholder="Search names, paths, triggers, tags, architecture...">
+            <select class="field" id="model-section-filter">
+                <option value="all">All sections</option>
+                <option value="checkpoints">Checkpoints</option>
+                <option value="loras">LoRAs</option>
+                <option value="embeddings">Embeddings</option>
+            </select>
+            <select class="field" id="model-source-filter">
+                <option value="all">All sources</option>
+                <option value="checkpoints">checkpoints</option>
+                <option value="diffusion_models">diffusion_models</option>
+                <option value="loras">loras</option>
+                <option value="embeddings">embeddings</option>
+            </select>
+        </div>
+
+        <div class="card section">
+            <div class="section-header">
+                <h2>🎨 Checkpoints</h2>
+                <div class="meta" id="meta-checkpoints">0 entries</div>
+            </div>
+            <div class="table-wrap" id="section-checkpoints"></div>
+        </div>
+
+        <div class="card section">
+            <div class="section-header">
+                <h2>🎭 LoRAs</h2>
+                <div class="meta" id="meta-loras">0 entries</div>
+            </div>
+            <div class="table-wrap" id="section-loras"></div>
+        </div>
+
+        <div class="card section">
+            <div class="section-header">
+                <h2>📝 Embeddings</h2>
+                <div class="meta" id="meta-embeddings">0 entries</div>
+            </div>
+            <div class="table-wrap" id="section-embeddings"></div>
+        </div>
+    </div>
+
+    <div class="model-overlay" id="model-overlay">
+        <div class="model-panel">
+            <div class="model-panel-header">
+                <div>
+                    <h3 id="model-overlay-title">Model Details</h3>
+                    <div class="subtle" id="model-overlay-subtitle">Inspect local and CivitAI metadata.</div>
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <button class="btn fuchsia" id="model-overlay-civitai-btn">✨ Fetch CivitAI</button>
+                    <button class="btn" id="model-overlay-close">Close</button>
+                </div>
+            </div>
+            <div class="model-panel-body" id="model-overlay-body"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentCatalog = { checkpoints: [], loras: [], embeddings: [] };
+        let currentCounts = { checkpoints: 0, loras: 0, embeddings: 0 };
+        let currentOverlayModelId = null;
+
+        function formatBytes(bytes) {
+            if (!bytes && bytes !== 0) return '-';
+            const units = ['B', 'KB', 'MB', 'GB', 'TB'];
+            let value = bytes;
+            let unit = 0;
+            while (value >= 1024 && unit < units.length - 1) {
+                value /= 1024;
+                unit += 1;
+            }
+            return `${value.toFixed(value >= 10 || unit === 0 ? 0 : 1)} ${units[unit]}`;
+        }
+
+        function formatDate(ts) {
+            if (!ts) return '-';
+            return new Date(ts * 1000).toLocaleString();
+        }
+
+        function escapeHtml(value) {
+            return String(value ?? '').replace(/[&<>"']/g, char => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[char]));
+        }
+
+        function truncateText(value, maxLength = 250) {
+            const text = String(value ?? '');
+            if (text.length <= maxLength) return text;
+            return `${text.slice(0, maxLength - 1)}…`;
+        }
+
+        function buildSearchBlob(model) {
+            return [
+                model.name,
+                model.path,
+                model.relative_path,
+                model.trigger,
+                model.tags,
+                model.architecture,
+                model.civitai_name,
+                model.civitai_creator,
+                model.civitai_base_model,
+                model.source_folder,
+                model.section
+            ].filter(Boolean).join(' ').toLowerCase();
+        }
+
+        function renderNameCell(model) {
+            const civitaiName = model.civitai_name ? `<span class="subtle">CivitAI: ${escapeHtml(model.civitai_name)}</span>` : '';
+            const arch = model.architecture ? `<span class="pill blue">${escapeHtml(model.architecture)}</span>` : '';
+            const source = model.source_folder ? `<span class="pill">${escapeHtml(model.source_folder)}</span>` : '';
+            const url = model.civitai_model_url ? `<a class="pill green" href="${model.civitai_model_url}" target="_blank" rel="noreferrer">CivitAI ↗</a>` : '';
+            let civitaiState = '';
+            if (model.civitai_status === 'matched') civitaiState = `<span class="pill green">CivitAI matched</span>`;
+            else if (model.civitai_status === 'not_found') civitaiState = `<span class="pill gold">CivitAI not found</span>`;
+            else if (model.civitai_status === 'error') civitaiState = `<span class="pill red">CivitAI error</span>`;
+            return `
+                <div class="name-cell">
+                    <strong>${escapeHtml(model.name)}</strong>
+                    ${civitaiName}
+                    <div class="pill-row">${arch}${source}${civitaiState}${url}</div>
+                </div>
+            `;
+        }
+
+        function renderStandardTable(models) {
+            if (!models.length) return `<div class="empty">No models loaded in this section yet.</div>`;
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Source</th>
+                            <th>Size</th>
+                            <th>Modified</th>
+                            <th>Path</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${models.map(model => `
+                            <tr class="clickable-row" data-model-id="${escapeHtml(model.id)}" data-section="${escapeHtml(model.section)}">
+                                <td>${renderNameCell(model)}</td>
+                                <td>${escapeHtml(model.source_folder)}</td>
+                                <td>${formatBytes(model.size)}</td>
+                                <td>${formatDate(model.mtime)}</td>
+                                <td class="mono">${escapeHtml(model.relative_path || model.path)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function renderLoraTable(models) {
+            if (!models.length) return `<div class="empty">No LoRAs loaded in this section yet.</div>`;
+            return `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th style="width: 20%;">Trigger</th>
+                            <th style="width: 26%;">Tags</th>
+                            <th>Size</th>
+                            <th>Path</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${models.map(model => `
+                            <tr class="clickable-row" data-model-id="${escapeHtml(model.id)}" data-section="${escapeHtml(model.section)}">
+                                <td>${renderNameCell(model)}</td>
+                                <td class="truncate-cell" title="${escapeHtml(model.trigger || '')}">${model.trigger ? escapeHtml(model.trigger) : '<span class="subtle">-</span>'}</td>
+                                <td class="truncate-cell" title="${escapeHtml(model.tags || '')}">${model.tags ? escapeHtml(truncateText(model.tags, 250)) : '<span class="subtle">-</span>'}</td>
+                                <td>${formatBytes(model.size)}</td>
+                                <td class="mono">${escapeHtml(model.relative_path || model.path)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function updateCounts(counts) {
+            const checkpoints = counts.checkpoints || 0;
+            const loras = counts.loras || 0;
+            const embeddings = counts.embeddings || 0;
+            document.getElementById('count-checkpoints').textContent = checkpoints;
+            document.getElementById('count-loras').textContent = loras;
+            document.getElementById('count-embeddings').textContent = embeddings;
+            document.getElementById('count-total').textContent = checkpoints + loras + embeddings;
+            document.getElementById('meta-checkpoints').textContent = `${checkpoints} entries`;
+            document.getElementById('meta-loras').textContent = `${loras} entries`;
+            document.getElementById('meta-embeddings').textContent = `${embeddings} entries`;
+        }
+
+        function getFilteredCatalog() {
+            const query = document.getElementById('model-search-input').value.trim().toLowerCase();
+            const sectionFilter = document.getElementById('model-section-filter').value;
+            const sourceFilter = document.getElementById('model-source-filter').value;
+
+            const filtered = { checkpoints: [], loras: [], embeddings: [] };
+
+            Object.entries(currentCatalog).forEach(([section, models]) => {
+                if (sectionFilter !== 'all' && sectionFilter !== section) return;
+
+                filtered[section] = models.filter(model => {
+                    if (sourceFilter !== 'all' && model.source_folder !== sourceFilter) return false;
+                    if (query && !buildSearchBlob(model).includes(query)) return false;
+                    return true;
+                });
+            });
+
+            return filtered;
+        }
+
+        function applyCatalogFilters() {
+            const filtered = getFilteredCatalog();
+            const counts = {
+                checkpoints: filtered.checkpoints.length,
+                loras: filtered.loras.length,
+                embeddings: filtered.embeddings.length,
+            };
+            updateCounts(counts);
+            document.getElementById('section-checkpoints').innerHTML = renderStandardTable(filtered.checkpoints);
+            document.getElementById('section-loras').innerHTML = renderLoraTable(filtered.loras);
+            document.getElementById('section-embeddings').innerHTML = renderStandardTable(filtered.embeddings);
+            bindModelRowClicks();
+        }
+
+        function renderCatalog(payload) {
+            currentCatalog = payload.models || { checkpoints: [], loras: [], embeddings: [] };
+            currentCounts = payload.counts || { checkpoints: 0, loras: 0, embeddings: 0 };
+            populateFilterOptions();
+            applyCatalogFilters();
+        }
+
+        function populateFilterOptions() {
+            const sectionSelect = document.getElementById('model-section-filter');
+            const sourceSelect = document.getElementById('model-source-filter');
+            const currentSection = sectionSelect.value;
+            const currentSource = sourceSelect.value;
+
+            const sectionOptions = [
+                ['all', 'All sections'],
+                ['checkpoints', `Checkpoints (${currentCatalog.checkpoints.length})`],
+                ['loras', `LoRAs (${currentCatalog.loras.length})`],
+                ['embeddings', `Embeddings (${currentCatalog.embeddings.length})`],
+            ];
+            sectionSelect.innerHTML = sectionOptions.map(([value, label]) => `<option value="${value}">${label}</option>`).join('');
+            sectionSelect.value = sectionOptions.some(([value]) => value === currentSection) ? currentSection : 'all';
+
+            const sourceValues = new Map([['all', 'All sources']]);
+            Object.values(currentCatalog).flat().forEach(model => {
+                if (!sourceValues.has(model.source_folder)) {
+                    sourceValues.set(model.source_folder, model.source_folder);
+                }
+            });
+            sourceSelect.innerHTML = Array.from(sourceValues.entries())
+                .map(([value, label]) => `<option value="${value}">${label}</option>`)
+                .join('');
+            sourceSelect.value = Array.from(sourceValues.keys()).includes(currentSource) ? currentSource : 'all';
+        }
+
+        function findModelById(modelId) {
+            for (const models of Object.values(currentCatalog)) {
+                const match = models.find(model => model.id === modelId);
+                if (match) return match;
+            }
+            return null;
+        }
+
+        function renderDetailRow(label, value) {
+            return `
+                <div class="detail-key">${escapeHtml(label)}</div>
+                <div class="detail-value">${value ? escapeHtml(value) : '<span class="subtle">-</span>'}</div>
+            `;
+        }
+
+        function openModelOverlay(modelId) {
+            const model = findModelById(modelId);
+            if (!model) return;
+            currentOverlayModelId = modelId;
+
+            document.getElementById('model-overlay-title').textContent = model.name;
+            document.getElementById('model-overlay-subtitle').textContent = `${model.section} from ${model.source_folder}`;
+            document.getElementById('model-overlay-body').innerHTML = `
+                <div class="detail-section">
+                    <h4>Core Data</h4>
+                    <div class="detail-grid">
+                        ${renderDetailRow('Section', model.section)}
+                        ${renderDetailRow('Source Folder', model.source_folder)}
+                        ${renderDetailRow('Name', model.name)}
+                        ${renderDetailRow('Architecture', model.architecture)}
+                        ${renderDetailRow('Size', formatBytes(model.size))}
+                        ${renderDetailRow('Modified', formatDate(model.mtime))}
+                        ${renderDetailRow('Relative Path', model.relative_path)}
+                        ${renderDetailRow('Absolute Path', model.path)}
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>Prompt Metadata</h4>
+                    <div class="detail-grid">
+                        ${renderDetailRow('Trigger', model.trigger)}
+                        ${renderDetailRow('Tags', model.tags)}
+                    </div>
+                </div>
+                <div class="detail-section">
+                    <h4>CivitAI Fields</h4>
+                    <div class="detail-grid">
+                        ${renderDetailRow('Name', model.civitai_name)}
+                        ${renderDetailRow('Version', model.civitai_version_name)}
+                        ${renderDetailRow('Type', model.civitai_type)}
+                        ${renderDetailRow('Base Model', model.civitai_base_model)}
+                        ${renderDetailRow('Creator', model.civitai_creator)}
+                        ${renderDetailRow('License', model.civitai_license)}
+                        ${renderDetailRow('Status', model.civitai_status)}
+                        ${renderDetailRow('Error', model.civitai_error)}
+                        ${renderDetailRow('CivitAI URL', model.civitai_model_url)}
+                    </div>
+                </div>
+            `;
+            document.getElementById('model-overlay').classList.add('show');
+        }
+
+        function closeModelOverlay() {
+            currentOverlayModelId = null;
+            document.getElementById('model-overlay').classList.remove('show');
+        }
+
+        function bindModelRowClicks() {
+            document.querySelectorAll('tr[data-model-id]').forEach(row => {
+                row.addEventListener('click', event => {
+                    if (event.target.closest('a, button')) return;
+                    openModelOverlay(row.dataset.modelId);
+                });
+            });
+        }
+
+        async function loadCatalog(scanFirst = false) {
+            const status = document.getElementById('models-status');
+            const scanNote = document.getElementById('scan-note');
+            const endpoint = scanFirst ? '/galleryout/api/models/scan' : '/galleryout/api/models/list';
+            const options = scanFirst ? {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ include_sha256: false })
+            } : {};
+
+            status.textContent = scanFirst ? 'Scanning model folders...' : 'Loading model catalog...';
+
+            try {
+                const response = await fetch(endpoint, options);
+                const data = await response.json();
+                if (!response.ok || data.status !== 'success') {
+                    throw new Error(data.message || 'Could not load model data.');
+                }
+
+                renderCatalog(data);
+                const total = (data.counts.checkpoints || 0) + (data.counts.loras || 0) + (data.counts.embeddings || 0);
+                status.textContent = scanFirst
+                    ? `Scan complete. Loaded ${total} model entries.`
+                    : total > 0
+                        ? `Loaded ${total} model entries from local catalog.`
+                        : 'Catalog is empty. Run a scan to populate the sections.';
+                scanNote.textContent = scanFirst ? 'Fresh scan completed.' : (total > 0 ? 'Loaded from cached catalog.' : 'No catalog entries yet.');
+            } catch (error) {
+                status.textContent = `Error: ${error.message}`;
+                scanNote.textContent = 'Model catalog unavailable.';
+            }
+        }
+
+        async function enrichModelsFromCivitai(modelIds) {
+            if (!modelIds.length) {
+                document.getElementById('models-status').textContent = 'No models selected for CivitAI lookup.';
+                return;
+            }
+
+            const status = document.getElementById('models-status');
+            const enrichVisibleBtn = document.getElementById('enrich-visible-btn');
+            const overlayBtn = document.getElementById('model-overlay-civitai-btn');
+            const originalVisibleLabel = enrichVisibleBtn.textContent;
+            const originalOverlayLabel = overlayBtn.textContent;
+            enrichVisibleBtn.disabled = true;
+            overlayBtn.disabled = true;
+            enrichVisibleBtn.textContent = '⏳ Enriching...';
+            overlayBtn.textContent = '⏳ Fetching...';
+            status.textContent = `Checking ${modelIds.length} model(s) against CivitAI...`;
+
+            try {
+                const response = await fetch('/galleryout/api/models/civitai/enrich', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model_ids: modelIds })
+                });
+                const data = await response.json();
+                if (!response.ok || data.status !== 'success') {
+                    throw new Error(data.message || 'CivitAI enrichment failed.');
+                }
+
+                status.textContent = data.message;
+                await loadCatalog(false);
+
+                if (currentOverlayModelId) {
+                    openModelOverlay(currentOverlayModelId);
+                }
+            } catch (error) {
+                status.textContent = `CivitAI error: ${error.message}`;
+            } finally {
+                enrichVisibleBtn.disabled = false;
+                overlayBtn.disabled = false;
+                enrichVisibleBtn.textContent = originalVisibleLabel;
+                overlayBtn.textContent = originalOverlayLabel;
+            }
+        }
+
+        document.getElementById('scan-models-btn').addEventListener('click', () => loadCatalog(true));
+        document.getElementById('enrich-visible-btn').addEventListener('click', async () => {
+            const filtered = getFilteredCatalog();
+            const ids = [
+                ...filtered.checkpoints.map(model => model.id),
+                ...filtered.loras.map(model => model.id),
+                ...filtered.embeddings.map(model => model.id),
+            ];
+            await enrichModelsFromCivitai(ids);
+        });
+        document.getElementById('refresh-models-btn').addEventListener('click', () => loadCatalog(false));
+        document.getElementById('model-search-input').addEventListener('input', applyCatalogFilters);
+        document.getElementById('model-section-filter').addEventListener('change', applyCatalogFilters);
+        document.getElementById('model-source-filter').addEventListener('change', applyCatalogFilters);
+        document.getElementById('model-overlay-close').addEventListener('click', closeModelOverlay);
+        document.getElementById('model-overlay-civitai-btn').addEventListener('click', async () => {
+            if (!currentOverlayModelId) return;
+            await enrichModelsFromCivitai([currentOverlayModelId]);
+        });
+        document.getElementById('model-overlay').addEventListener('click', event => {
+            if (event.target.id === 'model-overlay') closeModelOverlay();
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && document.getElementById('model-overlay').classList.contains('show')) {
+                closeModelOverlay();
+            }
+        });
+
+        loadCatalog(false).then(() => {
+            const total = Number(document.getElementById('count-total').textContent || '0');
+            if (total === 0) {
+                loadCatalog(true);
+            }
+        });
+    </script>
+</body>
+</html>
