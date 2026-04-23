@@ -17,7 +17,7 @@ Versioning policy:
 
 First, credit where it belongs:
 
-- Thanks to **Biagio Maffettone** for creating and publishing the original SmartGallery / Smart ComfyUI Gallery project.
+- Thanks to **[Biagio Maffettone](https://github.com/biagiomaf)** (@biagiomaf)  for creating and publishing the original SmartGallery / Smart ComfyUI Gallery project.
 - Thanks to all contributors around the original project, including the Docker and deployment work that helped make it easier to run in more environments.
 
 This fork exists because the original project already solved the hard base problem very well: a fast, practical, ComfyUI-aware gallery and DAM. The goal here is not to erase that work, but to continue it in a direction that fits this repository's workflow and priorities.
