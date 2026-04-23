@@ -1,7 +1,7 @@
 # Smart Gallery DAM for ComfyUI
 # Author: Biagio Maffettone © 2025-2026 — MIT License (free to use and modify)
 #
-# Version: 2.11 - April 08, 2026
+# Version: 1.0.0-fork.1 - April 23, 2026
 # Check the GitHub repository for updates, bug fixes, and contributions.
 #
 # Contact: biagiomaf@gmail.com
@@ -349,8 +349,10 @@ AI_MODELS_FOLDER_NAME = '.AImodels'
 ENABLE_DAM_MODE = True
 
 # --- APP INFO ---
-APP_VERSION = "2.11"
-APP_VERSION_DATE = "April 08, 2026"
+APP_VERSION = "1.0.0-fork.1"
+APP_VERSION_DATE = "April 23, 2026"
+UPSTREAM_BASELINE_VERSION = "2.11"
+FORK_RELEASE_LINE = "1.x"
 GITHUB_REPO_URL = "https://github.com/biagiomaf/smart-comfyui-gallery"
 GITHUB_RAW_URL = "https://raw.githubusercontent.com/biagiomaf/smart-comfyui-gallery/main/smartgallery.py"
 
@@ -521,6 +523,269 @@ def normalize_smart_path(path_str):
     """
     if not path_str: return ""
     return str(path_str).lower().replace('\\', '/')
+
+
+def build_filename_search_condition(column_name, raw_term):
+    """
+    Builds a filename search condition that tolerates separators such as
+    spaces, underscores, dots, dashes, and brackets.
+    """
+    term = (raw_term or "").strip()
+    if not term:
+        return None
+
+    is_not = False
+    if term.startswith('!'):
+        is_not = True
+        term = term[1:].strip()
+    elif term.lower().startswith('not '):
+        is_not = True
+        term = term[4:].strip()
+    elif term.startswith('!='):
+        is_not = True
+        term = term[2:].strip()
+    if not term:
+        return None
+
+    exact_match = term.startswith('"') and term.endswith('"') and len(term) > 2
+    if exact_match:
+        term = term[1:-1].strip()
+
+    normalized_term = normalize_smart_path(term)
+    normalized_term = re.sub(r'[\s._\-\\/]+', ' ', normalized_term)
+    normalized_term = re.sub(r'[():\[\]{}]+', ' ', normalized_term)
+    normalized_term = re.sub(r'\s+', ' ', normalized_term).strip()
+    if not normalized_term:
+        return None
+
+    col_expr = (
+        f"(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE("
+        f"LOWER({column_name}), '.', ' '), '_', ' '), '-', ' '), '/', ' '), '\\\\', ' '), "
+        f"'(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')"
+    )
+    operator = 'NOT LIKE' if is_not else 'LIKE'
+    param_val = f"% {normalized_term} %" if exact_match else f"%{normalized_term}%"
+    return col_expr, operator, param_val
+
+
+def append_keyword_filter(
+    conditions,
+    params,
+    raw_value,
+    exact_expr,
+    like_expr,
+    normalize_terms=False,
+    exact_expr_not=None,
+    like_expr_not=None,
+):
+    if not raw_value:
+        return False
+
+    applied = False
+    for kw in [k.strip() for k in raw_value.split(',') if k.strip()]:
+        sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
+        if not sub_kws:
+            continue
+
+        or_conds = []
+        not_conds = []
+        for s in sub_kws:
+            is_not = False
+            if s.startswith('!'):
+                is_not = True
+                s = s[1:].strip()
+            if not s:
+                continue
+
+            if s.startswith('"') and s.endswith('"') and len(s) > 2:
+                clean_s = s[1:-1]
+                value = normalize_smart_path(clean_s) if normalize_terms else clean_s
+                if is_not and exact_expr_not:
+                    cond_str = exact_expr_not
+                else:
+                    cond_str = f"{exact_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
+                param_val = f"% {value} %"
+            else:
+                value = normalize_smart_path(s) if normalize_terms else s
+                if is_not and like_expr_not:
+                    cond_str = like_expr_not
+                else:
+                    cond_str = f"{like_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
+                param_val = f"%{value}%"
+
+            if is_not:
+                not_conds.append((cond_str, param_val))
+            else:
+                or_conds.append((cond_str, param_val))
+
+        if or_conds:
+            if len(or_conds) > 1:
+                conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
+            else:
+                conditions.append(or_conds[0][0])
+            params.extend([c[1] for c in or_conds])
+            applied = True
+
+        for cond, param in not_conds:
+            conditions.append(cond)
+            params.append(param)
+            applied = True
+
+    return applied
+
+
+def append_workflow_asset_filter(conditions, params, column_name, raw_value, folder_markers):
+    if not raw_value:
+        return False
+
+    applied = False
+    normalized_expr = (
+        f"(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE({column_name}, "
+        f"',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')"
+    )
+    folder_clause = "(" + " OR ".join([f"{column_name} LIKE ?" for _ in folder_markers]) + ")"
+    folder_params = [f"%{marker}%" for marker in folder_markers]
+
+    for kw in [k.strip() for k in raw_value.split(',') if k.strip()]:
+        sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
+        if not sub_kws:
+            continue
+
+        or_conds = []
+        or_params = []
+        for s in sub_kws:
+            is_not = False
+            if s.startswith('!'):
+                is_not = True
+                s = s[1:].strip()
+            if not s:
+                continue
+
+            if s.startswith('"') and s.endswith('"') and len(s) > 2:
+                clean_s = normalize_smart_path(s[1:-1])
+                token_clause = f"{normalized_expr} LIKE ?"
+                token_param = f"% {clean_s} %"
+            else:
+                clean_s = normalize_smart_path(s)
+                token_clause = f"{column_name} LIKE ?"
+                token_param = f"%{clean_s}%"
+
+            scoped_clause = f"({folder_clause} AND {token_clause})"
+            scoped_params = [*folder_params, token_param]
+
+            if is_not:
+                conditions.append(f"NOT {scoped_clause}")
+                params.extend(scoped_params)
+                applied = True
+            else:
+                or_conds.append(scoped_clause)
+                or_params.extend(scoped_params)
+
+        if or_conds:
+            if len(or_conds) > 1:
+                conditions.append("(" + " OR ".join(or_conds) + ")")
+            else:
+                conditions.append(or_conds[0])
+            params.extend(or_params)
+            applied = True
+
+    return applied
+
+
+def append_workflow_asset_selection_filter(conditions, params, column_name, selected_values, folder_markers, allow_none=False):
+    values = [value for value in selected_values if value]
+    if not values:
+        return False
+
+    folder_clause = "(" + " OR ".join([f"{column_name} LIKE ?" for _ in folder_markers]) + ")"
+    folder_params = [f"%{marker}%" for marker in folder_markers]
+    positive_values = [normalize_smart_path(value) for value in values if value != "__none__"]
+    wants_none = allow_none and "__none__" in values
+
+    clauses = []
+    clause_params = []
+
+    for value in positive_values:
+        clauses.append(f"({folder_clause} AND {column_name} LIKE ?)")
+        clause_params.extend([*folder_params, f"%{value}%"])
+
+    if wants_none:
+        clauses.append(f"NOT {folder_clause}")
+        clause_params.extend(folder_params)
+
+    if not clauses:
+        return False
+
+    conditions.append("(" + " OR ".join(clauses) + ")")
+    params.extend(clause_params)
+    return True
+
+
+def fetch_known_lora_names(conn) -> set[str]:
+    known_lora_names = set()
+    try:
+        ensure_sg_models_schema(conn)
+        rows = conn.execute("SELECT name, relative_path, path FROM sg_models WHERE section = 'loras'").fetchall()
+        for row in rows:
+            for value in (row['name'], row['relative_path'], row['path']):
+                if not value:
+                    continue
+                known_lora_names.add(normalize_smart_path(os.path.splitext(os.path.basename(value))[0]))
+                known_lora_names.add(normalize_smart_path(os.path.basename(value)))
+                known_lora_names.add(normalize_smart_path(str(value)))
+    except Exception:
+        pass
+    return known_lora_names
+
+
+def fetch_known_model_names(conn) -> set[str]:
+    known_model_names = set()
+    try:
+        ensure_sg_models_schema(conn)
+        rows = conn.execute(
+            "SELECT name, relative_path, path FROM sg_models WHERE section = 'checkpoints'"
+        ).fetchall()
+        for row in rows:
+            for value in (row['name'], row['relative_path'], row['path']):
+                if not value:
+                    continue
+                known_model_names.add(normalize_smart_path(os.path.splitext(os.path.basename(value))[0]))
+                known_model_names.add(normalize_smart_path(os.path.basename(value)))
+                known_model_names.add(normalize_smart_path(str(value)))
+    except Exception:
+        pass
+    return known_model_names
+
+
+def extract_workflow_asset_choices(
+    workflow_files: str,
+    known_lora_names: set[str] | None = None,
+    known_model_names: set[str] | None = None,
+) -> tuple[set[str], set[str]]:
+    known_lora_names = known_lora_names or set()
+    known_model_names = known_model_names or set()
+    model_like_extensions = {'.safetensors', '.ckpt', '.pt', '.pth', '.bin', '.gguf', '.sft'}
+    media_extensions = {'.png', '.jpg', '.jpeg', '.webp', '.gif', '.bmp', '.tiff', '.mp4', '.mov', '.webm', '.mkv', '.avi', '.mp3', '.wav', '.ogg', '.flac', '.m4a'}
+    models: set[str] = set()
+    loras: set[str] = set()
+
+    tokens = [normalize_smart_path(token.strip()) for token in (workflow_files or "").split("|||") if token.strip()]
+    for token in tokens:
+        base_name = normalize_smart_path(os.path.splitext(os.path.basename(token))[0])
+        ext = os.path.splitext(token)[1]
+        if not base_name or ext in media_extensions:
+            continue
+        if "/loras/" in token or "/lora/" in token or base_name in known_lora_names or token in known_lora_names:
+            loras.add(base_name)
+        elif ext in model_like_extensions and (
+            "/checkpoints/" in token
+            or "/diffusion_models/" in token
+            or base_name in known_model_names
+            or token in known_model_names
+        ):
+            models.add(base_name)
+
+    return models, loras
 
 def print_configuration():
     """Prints the current configuration in a neat, aligned table."""
@@ -2435,7 +2700,11 @@ def get_filter_options_from_db(conn, scope, folder_path=None, recursive=False):
     Python-side path filtering to handle mixed slashes and cross-platform issues.
     """
     extensions, prefixes = set(), set()
+    workflow_models, workflow_loras = set(), set()
+    has_lora_free_workflows = False
     prefix_limit_reached = False
+    known_lora_names = fetch_known_lora_names(conn)
+    known_model_names = fetch_known_model_names(conn)
     
     # Identical helper to gallery_view for consistency
     def safe_path_norm(p):
@@ -2445,13 +2714,14 @@ def get_filter_options_from_db(conn, scope, folder_path=None, recursive=False):
     try:
         # We fetch all names and paths. For very large DBs (100k+ files), 
         # this is still faster than failing with a wrong SQL LIKE.
-        cursor = conn.execute("SELECT name, path FROM files")
+        cursor = conn.execute("SELECT name, path, workflow_files FROM files")
         
         target_norm = safe_path_norm(folder_path)
 
         for row in cursor:
             f_path_raw = row['path']
             f_name = row['name']
+            workflow_files = row['workflow_files'] or ""
             
             # NORMALIZATION STEP
             f_path_norm = safe_path_norm(f_path_raw)
@@ -2484,11 +2754,32 @@ def get_filter_options_from_db(conn, scope, folder_path=None, recursive=False):
                         if len(prefixes) > MAX_PREFIX_DROPDOWN_ITEMS:
                             prefix_limit_reached = True
                             prefixes.clear()
+
+                models_in_file, loras_in_file = extract_workflow_asset_choices(
+                    workflow_files,
+                    known_lora_names,
+                    known_model_names,
+                )
+                workflow_models.update(models_in_file)
+                workflow_loras.update(loras_in_file)
+
+                if workflow_files.strip() and not loras_in_file:
+                    has_lora_free_workflows = True
                             
     except Exception as e: 
         print(f"Error extracting options: {e}")
-        
-    return sorted(list(extensions)), sorted(list(prefixes)), prefix_limit_reached
+
+    lora_options = sorted(list(workflow_loras))
+    if has_lora_free_workflows:
+        lora_options = ["__none__"] + lora_options
+
+    return (
+        sorted(list(extensions)),
+        sorted(list(prefixes)),
+        prefix_limit_reached,
+        sorted(list(workflow_models)),
+        lora_options,
+    )
     
 # --- ENCRYPTION & USER SECURITY ---
 cipher_suite = None
@@ -2836,9 +3127,15 @@ def api_search_options():
     
     with get_db_connection() as conn:
         # Now passing the recursive flag to the options extractor
-        exts, pfxs, limit_reached = get_filter_options_from_db(conn, scope, folder_path, recursive=is_rec)
+        exts, pfxs, limit_reached, models, loras = get_filter_options_from_db(conn, scope, folder_path, recursive=is_rec)
         
-    return jsonify({'extensions': exts, 'prefixes': pfxs, 'prefix_limit_reached': limit_reached})
+    return jsonify({
+        'extensions': exts,
+        'prefixes': pfxs,
+        'prefix_limit_reached': limit_reached,
+        'workflow_models': models,
+        'workflow_loras': loras,
+    })
 
 @app.route('/galleryout/api/compare_files', methods=['POST'])
 def compare_files_api():
@@ -3380,12 +3677,17 @@ def gallery_view(folder_key):
     # Text filters
     search_term = request.args.get('search', '').strip()
     wf_files = request.args.get('workflow_files', '').strip()
+    wf_model = request.args.get('workflow_model', '').strip()
+    wf_lora = request.args.get('workflow_lora', '').strip()
+    selected_workflow_models = request.args.getlist('workflow_model')
+    selected_workflow_loras = request.args.getlist('workflow_lora')
     wf_prompt = request.args.get('workflow_prompt', '').strip()
     comment_search = request.args.get('comment_search', '').strip()
     start_date = request.args.get('start_date', '').strip()
     end_date = request.args.get('end_date', '').strip()
     selected_exts = request.args.getlist('extension')
     selected_prefixes = request.args.getlist('prefix')
+    selected_ratings = [value for value in request.args.getlist('rating') if value in {'1', '2', '3', '4', '5'}]
 
     is_ai_search = False
     ai_query_text = ""
@@ -3419,128 +3721,57 @@ def gallery_view(folder_key):
     # --- PATH B: STANDARD VIEW / SEARCH ---
     if not is_ai_search:
         with get_db_connection() as conn:
+            known_lora_names = fetch_known_lora_names(conn)
+            known_model_names = fetch_known_model_names(conn)
             conditions, params = [], []
 
             if search_term:
-                conditions.append("name LIKE ?")
-                params.append(f"%{search_term}%")
+                search_cond = build_filename_search_condition("f.name", search_term)
+                if search_cond:
+                    col_expr, operator, param_val = search_cond
+                    conditions.append(f"{col_expr} {operator} ?")
+                    params.append(param_val)
             
-            if wf_files:
-                for kw in [k.strip() for k in wf_files.split(',') if k.strip()]:
-                    sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-                    if not sub_kws: continue
-                    
-                    or_conds = []
-                    not_conds = []
-                    for s in sub_kws:
-                        is_not = False
-                        if s.startswith('!'):
-                            is_not = True
-                            s = s[1:].strip()
-                        if not s: continue
-                        
-                        # Check for exact word match wrapped in double quotes
-                        if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                            clean_s = s[1:-1]
-                            col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(workflow_files, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')"
-                            cond_str = f"{col_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
-                            param_val = f"% {normalize_smart_path(clean_s)} %"
-                        else:
-                            cond_str = f"workflow_files {'NOT LIKE' if is_not else 'LIKE'} ?"
-                            param_val = f"%{normalize_smart_path(s)}%"
-                            
-                        if is_not:
-                            not_conds.append((cond_str, param_val))
-                        else:
-                            or_conds.append((cond_str, param_val))
-                            
-                    if or_conds:
-                        if len(or_conds) > 1:
-                            conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                        elif len(or_conds) == 1:
-                            conditions.append(or_conds[0][0])
-                        params.extend([c[1] for c in or_conds])
-                        
-                    for cond, param in not_conds:
-                        conditions.append(cond)
-                        params.append(param)
-            if wf_prompt:
-                for kw in [k.strip() for k in wf_prompt.split(',') if k.strip()]:
-                    sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-                    if not sub_kws: continue
-                    
-                    or_conds = []
-                    not_conds = []
-                    for s in sub_kws:
-                        is_not = False
-                        if s.startswith('!'):
-                            is_not = True
-                            s = s[1:].strip()
-                        if not s: continue
-                        
-                        if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                            clean_s = s[1:-1]
-                            col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(workflow_prompt, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' '), char(10), ' ') || ' ')"
-                            cond_str = f"{col_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
-                            param_val = f"% {clean_s} %"
-                        else:
-                            cond_str = f"workflow_prompt {'NOT LIKE' if is_not else 'LIKE'} ?"
-                            param_val = f"%{s}%"
-                            
-                        if is_not:
-                            not_conds.append((cond_str, param_val))
-                        else:
-                            or_conds.append((cond_str, param_val))
-                            
-                    if or_conds:
-                        if len(or_conds) > 1:
-                            conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                        elif len(or_conds) == 1:
-                            conditions.append(or_conds[0][0])
-                        params.extend([c[1] for c in or_conds])
-                        
-                    for cond, param in not_conds:
-                        conditions.append(cond)
-                        params.append(param)
-            if comment_search:
-                for kw in [k.strip() for k in comment_search.split(',') if k.strip()]:
-                    sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-                    if not sub_kws: continue
-                    
-                    or_conds = []
-                    not_conds = []
-                    for s in sub_kws:
-                        is_not = False
-                        if s.startswith('!'):
-                            is_not = True
-                            s = s[1:].strip()
-                        if not s: continue
-                        
-                        op_in = "NOT IN" if is_not else "IN"
-                        if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                            clean_s = s[1:-1]
-                            col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ')"
-                            cond_str = f"f.id {op_in} (SELECT file_id FROM file_comments WHERE {col_expr} LIKE ?)"
-                            param_val = f"% {clean_s} %"
-                        else:
-                            cond_str = f"f.id {op_in} (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)"
-                            param_val = f"%{s}%"
-                            
-                        if is_not:
-                            not_conds.append((cond_str, param_val))
-                        else:
-                            or_conds.append((cond_str, param_val))
-                            
-                    if or_conds:
-                        if len(or_conds) > 1:
-                            conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                        elif len(or_conds) == 1:
-                            conditions.append(or_conds[0][0])
-                        params.extend([c[1] for c in or_conds])
-                        
-                    for cond, param in not_conds:
-                        conditions.append(cond)
-                        params.append(param)
+            append_keyword_filter(
+                conditions,
+                params,
+                wf_files,
+                "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(workflow_files, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')",
+                "workflow_files",
+                normalize_terms=True,
+            )
+            if not selected_workflow_loras:
+                append_workflow_asset_filter(
+                    conditions,
+                    params,
+                    "workflow_files",
+                    wf_lora,
+                    ("/loras/", "/lora/"),
+                )
+            if not selected_workflow_models:
+                append_workflow_asset_filter(
+                    conditions,
+                    params,
+                    "workflow_files",
+                    wf_model,
+                    ("/checkpoints/", "/diffusion_models/"),
+                )
+            append_keyword_filter(
+                conditions,
+                params,
+                wf_prompt,
+                "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(workflow_prompt, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' '), char(10), ' ') || ' ')",
+                "workflow_prompt",
+            )
+            append_keyword_filter(
+                conditions,
+                params,
+                comment_search,
+                "f.id IN (SELECT file_id FROM file_comments WHERE (' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ') LIKE ?)",
+                "f.id IN (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)",
+                exact_expr_not="f.id NOT IN (SELECT file_id FROM file_comments WHERE (' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ') LIKE ?)",
+                like_expr_not="f.id NOT IN (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)",
+            )
             if request.args.get('favorites') == 'true': conditions.append("is_favorite = 1")
             if request.args.get('no_workflow') == 'true': conditions.append("has_workflow = 0")
             if request.args.get('no_ai_caption') == 'true': 
@@ -3562,6 +3793,14 @@ def gallery_view(folder_key):
                 p_cond = [f"name LIKE ?" for p in selected_prefixes if p.strip()]
                 params.extend([f"{p.strip()}_%" for p in selected_prefixes if p.strip()])
                 if p_cond: conditions.append(f"({' OR '.join(p_cond)})")
+
+            if selected_ratings:
+                rating_cond = [
+                    "ROUND((SELECT AVG(rating) FROM file_ratings WHERE file_id = f.id), 0) = ?"
+                    for _ in selected_ratings
+                ]
+                conditions.append(f"({' OR '.join(rating_cond)})")
+                params.extend([int(value) for value in selected_ratings])
 
             req_sort_by = request.args.get('sort_by', 'date')
             sort_order = "ASC" if request.args.get('sort_order', 'desc').lower() == 'asc' else "DESC"
@@ -3636,6 +3875,25 @@ def gallery_view(folder_key):
             for row in rows:
                 f_data = dict(row)
                 if 'ai_embedding' in f_data: del f_data['ai_embedding']
+                workflow_models_in_file, workflow_loras_in_file = extract_workflow_asset_choices(
+                    f_data.get('workflow_files', ''),
+                    known_lora_names,
+                    known_model_names,
+                )
+
+                if selected_workflow_models:
+                    selected_models_norm = {normalize_smart_path(value) for value in selected_workflow_models if value}
+                    if not workflow_models_in_file.intersection(selected_models_norm):
+                        continue
+
+                if selected_workflow_loras:
+                    selected_loras_norm = {normalize_smart_path(value) for value in selected_workflow_loras if value and value != '__none__'}
+                    wants_no_lora = '__none__' in selected_workflow_loras
+                    lora_match = bool(workflow_loras_in_file.intersection(selected_loras_norm)) if selected_loras_norm else False
+                    if wants_no_lora and not workflow_loras_in_file:
+                        lora_match = True
+                    if not lora_match:
+                        continue
                 
                 f_path_norm = safe_path_norm(f_data['path'])
                 f_dir_norm = safe_path_norm(os.path.dirname(f_path_norm))
@@ -3654,16 +3912,18 @@ def gallery_view(folder_key):
     active_filters_count = 0
     if search_term: active_filters_count += 1
     if wf_files: active_filters_count += 1
+    if selected_workflow_models or wf_model: active_filters_count += 1
+    if selected_workflow_loras or wf_lora: active_filters_count += 1
     if wf_prompt: active_filters_count += 1
     if request.args.get('comment_search', '').strip(): active_filters_count += 1
     if start_date: active_filters_count += 1
     if end_date: active_filters_count += 1
     if selected_exts: active_filters_count += 1
     if selected_prefixes: active_filters_count += 1
+    if selected_ratings: active_filters_count += 1
     if request.args.get('favorites') == 'true': active_filters_count += 1
     if request.args.get('no_workflow') == 'true': active_filters_count += 1
     if ENABLE_AI_SEARCH and request.args.get('no_ai_caption') == 'true': active_filters_count += 1
-    if is_global_search or is_recursive: active_filters_count += 1
 
     total_folder_files, _, _ = scan_folder_and_extract_options(folder_path, recursive=is_recursive)
     total_db_files = 0 
@@ -3674,7 +3934,12 @@ def gallery_view(folder_key):
             total_db_files = 0
 
         scope_for_opts = 'global' if is_global_search else 'local'
-        extensions, prefixes, pfx_limit = get_filter_options_from_db(conn_opts, scope_for_opts, folder_path, recursive=is_recursive)
+        extensions, prefixes, pfx_limit, workflow_models, workflow_loras = get_filter_options_from_db(
+            conn_opts,
+            scope_for_opts,
+            folder_path,
+            recursive=is_recursive,
+        )
     
     breadcrumbs, ancestor_keys = [], set()
     
@@ -3705,9 +3970,14 @@ def gallery_view(folder_key):
                            ancestor_keys=list(ancestor_keys),
                            available_extensions=extensions, 
                            available_prefixes=prefixes,
+                           available_workflow_models=workflow_models,
+                           available_workflow_loras=workflow_loras,
                            prefix_limit_reached=pfx_limit,  
                            selected_extensions=selected_exts, 
                            selected_prefixes=selected_prefixes,
+                           selected_ratings=selected_ratings,
+                           selected_workflow_models=selected_workflow_models,
+                           selected_workflow_loras=selected_workflow_loras,
                            protected_folder_keys=list(PROTECTED_FOLDER_KEYS),
                            show_favorites=request.args.get('favorites', 'false').lower() == 'true',
                            enable_ai_search=ENABLE_AI_SEARCH, is_ai_search=False, ai_query="",
@@ -6169,12 +6439,15 @@ def collection_view(coll_id):
     # 2. Capture Filter Parameters
     search_term = request.args.get('search', '').strip()
     wf_files = request.args.get('workflow_files', '').strip()
+    wf_model = request.args.get('workflow_model', '').strip()
+    wf_lora = request.args.get('workflow_lora', '').strip()
     wf_prompt = request.args.get('workflow_prompt', '').strip()
     comment_search = request.args.get('comment_search', '').strip()
     start_date = request.args.get('start_date', '').strip()
     end_date = request.args.get('end_date', '').strip()
     selected_exts = request.args.getlist('extension')
     selected_prefixes = request.args.getlist('prefix')
+    selected_ratings = [value for value in request.args.getlist('rating') if value in {'1', '2', '3', '4', '5'}]
     
     req_sort_by = request.args.get('sort_by')
     req_sort_order = request.args.get('sort_order', 'desc').upper()
@@ -6201,130 +6474,60 @@ def collection_view(coll_id):
     active_filters_count = 0
 
     if search_term:
-        conditions.append("f.name LIKE ?")
-        params.append(f"%{search_term}%")
-        active_filters_count += 1
+        search_cond = build_filename_search_condition("f.name", search_term)
+        if search_cond:
+            col_expr, operator, param_val = search_cond
+            conditions.append(f"{col_expr} {operator} ?")
+            params.append(param_val)
+            active_filters_count += 1
     
-    if wf_files:
+    if append_keyword_filter(
+        conditions,
+        params,
+        wf_files,
+        "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(f.workflow_files, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')",
+        "f.workflow_files",
+        normalize_terms=True,
+    ):
         active_filters_count += 1
-        for kw in [k.strip() for k in wf_files.split(',') if k.strip()]:
-            sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-            if not sub_kws: continue
-            
-            or_conds = []
-            not_conds = []
-            for s in sub_kws:
-                is_not = False
-                if s.startswith('!'):
-                    is_not = True
-                    s = s[1:].strip()
-                if not s: continue
-                
-                if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                    clean_s = s[1:-1]
-                    col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(f.workflow_files, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' ') || ' ')"
-                    cond_str = f"{col_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
-                    param_val = f"% {normalize_smart_path(clean_s)} %"
-                else:
-                    cond_str = f"f.workflow_files {'NOT LIKE' if is_not else 'LIKE'} ?"
-                    param_val = f"%{normalize_smart_path(s)}%"
-                    
-                if is_not:
-                    not_conds.append((cond_str, param_val))
-                else:
-                    or_conds.append((cond_str, param_val))
-                    
-            if or_conds:
-                if len(or_conds) > 1:
-                    conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                elif len(or_conds) == 1:
-                    conditions.append(or_conds[0][0])
-                params.extend([c[1] for c in or_conds])
-                
-            for cond, param in not_conds:
-                conditions.append(cond)
-                params.append(param)
-    
-    if wf_prompt:
+
+    if (not selected_workflow_models) and append_workflow_asset_filter(
+        conditions,
+        params,
+        "f.workflow_files",
+        wf_model,
+        ("/checkpoints/", "/diffusion_models/"),
+    ):
         active_filters_count += 1
-        for kw in [k.strip() for k in wf_prompt.split(',') if k.strip()]:
-            sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-            if not sub_kws: continue
-            
-            or_conds = []
-            not_conds = []
-            for s in sub_kws:
-                is_not = False
-                if s.startswith('!'):
-                    is_not = True
-                    s = s[1:].strip()
-                if not s: continue
-                
-                if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                    clean_s = s[1:-1]
-                    col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(f.workflow_prompt, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' '), char(10), ' ') || ' ')"
-                    cond_str = f"{col_expr} {'NOT LIKE' if is_not else 'LIKE'} ?"
-                    param_val = f"% {clean_s} %"
-                else:
-                    cond_str = f"f.workflow_prompt {'NOT LIKE' if is_not else 'LIKE'} ?"
-                    param_val = f"%{s}%"
-                    
-                if is_not:
-                    not_conds.append((cond_str, param_val))
-                else:
-                    or_conds.append((cond_str, param_val))
-                    
-            if or_conds:
-                if len(or_conds) > 1:
-                    conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                elif len(or_conds) == 1:
-                    conditions.append(or_conds[0][0])
-                params.extend([c[1] for c in or_conds])
-                
-            for cond, param in not_conds:
-                conditions.append(cond)
-                params.append(param)
-    
-    if comment_search:
+
+    if (not selected_workflow_loras) and append_workflow_asset_filter(
+        conditions,
+        params,
+        "f.workflow_files",
+        wf_lora,
+        ("/loras/", "/lora/"),
+    ):
         active_filters_count += 1
-        for kw in [k.strip() for k in comment_search.split(',') if k.strip()]:
-            sub_kws = [s.strip() for s in kw.split(';') if s.strip()]
-            if not sub_kws: continue
-            
-            or_conds = []
-            not_conds = []
-            for s in sub_kws:
-                is_not = False
-                if s.startswith('!'):
-                    is_not = True
-                    s = s[1:].strip()
-                if not s: continue
-                
-                op_in = "NOT IN" if is_not else "IN"
-                if s.startswith('"') and s.endswith('"') and len(s) > 2:
-                    clean_s = s[1:-1]
-                    col_expr = "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ')"
-                    cond_str = f"f.id {op_in} (SELECT file_id FROM file_comments WHERE {col_expr} LIKE ?)"
-                    param_val = f"% {clean_s} %"
-                else:
-                    cond_str = f"f.id {op_in} (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)"
-                    param_val = f"%{s}%"
-                    
-                if is_not:
-                    not_conds.append((cond_str, param_val))
-                else:
-                    or_conds.append((cond_str, param_val))
-                    
-            if or_conds:
-                if len(or_conds) > 1:
-                    conditions.append("(" + " OR ".join([c[0] for c in or_conds]) + ")")
-                elif len(or_conds) == 1:
-                    conditions.append(or_conds[0][0])
-                params.extend([c[1] for c in or_conds])
-                
-            for cond, param in not_conds:
-                conditions.append(cond)
-                params.append(param)
+
+    if append_keyword_filter(
+        conditions,
+        params,
+        wf_prompt,
+        "(' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(f.workflow_prompt, ',', ' '), '|', ' '), '.', ' '), '_', ' '), ':', ' '), '(', ' '), ')', ' '), '[', ' '), ']', ' '), char(10), ' ') || ' ')",
+        "f.workflow_prompt",
+    ):
+        active_filters_count += 1
+
+    if append_keyword_filter(
+        conditions,
+        params,
+        comment_search,
+        "f.id IN (SELECT file_id FROM file_comments WHERE (' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ') LIKE ?)",
+        "f.id IN (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)",
+        exact_expr_not="f.id NOT IN (SELECT file_id FROM file_comments WHERE (' ' || REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(comment_text, ',', ' '), '?', ' '), '.', ' '), '!', ' '), char(10), ' ') || ' ') LIKE ?)",
+        like_expr_not="f.id NOT IN (SELECT file_id FROM file_comments WHERE comment_text LIKE ?)",
+    ):
+        active_filters_count += 1
 
     if request.args.get('favorites') == 'true': 
         conditions.append("f.is_favorite = 1")
@@ -6363,6 +6566,15 @@ def collection_view(coll_id):
         params.extend([f"{p.strip()}_%" for p in selected_prefixes if p.strip()])
         if p_cond: conditions.append(f"({' OR '.join(p_cond)})")
 
+    if selected_ratings:
+        active_filters_count += 1
+        rating_cond = [
+            "ROUND((SELECT AVG(rating) FROM file_ratings WHERE file_id = f.id), 0) = ?"
+            for _ in selected_ratings
+        ]
+        conditions.append(f"({' OR '.join(rating_cond)})")
+        params.extend([int(value) for value in selected_ratings])
+
     # --- SORTING LOGIC ---
     if req_sort_by == 'name':
         order_clause = f"f.name {req_sort_order}"
@@ -6385,6 +6597,8 @@ def collection_view(coll_id):
     total_folder_files = 0 
 
     with get_db_connection() as conn:
+        known_lora_names = fetch_known_lora_names(conn)
+        known_model_names = fetch_known_model_names(conn)
         # Calculate total files in this view (without search/filters)
         if is_all_mode:
             count_subquery = "SELECT id FROM collections WHERE type='user_album'"
@@ -6434,6 +6648,26 @@ def collection_view(coll_id):
         for r in rows:
             d = dict(r)
             if 'ai_embedding' in d: del d['ai_embedding']
+            workflow_models_in_file, workflow_loras_in_file = extract_workflow_asset_choices(
+                d.get('workflow_files', ''),
+                known_lora_names,
+                known_model_names,
+            )
+
+            if selected_workflow_models:
+                selected_models_norm = {normalize_smart_path(value) for value in selected_workflow_models if value}
+                if not workflow_models_in_file.intersection(selected_models_norm):
+                    continue
+
+            if selected_workflow_loras:
+                selected_loras_norm = {normalize_smart_path(value) for value in selected_workflow_loras if value and value != '__none__'}
+                wants_no_lora = '__none__' in selected_workflow_loras
+                lora_match = bool(workflow_loras_in_file.intersection(selected_loras_norm)) if selected_loras_norm else False
+                if wants_no_lora and not workflow_loras_in_file:
+                    lora_match = True
+                if not lora_match:
+                    continue
+
             final_files.append(d)
             
     gallery_view_cache = final_files
@@ -6511,6 +6745,9 @@ def collection_view(coll_id):
                            available_prefixes=sorted(list(prefixes)), 
                            prefix_limit_reached=prefix_limit_reached,  
                            selected_extensions=selected_exts, selected_prefixes=selected_prefixes,
+                           selected_ratings=selected_ratings,
+                           selected_workflow_models=selected_workflow_models,
+                           selected_workflow_loras=selected_workflow_loras,
                            protected_folder_keys=list(PROTECTED_FOLDER_KEYS),
                            show_favorites=request.args.get('favorites', 'false').lower() == 'true',
                            enable_ai_search=ENABLE_AI_SEARCH, is_ai_search=False, ai_query="",
@@ -6870,8 +7107,10 @@ def print_startup_banner():
         
     print(f"   {Colors.BOLD}Smart Gallery DAM for ComfyUI{Colors.RESET}")
     print(f"   Author     : {Colors.BLUE}Biagio Maffettone{Colors.RESET}")
-    print(f"   Version    : {Colors.YELLOW}{APP_VERSION}{Colors.RESET} ({APP_VERSION_DATE})")
-    print(f"   GitHub     : {Colors.CYAN}{GITHUB_REPO_URL}{Colors.RESET}")
+    print(f"   Fork Ver.  : {Colors.YELLOW}{APP_VERSION}{Colors.RESET} ({APP_VERSION_DATE})")
+    print(f"   Release Ln.: {Colors.YELLOW}{FORK_RELEASE_LINE}{Colors.RESET} (fork-managed)")
+    print(f"   Based on   : {Colors.YELLOW}{UPSTREAM_BASELINE_VERSION}{Colors.RESET} from upstream")
+    print(f"   Upstream   : {Colors.CYAN}{GITHUB_REPO_URL}{Colors.RESET}")
     print(f"   Contributor: {Colors.CYAN}Martial Michel (Docker & Codebase){Colors.RESET}")
     print("")
 
@@ -6880,56 +7119,9 @@ UPDATE_AVAILABLE = False
 REMOTE_VERSION = None  # New global variable
 
 def check_for_updates():
-    """Checks the GitHub repo for a newer version without external libs."""
+    """Fork builds do not use the upstream auto-update comparison."""
     global UPDATE_AVAILABLE, REMOTE_VERSION
-    print("Checking for updates...", end=" ", flush=True)
-    try:
-        # Timeout (3s) not blocking start if no internet connection
-        with urllib.request.urlopen(GITHUB_RAW_URL, timeout=3) as response:
-            content = response.read().decode('utf-8')
-            
-            # Regex modified to handle APP_VERSION="1.41" (string) or APP_VERSION=1.41 (number)
-            match = re.search(r'APP_VERSION\s*=\s*["\']?([0-9.]+)["\']?', content)
-            
-            remote_version_str = None
-            if match:
-                remote_version_str = match.group(1)
-            else:
-                match_header = re.search(r'#\s*Version:\s*([0-9.]+)', content)
-                if match_header:
-                    remote_version_str = match_header.group(1)
-
-            if remote_version_str:
-                local_clean = re.sub(r'[^0-9.]', '', str(APP_VERSION))
-                remote_clean = re.sub(r'[^0-9.]', '', str(remote_version_str))
-
-                local_dots = local_clean.count('.')
-                remote_dots = remote_clean.count('.')
-                
-                is_update_available = False
-                
-                if local_dots <= 1 and remote_dots <= 1:
-                    try:
-                        is_update_available = float(remote_clean) > float(local_clean)
-                    except ValueError:
-                        pass
-
-                if not is_update_available:
-                    local_v = tuple(map(int, local_clean.split('.'))) if local_clean else (0,)
-                    remote_v = tuple(map(int, remote_clean.split('.'))) if remote_clean else (0,)
-                    is_update_available = remote_v > local_v
-                
-                if is_update_available:
-                    UPDATE_AVAILABLE = True
-                    REMOTE_VERSION = remote_version_str # Store the version string
-                    print(f"\n{Colors.YELLOW}{Colors.BOLD}NOTICE: A new version ({remote_version_str}) is available!{Colors.RESET}")
-                else:
-                    print("You are up to date.")
-            else:
-                print("Could not parse remote version.")
-                
-    except Exception:
-        print("Skipped (Offline or GitHub unreachable).")
+    print("Checking for updates... skipped (fork versioning is managed locally).")
         
 # --- STARTUP CHECKS AND MAIN ENTRY POINT ---
 def show_config_error_and_exit(path):

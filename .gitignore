@@ -58,6 +58,3 @@ pytest*
 .tmp*
 
 
-# Own stuff
-docs/architecture-plan.md
-docs/lessons-learned.md

@@ -1,5 +1,53 @@
 # Changelog
 
+This file tracks the release history of this fork.
+
+Versioning policy:
+
+- fork releases use their own version numbers
+- upstream versions are not continued as fork versions
+- upstream entries are preserved below as historical baseline reference
+
+## [1.0.0-fork.1] - 2026-04-23
+
+This is the first fork-specific release line for this repository.
+
+Baseline:
+
+- upstream project: `smart-comfyui-gallery`
+- upstream baseline version: `2.11`
+
+Fork-specific additions in this release:
+
+- architecture cleanup seams introduced in:
+  - `smartgallery_core/storage.py`
+  - `smartgallery_core/files.py`
+  - `smartgallery_core/renaming.py`
+  - `smartgallery_core/models.py`
+- workflow-aware batch renaming with preview and apply flow
+- integrated model manager for:
+  - checkpoints
+  - loras
+  - embeddings
+- CivitAI enrichment from the model manager
+- explicit checkbox-based model selection for CivitAI fetches
+- progress feedback during selected-model CivitAI fetches
+- advanced filter additions:
+  - workflow model dropdown
+  - workflow LoRA dropdown
+  - ratings filter
+- explicit `No LoRA in workflow` filter state
+- negative filename search in `Search by Name`:
+  - `!term`
+  - `NOT term`
+  - `!= term`
+- desktop filter-panel layout cleanup and grouping improvements
+
+Notes:
+
+- fork versions are now tracked independently from upstream
+- upstream historical entries are preserved below as baseline reference only
+
 ### **[2.11] - 2026-04-08**
 
 v2 is not just a feature drop. The version number jumped because the architecture, ACL system, and multi-user logic required a ground-up rethink. Your existing setup, folders, and data are all forward-compatible.
@@ -18,6 +66,10 @@ v2 is not just a feature drop. The version number jumped because the architectur
 ** Improved **  
 -   **Mount Any External Drive or Folder:** mount external drives, NAS volumes or network paths directly from the UI. Mix ComfyUI output folders with photo archives, video collections or any other media library. All DAM features work on everything, workflow extraction only applies where there is a workflow to extract.  
 -   **Powerful search operators:** filter by multiple keywords at once using AND, OR and exclusion operators across prompts, models, LoRAs, comment text and more.
+-   **Model Manager workflow:** CivitAI lookup is now selection-driven with explicit checkboxes and visible progress feedback during fetches.
+-   **Workflow-aware filters:** added dedicated `Model`, `LoRA`, and `Ratings` filters in the advanced filter panel.
+-   **Smart workflow asset dropdowns:** model and LoRA filters now use dropdowns populated from detected workflow references instead of relying only on free-text guessing.
+-   **Negative filename search:** the filename search now supports exclusion syntax such as `!term`, `NOT term`, and `!= term`.
 
 #### **[1.55] - 2026-02-05**
 

@@ -171,9 +171,35 @@
             margin-bottom: 18px;
         }
 
+        .selection-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding: 14px 16px;
+        }
+
+        .selection-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
         .status-text {
             color: var(--muted);
             font-size: 0.95rem;
+        }
+
+        .status-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .status-progress {
+            color: var(--text);
+            font-size: 0.88rem;
         }
 
         .section {
@@ -296,6 +322,18 @@
             word-break: break-all;
             color: #d7def0;
             font-size: 0.85rem;
+        }
+
+        .select-col {
+            width: 46px;
+            text-align: center;
+        }
+
+        .select-checkbox {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--pink);
+            cursor: pointer;
         }
 
         .truncate-cell {
@@ -429,7 +467,7 @@
             </div>
             <div class="actions">
                 <button class="btn primary" id="scan-models-btn">🔄 Scan Models</button>
-                <button class="btn fuchsia" id="enrich-visible-btn">✨ Enrich Visible via CivitAI</button>
+                <button class="btn fuchsia" id="enrich-visible-btn">✨ Enrich Selected via CivitAI</button>
                 <button class="btn" id="refresh-models-btn">↻ Refresh View</button>
                 <a class="btn ghost" href="/galleryout/">← Back to Gallery</a>
             </div>
@@ -464,7 +502,10 @@
         </div>
 
         <div class="status-row">
-            <div class="status-text" id="models-status">Loading model catalog...</div>
+            <div class="status-stack">
+                <div class="status-text" id="models-status">Loading model catalog...</div>
+                <div class="status-progress" id="models-progress">No CivitAI job running.</div>
+            </div>
             <div class="pill-row">
                 <span class="pill blue">🎨 checkpoints</span>
                 <span class="pill pink">🎭 loras</span>
@@ -487,6 +528,15 @@
                 <option value="loras">loras</option>
                 <option value="embeddings">embeddings</option>
             </select>
+        </div>
+
+        <div class="card selection-bar">
+            <div class="status-text" id="selection-summary">0 models selected.</div>
+            <div class="selection-actions">
+                <button class="chip" id="select-filtered-btn">Select Filtered</button>
+                <button class="chip" id="clear-filtered-btn">Clear Filtered</button>
+                <button class="chip" id="clear-selection-btn">Clear All</button>
+            </div>
         </div>
 
         <div class="card section">
@@ -534,6 +584,7 @@
         let currentCatalog = { checkpoints: [], loras: [], embeddings: [] };
         let currentCounts = { checkpoints: 0, loras: 0, embeddings: 0 };
         let currentOverlayModelId = null;
+        let selectedModelIds = new Set();
 
         function formatBytes(bytes) {
             if (!bytes && bytes !== 0) return '-';
@@ -602,12 +653,26 @@
             `;
         }
 
-        function renderStandardTable(models) {
+        function renderSelectionCell(model) {
+            const checked = selectedModelIds.has(model.id) ? 'checked' : '';
+            return `
+                <input
+                    class="select-checkbox model-select-checkbox"
+                    type="checkbox"
+                    data-model-id="${escapeHtml(model.id)}"
+                    aria-label="Select ${escapeHtml(model.name)}"
+                    ${checked}
+                >
+            `;
+        }
+
+        function renderStandardTable(models, section) {
             if (!models.length) return `<div class="empty">No models loaded in this section yet.</div>`;
             return `
                 <table>
                     <thead>
                         <tr>
+                            <th class="select-col"><input class="select-checkbox section-select-all" type="checkbox" data-section="${escapeHtml(section)}" aria-label="Select all ${escapeHtml(section)}"></th>
                             <th>Name</th>
                             <th>Source</th>
                             <th>Size</th>
@@ -618,6 +683,7 @@
                     <tbody>
                         ${models.map(model => `
                             <tr class="clickable-row" data-model-id="${escapeHtml(model.id)}" data-section="${escapeHtml(model.section)}">
+                                <td class="select-col">${renderSelectionCell(model)}</td>
                                 <td>${renderNameCell(model)}</td>
                                 <td>${escapeHtml(model.source_folder)}</td>
                                 <td>${formatBytes(model.size)}</td>
@@ -636,6 +702,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th class="select-col"><input class="select-checkbox section-select-all" type="checkbox" data-section="loras" aria-label="Select all loras"></th>
                             <th>Name</th>
                             <th style="width: 20%;">Trigger</th>
                             <th style="width: 26%;">Tags</th>
@@ -646,6 +713,7 @@
                     <tbody>
                         ${models.map(model => `
                             <tr class="clickable-row" data-model-id="${escapeHtml(model.id)}" data-section="${escapeHtml(model.section)}">
+                                <td class="select-col">${renderSelectionCell(model)}</td>
                                 <td>${renderNameCell(model)}</td>
                                 <td class="truncate-cell" title="${escapeHtml(model.trigger || '')}">${model.trigger ? escapeHtml(model.trigger) : '<span class="subtle">-</span>'}</td>
                                 <td class="truncate-cell" title="${escapeHtml(model.tags || '')}">${model.tags ? escapeHtml(truncateText(model.tags, 250)) : '<span class="subtle">-</span>'}</td>
@@ -669,6 +737,20 @@
             document.getElementById('meta-checkpoints').textContent = `${checkpoints} entries`;
             document.getElementById('meta-loras').textContent = `${loras} entries`;
             document.getElementById('meta-embeddings').textContent = `${embeddings} entries`;
+        }
+
+        function updateSelectionSummary() {
+            const count = selectedModelIds.size;
+            document.getElementById('selection-summary').textContent = `${count} model${count === 1 ? '' : 's'} selected.`;
+        }
+
+        function getFilteredModelList() {
+            const filtered = getFilteredCatalog();
+            return [
+                ...filtered.checkpoints,
+                ...filtered.loras,
+                ...filtered.embeddings,
+            ];
         }
 
         function getFilteredCatalog() {
@@ -699,15 +781,19 @@
                 embeddings: filtered.embeddings.length,
             };
             updateCounts(counts);
-            document.getElementById('section-checkpoints').innerHTML = renderStandardTable(filtered.checkpoints);
+            document.getElementById('section-checkpoints').innerHTML = renderStandardTable(filtered.checkpoints, 'checkpoints');
             document.getElementById('section-loras').innerHTML = renderLoraTable(filtered.loras);
-            document.getElementById('section-embeddings').innerHTML = renderStandardTable(filtered.embeddings);
+            document.getElementById('section-embeddings').innerHTML = renderStandardTable(filtered.embeddings, 'embeddings');
             bindModelRowClicks();
+            bindSelectionControls();
+            updateSelectionSummary();
         }
 
         function renderCatalog(payload) {
             currentCatalog = payload.models || { checkpoints: [], loras: [], embeddings: [] };
             currentCounts = payload.counts || { checkpoints: 0, loras: 0, embeddings: 0 };
+            const knownIds = new Set(Object.values(currentCatalog).flat().map(model => model.id));
+            selectedModelIds = new Set(Array.from(selectedModelIds).filter(modelId => knownIds.has(modelId)));
             populateFilterOptions();
             applyCatalogFilters();
         }
@@ -808,9 +894,43 @@
         function bindModelRowClicks() {
             document.querySelectorAll('tr[data-model-id]').forEach(row => {
                 row.addEventListener('click', event => {
-                    if (event.target.closest('a, button')) return;
+                    if (event.target.closest('a, button, input')) return;
                     openModelOverlay(row.dataset.modelId);
                 });
+            });
+        }
+
+        function bindSelectionControls() {
+            document.querySelectorAll('.model-select-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('click', event => event.stopPropagation());
+                checkbox.addEventListener('change', event => {
+                    const modelId = event.target.dataset.modelId;
+                    if (event.target.checked) selectedModelIds.add(modelId);
+                    else selectedModelIds.delete(modelId);
+                    updateSelectionSummary();
+                    syncSectionSelectAllState();
+                });
+            });
+
+            document.querySelectorAll('.section-select-all').forEach(checkbox => {
+                const section = checkbox.dataset.section;
+                const models = getFilteredCatalog()[section] || [];
+                checkbox.checked = Boolean(models.length) && models.every(model => selectedModelIds.has(model.id));
+                checkbox.addEventListener('change', event => {
+                    models.forEach(model => {
+                        if (event.target.checked) selectedModelIds.add(model.id);
+                        else selectedModelIds.delete(model.id);
+                    });
+                    applyCatalogFilters();
+                });
+            });
+        }
+
+        function syncSectionSelectAllState() {
+            document.querySelectorAll('.section-select-all').forEach(checkbox => {
+                const section = checkbox.dataset.section;
+                const models = getFilteredCatalog()[section] || [];
+                checkbox.checked = Boolean(models.length) && models.every(model => selectedModelIds.has(model.id));
             });
         }
 
@@ -854,6 +974,7 @@
             }
 
             const status = document.getElementById('models-status');
+            const progress = document.getElementById('models-progress');
             const enrichVisibleBtn = document.getElementById('enrich-visible-btn');
             const overlayBtn = document.getElementById('model-overlay-civitai-btn');
             const originalVisibleLabel = enrichVisibleBtn.textContent;
@@ -863,19 +984,34 @@
             enrichVisibleBtn.textContent = '⏳ Enriching...';
             overlayBtn.textContent = '⏳ Fetching...';
             status.textContent = `Checking ${modelIds.length} model(s) against CivitAI...`;
+            progress.textContent = `Progress: 0/${modelIds.length} checked, 0 matched, 0 errors.`;
 
             try {
-                const response = await fetch('/galleryout/api/models/civitai/enrich', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ model_ids: modelIds })
-                });
-                const data = await response.json();
-                if (!response.ok || data.status !== 'success') {
-                    throw new Error(data.message || 'CivitAI enrichment failed.');
+                let checked = 0;
+                let matched = 0;
+                let errors = 0;
+
+                for (const modelId of modelIds) {
+                    const model = findModelById(modelId);
+                    status.textContent = `Checking CivitAI: ${model?.name || modelId}`;
+                    const response = await fetch('/galleryout/api/models/civitai/enrich', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ model_ids: [modelId] })
+                    });
+                    const data = await response.json();
+                    if (!response.ok || data.status !== 'success') {
+                        throw new Error(data.message || 'CivitAI enrichment failed.');
+                    }
+
+                    checked += 1;
+                    const result = (data.results || [])[0];
+                    if (result?.status === 'success' && result?.found) matched += 1;
+                    if (result?.status === 'error') errors += 1;
+                    progress.textContent = `Progress: ${checked}/${modelIds.length} checked, ${matched} matched, ${errors} errors.`;
                 }
 
-                status.textContent = data.message;
+                status.textContent = `CivitAI checked ${checked} model(s), matched ${matched}, errors ${errors}.`;
                 await loadCatalog(false);
 
                 if (currentOverlayModelId) {
@@ -883,6 +1019,7 @@
                 }
             } catch (error) {
                 status.textContent = `CivitAI error: ${error.message}`;
+                progress.textContent = 'Last CivitAI job failed before completion.';
             } finally {
                 enrichVisibleBtn.disabled = false;
                 overlayBtn.disabled = false;
@@ -893,15 +1030,22 @@
 
         document.getElementById('scan-models-btn').addEventListener('click', () => loadCatalog(true));
         document.getElementById('enrich-visible-btn').addEventListener('click', async () => {
-            const filtered = getFilteredCatalog();
-            const ids = [
-                ...filtered.checkpoints.map(model => model.id),
-                ...filtered.loras.map(model => model.id),
-                ...filtered.embeddings.map(model => model.id),
-            ];
+            const ids = Array.from(selectedModelIds);
             await enrichModelsFromCivitai(ids);
         });
         document.getElementById('refresh-models-btn').addEventListener('click', () => loadCatalog(false));
+        document.getElementById('select-filtered-btn').addEventListener('click', () => {
+            getFilteredModelList().forEach(model => selectedModelIds.add(model.id));
+            applyCatalogFilters();
+        });
+        document.getElementById('clear-filtered-btn').addEventListener('click', () => {
+            getFilteredModelList().forEach(model => selectedModelIds.delete(model.id));
+            applyCatalogFilters();
+        });
+        document.getElementById('clear-selection-btn').addEventListener('click', () => {
+            selectedModelIds.clear();
+            applyCatalogFilters();
+        });
         document.getElementById('model-search-input').addEventListener('input', applyCatalogFilters);
         document.getElementById('model-section-filter').addEventListener('change', applyCatalogFilters);
         document.getElementById('model-source-filter').addEventListener('change', applyCatalogFilters);

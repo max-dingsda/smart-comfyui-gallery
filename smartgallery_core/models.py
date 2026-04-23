@@ -315,7 +315,7 @@ def build_license_summary(model_data: dict | None) -> str | None:
 
 
 def civitai_request_json(url: str, api_key: str | None = None, timeout: int = 20) -> dict:
-    headers = {"User-Agent": "SmartGallery/2.11"}
+    headers = {"User-Agent": "SmartGallery-Fork/1.0.0-fork.1 (based on 2.11)"}
     if api_key:
         headers["Authorization"] = f"Bearer {api_key}"
     request = urllib.request.Request(url, headers=headers)
